@@ -133,9 +133,9 @@ class MobileController extends Controller
 
         if($result[0]->response != "false") {
             $data = [
-                'subject' => 'IWasto Verification',
+                'subject' => 'IWasto Password Reset',
                 'to_email' => $_POST['social_email'],
-                'from' => 'anthonykiedes545@gmail.com','IWasto'
+                'from' => 'iwasto2021@gmail.com','IWasto'
                 ];
                 // $url = asset('');
                 Mail::send('forgot_password', 
