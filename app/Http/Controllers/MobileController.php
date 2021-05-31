@@ -163,7 +163,9 @@ class MobileController extends Controller
     public function get_location_schedule()
     {
         $zipcodes = db::table('v_get_location_schedule')->where('major_area',$_POST['major_area'])->get();
-        $output = json_encode(array('Results' => $zipcodes));
+        $top_location = db::table('v_get_top_location')->where('major_area',$_POST['major_area'])->get();
+        
+        $output = json_encode(array('Results' => $zipcodes,'Top_Location' => $top_location));
         echo $output;
     }
 }
