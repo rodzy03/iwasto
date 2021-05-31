@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use App\User;
 class MobileController extends Controller
 {
-
     public function upload()
     {
         // $req_reupload = $request->file('req_reupload');
@@ -18,7 +17,6 @@ class MobileController extends Controller
         //         $req_reupload->move(public_path('mydocuments/student-requests/')
         //             , $req_reupload->getClientOriginalName());
     }
-
 
     public function get_zipcodes()
     {
@@ -62,10 +60,7 @@ class MobileController extends Controller
             $data = [
             'subject' => 'IWasto Verification',
             'to_email' => $_POST['email'],
-
-            'from' => 'anthonykiedes545@gmail.com','IWasto'
             'from' => 'iwasto2021@gmail.com','IWasto'
-
             ];
             $url = asset('');
             Mail::send('verify_email', 
@@ -139,8 +134,6 @@ class MobileController extends Controller
     {
         $email = $_POST['social_email'];
         
-
-        // $pubkey = "duterterodelb@gmail.com";
         $result = db::select("call sp_forgot_password(?)",array(
             $email
             

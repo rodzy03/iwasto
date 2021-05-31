@@ -13,13 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-<<<<<<< HEAD
-Route::get('/', function () {
-    
-=======
-Route::get('/home', function () {
->>>>>>> a4200979d6201eba4186a3603efc839c335b1b1a
-    
+Route::get('/newroute', function () {    
     return view('home');
 });
 
