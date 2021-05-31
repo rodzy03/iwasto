@@ -168,4 +168,15 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $zipcodes,'Top_Location' => $top_location));
         echo $output;
     }
+
+    public function get_next_location()
+    {
+        $pubkey = $_POST['schedule_id'];
+        $result = db::select("call sp_get_next_collection(?)",array(
+            $pubkey ,
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
 }

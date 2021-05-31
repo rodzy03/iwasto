@@ -26,6 +26,7 @@ Route::post('/get-profile','MobileController@get_profile')->name('get-profile');
 Route::post('/getall','MobileController@get_all')->name('getall');
 Route::post('/forgot-password','MobileController@forgot_pass')->name('forgot_pass');
 Route::post('/location-schedule','MobileController@get_location_schedule');
+Route::post('/next-location','MobileController@sp_get_next_collection');
 
 Route::get('/verify_email/{email}','MobileController@verify_email')->name('verify_email');
 
