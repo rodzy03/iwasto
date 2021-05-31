@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         'getall',
         'login-mobile',
         'get-profile',
-        'forgot-password'
+        'forgot-password',
+        'location-schedule'
     ];
 }
