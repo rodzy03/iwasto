@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    
-    // return view('home');
-});
-
 // Mobile routes
 Route::post('/get-zipcodes','MobileController@get_zipcodes')->name('get-zipcodes');
 Route::post('/get-barangays','MobileController@get_barangays')->name('get-barangays');
