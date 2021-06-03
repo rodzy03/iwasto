@@ -149,7 +149,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-paper-plane"></i></span></div>
-                                    <input type="file" class="form-control" accept="image/*" capture=""/>
+                                    <input type="file" accept="image/*" capture="" >
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
