@@ -44,7 +44,8 @@
 		<div id="header" class="header navbar-default">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>IWasto</b> </a>
+				<a href="index.html" class="navbar-brand"><span style="padding-right:3px; padding-top: 3px; display:block;">
+				<img class="manImg" src="{{asset('uploads/logowhite.png')}}"></img></span> <b>IWasto</b> </a>
 				<!-- <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -149,7 +150,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-paper-plane"></i></span></div>
-                                    <input type="file" accept="image/*" capture="" >
+                                    <input type="file" accept="image/*" capture="" class="form-control">
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
