@@ -29,7 +29,12 @@ Route::post('/forgot-password','MobileController@forgot_pass')->name('forgot_pas
 Route::post('/location-schedule','MobileController@get_location_schedule');
 Route::post('/next-location','MobileController@get_next_location');
 
+// Filter Address
+Route::post('/get-region','MobileController@get_region');
+
+
 Route::get('/verify_email/{email}','MobileController@verify_email')->name('verify_email');
+
 
 // Route::group(['middleware' => ['mobile_routes']], function () {
     

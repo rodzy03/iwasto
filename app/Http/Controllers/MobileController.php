@@ -179,4 +179,12 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $result));
         echo $output;
     }
+
+    public function get_region()
+    {
+        $result = db::select("select * from r_region");
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
+
 }
