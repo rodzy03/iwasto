@@ -220,5 +220,13 @@ class MobileController extends Controller
         echo $output;
     }
 
+
+    public function citizen_patrol($pubkey)
+    {   
+        // 5cfb57692a2a70e97d940ee39fb311c2
+        $user = db::table('users')->where('public_token',$pubkey)->get();
+        
+        return view('home',compact('user'));
+    }
     
 }
