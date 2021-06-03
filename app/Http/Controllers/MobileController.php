@@ -231,5 +231,38 @@ class MobileController extends Controller
         else
         return view('home',compact('user'));
     }
+
+    public function submit_patrol(Request $request)
+    {
+        $selType = $request->get('selType');
+
+        $location = $request->get('location');
+        $description = $request->get('description');
+        $full_name = $request->get('full_name');
+        $email_address = $request->get('email');
+        $contact_number = $request->get('contact_number');
+        $main_document = $request->file('photo');
+        
+        
+        $main_document->move(public_path('uploads/')
+                , $main_document->getClientOriginalName()); 
+        
+
+        $file_name = $main_document->getClientOriginalName();
+        db::table('t_citizen_patrol')
+        ->insert([
+            'type' => $selType
+            , 'location' => $location
+            , 'description' => $description
+            , 'full_name' => $full_name
+            , 'email_address' => $email_address
+            , 'contact_number' => $contact_number
+            , 'file_path' => $file_name
+        ]);
+        
+        return redirect()->back()->with('success', 'Please wait for confirmation');
+        //return redirect()->back()->withMessage(['Please wait for confirmation']);
+
+    }
     
 }
