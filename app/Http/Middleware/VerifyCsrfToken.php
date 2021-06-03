@@ -21,6 +21,9 @@ class VerifyCsrfToken extends Middleware
         'forgot-password',
         'location-schedule',
         'next-location',
-        'get-region'
+        'get-region',
+        'get-provinces',
+        'get-municipality',
+        'get-barangay'
     ];
 }
