@@ -235,7 +235,6 @@ class MobileController extends Controller
     public function submit_patrol(Request $request)
     {
         $selType = $request->get('selType');
-
         $location = $request->get('location');
         $description = $request->get('description');
         $full_name = $request->get('full_name');
