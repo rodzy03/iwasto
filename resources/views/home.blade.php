@@ -98,7 +98,7 @@
 
                 @endif--}}
 				<div class="panel-body">
-                    <form method="POST" action="{{route('submit_patrol')}}">
+                    <form method="POST" action="{{route('submit_patrol')}}" enctype="multipart/form-data">
 					@csrf
 					<div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Select Type</label>
