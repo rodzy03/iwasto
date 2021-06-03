@@ -187,4 +187,38 @@ class MobileController extends Controller
         echo $output;
     }
 
+    public function get_provinces()
+    {
+        $pubkey = $_POST['pregion_desc'];
+        $result = db::select("call sp_get_province(?)",array(
+            $pubkey ,
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
+
+    public function get_municipality()
+    {
+        $pubkey = $_POST['pprovince_desc'];
+        $result = db::select("call sp_get_municipality(?)",array(
+            $pubkey ,
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
+
+    public function get_barangay()
+    {
+        $pubkey = $_POST['pcitymun_desc'];
+        $result = db::select("call sp_get_barangay(?)",array(
+            $pubkey ,
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
+
+    
 }

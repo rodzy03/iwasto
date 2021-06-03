@@ -29,21 +29,21 @@ Route::post('/forgot-password','MobileController@forgot_pass')->name('forgot_pas
 Route::post('/location-schedule','MobileController@get_location_schedule');
 Route::post('/next-location','MobileController@get_next_location');
 
+
 // Filter Address
 Route::post('/get-region','MobileController@get_region');
+Route::post('/get-provinces','MobileController@get_provinces');
+Route::post('/get-municipality','MobileController@get_municipality');
+Route::post('/get-barangay','MobileController@get_barangay');
 
 
 Route::get('/verify_email/{email}','MobileController@verify_email')->name('verify_email');
-
 
 // Route::group(['middleware' => ['mobile_routes']], function () {
     
 //     Route::get('/test','MobileController@test');
 
 // });
-
-
-
 
 // Route::get('/VerifyEmail', 'Email@VerifyEmail')
 //     ->NAME('VerifyEmail');
@@ -52,8 +52,6 @@ Route::get('/verify_email/{email}','MobileController@verify_email')->name('verif
 
 
 // Route::group(['middleware' => ['validateBackHistory']], function () {
-
-
 // });
 
 
