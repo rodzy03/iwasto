@@ -83,7 +83,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-chevron-down"></i></span></div>
-                                    <select style="background-color: white;" name="selType" class="form-control">
+                                    <select style="background-color: white;" name="selType" class="form-control-lg">
 										<option class="form-control" value="Missing Collection">Missing Collection</option>
 									</select>
                                 </div>
@@ -94,7 +94,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-truck"></i></span></div>
-                                    <input type="text" class="form-control" value="{{$user[0]->major_area}}, {{$user[0]->barangay}}"/>
+                                    <input type="text" class="form-control-lg" value="{{$user[0]->major_area}}, {{$user[0]->barangay}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-list"></i></span></div>
-                                    <textarea type="text" class="form-control" ></textarea>
+                                    <textarea type="text" class="form-control-lg" ></textarea>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
-                                    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
+                                    <input type="text" class="form-control-lg" style="text-transform: capitalize;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-open"></i></span></div>
-                                    <input type="text" class="form-control" value="{{$user[0]->email}}"/>
+                                    <input type="text" class="form-control-lg" value="{{$user[0]->email}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
-                                    <input type="text" class="form-control" min="1" max="12"/>
+                                    <input type="text" class="form-control-lg" min="1" max="12"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-upload"></i></span></div>
-                                    <input type="file" class="form-control" accept="image/*" capture=""/>
+                                    <input type="file" class="form-control-lg" accept="image/*" capture=""/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
