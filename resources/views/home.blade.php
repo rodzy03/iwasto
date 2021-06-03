@@ -30,6 +30,13 @@
         height: 240px;
         border: 1px solid black;
     }
+	#logo {
+    display: inline-block;
+    margin: 5px; 
+    height: 35px;
+    width: auto; /* correct proportions to specified height */
+    border-radius: 50%; /* makes it a circle */
+  }
     </style>
 
 </head>
@@ -44,13 +51,10 @@
 		<div id="header" class="header navbar-default">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand"><span style="padding-right:3px; padding-top: 3px; display:block;">
-				<img class="manImg" src="{{asset('uploads/logowhite.png')}}"></img></span> <b>IWasto</b> </a>
-				<!-- <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> -->
+			<a href="#"><img id="logo" src="{{asset('uploads/logowhite.png')}}"></a>
+        
+        	<b style="font-size: 16px; margin-right: 0px; padding-right: 10xp" >Iwasto</b>
+			
 			</div>
 			<!-- end navbar-header -->
 			
