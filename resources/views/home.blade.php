@@ -81,8 +81,25 @@
 					
 					<h4 class="panel-title"><b>CITIZEN PATROL</b> </h4>
 				</div>
+				@if (Session::has('success'))
+					<div class="alert alert-success">
+						<ul>
+							<li>{{ Session::get('success') }}</li>
+						</ul>
+					</div>
+				@endif
+				{{--@if( $errors->any() )
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                    @endforeach
+				@else
+
+                @endif--}}
 				<div class="panel-body">
-                    <form>
+                    <form method="POST" action="{{route('submit_patrol')}}">
+					@csrf
 					<div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Select Type</label>
                             <div class="col-md-6">
@@ -99,7 +116,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-truck"></i></span></div>
-                                    <input type="text" class="form-control" value="{{$user[0]->major_area}}, {{$user[0]->barangay}}"/>
+                                    <input type="text" class="form-control" value="{{$user[0]->major_area}}, {{$user[0]->barangay}}" name="location"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -110,7 +127,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-list"></i></span></div>
-                                    <textarea type="text" class="form-control" ></textarea>
+                                    <textarea type="text" class="form-control" name="description"></textarea>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -121,7 +138,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
-                                    <input type="text" class="form-control" style="text-transform: capitalize;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
+                                    <input name="full_name" type="text" class="form-control" style="text-transform: capitalize;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -132,7 +149,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-open"></i></span></div>
-                                    <input type="text" class="form-control" value="{{$user[0]->email}}"/>
+                                    <input name="email" type="text" class="form-control" value="{{$user[0]->email}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -143,7 +160,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-hashtag"></i></span></div>
-                                    <input type="text" class="form-control" min="1" max="12"/>
+                                    <input name="contact_number" type="text" class="form-control" min="1" max="12"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -154,7 +171,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-paper-plane"></i></span></div>
-                                    <input type="file" accept="image/*" capture="" class="form-control">
+                                    <input name="photo" type="file" accept="image/*" capture="" class="form-control">
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -171,7 +188,7 @@
                             
                         </div>--}}<br>
                        
-                        <button id="btn-capture" type="button" class="button form-control btn btn-primary">Submit</button>
+                        <button id="btn-capture" type="submit" class="button form-control btn btn-primary">Submit</button>
                         
                     </form>
 				</div>
