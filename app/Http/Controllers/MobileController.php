@@ -225,7 +225,10 @@ class MobileController extends Controller
     {   
         // 5cfb57692a2a70e97d940ee39fb311c2
         $user = db::table('users')->where('public_token',$pubkey)->get();
-        
+        if($user->isEmpty()) {
+            return "NOT FOUND";
+        }
+        else
         return view('home',compact('user'));
     }
     
