@@ -123,7 +123,7 @@ class MobileController extends Controller
 
     public function verify_email($email)
     {
-        db::table('r_users')->where('email',$email)
+        db::table('users')->where('email',$email)
         ->update([ 'email_verified_at' => Carbon::now('Asia/Manila') ]);
         return redirect()->intended('/home');
     }
