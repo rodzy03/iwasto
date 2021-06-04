@@ -7,6 +7,8 @@ use Mail;
 use DB;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Crypt;
+
 class MobileController extends Controller
 {
     public function upload()
@@ -65,9 +67,10 @@ class MobileController extends Controller
             'to_email' => $_POST['email'],
             'from' => 'iwasto2021@gmail.com','IWasto'
             ];
+            
             $url = asset('');
             Mail::send('verify_email', 
-            [ 'url' => $url."verify_email/".$email ] ,
+            [ 'url' => $url."verify_email/".Crypt::encrypt($email) ] ,
             function($message) use ($data) {
                         
                 $message->from($data['from'])
@@ -122,8 +125,8 @@ class MobileController extends Controller
     }
 
     public function verify_email($email)
-    {
-        db::table('users')->where('email',$email)
+    {   
+        db::table('users')->where('email',Crypt::decrypt($email))
         ->update([ 'email_verified_at' => Carbon::now('Asia/Manila') ]);
         return redirect()->intended('https://iwasto.ph/');
     }
