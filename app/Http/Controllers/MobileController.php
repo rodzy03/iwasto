@@ -125,7 +125,7 @@ class MobileController extends Controller
     {
         db::table('users')->where('email',$email)
         ->update([ 'email_verified_at' => Carbon::now('Asia/Manila') ]);
-        return redirect()->intended('/home');
+        return redirect()->intended('https://iwasto.ph/');
     }
 
     public function test()
