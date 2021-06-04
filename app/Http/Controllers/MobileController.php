@@ -43,8 +43,9 @@ class MobileController extends Controller
         $barangay = $_POST['barangay'];
         $password = $_POST['password'];
         $social_reg = $_POST['social_reg'];
-
-        $pubkey = db::select("call sp_add_user(?,?,?,?,?,?,?,?)",array(
+        $region = $_POST['region'];
+        $province = $_POST['province'];
+        $pubkey = db::select("call sp_add_user(?,?,?,?,?,?,?,?,?,?)",array(
             $firstname ,
             $middlename ,
             $lastname ,
@@ -52,7 +53,9 @@ class MobileController extends Controller
             $major_area ,
             $barangay,
             $password,
-            $social_reg
+            $social_reg,
+            $region,
+            $province
         ));
         
         if($pubkey[0]->pubkey != 'account exists') {
