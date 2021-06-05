@@ -93,14 +93,15 @@
                         </div>
                     </div>
 					@csrf
-                    @if (Session::has('success'))
+                    @if (session('message'))
                         <div class="alert alert-success fade show">
                             <span class="close" data-dismiss="alert">×</span>
                             <strong>Success!</strong>
-                            {{ Session::get('success') }}.
+                            {{ session('message') }}.
                             
                         </div>
                     @endif
+                    {{ session()->forget('message') }}
 					    <div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Select Type</label>
                             <div class="col-md-6">
