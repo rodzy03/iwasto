@@ -35,6 +35,8 @@ Route::post('/get-barangay','MobileController@get_barangay');
 Route::post('/submit-citizen-patrol','MobileController@submit_patrol')->name('submit_patrol');
 Route::get('/verify_email/{email}','MobileController@verify_email')->name('verify_email');
 
+
+Route::post('/check/has/id','MobileController@check_id_ifverified');
 // Route::group(['middleware' => ['mobile_routes']], function () {
     
 //     Route::get('/test','MobileController@test');

@@ -24,6 +24,7 @@ class VerifyCsrfToken extends Middleware
         'get-region',
         'get-provinces',
         'get-municipality',
-        'get-barangay'
+        'get-barangay',
+        'check/has/id'
     ];
 }

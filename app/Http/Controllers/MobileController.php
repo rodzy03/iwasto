@@ -273,7 +273,7 @@ class MobileController extends Controller
         session()->forget('session_public_key');
         return redirect()->back();
         
-        
+    
     }
 
     public function citizen_patrol_verification($pubkey)
@@ -311,5 +311,18 @@ class MobileController extends Controller
         return redirect()->back();
         
     }
+
+
+    public function check_id_ifverified()
+    {
+        $pubkey = $_POST['pubkey'];
+        $result = db::select("call sp_check_id_ifverified(?)",array(
+            $pubkey ,
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
+    
     
 }
