@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use DB;
+use Session;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Crypt;
@@ -223,9 +224,18 @@ class MobileController extends Controller
         echo $output;
     }
 
-    public function citizen_patrol_verification()
+    public function citizen_patrol_verification($pubkey)
     {
-        return view('verify_id');
+        $user = db::table('users')->where('public_token',$pubkey)->get();
+        if($user->isEmpty()) {
+            return redirect()->intended('https://iwasto.ph/');
+        }
+        else {
+            session(['session_public_key' => Crypt::encrypt($pubkey)]);
+            Session::save(); 
+            return view('verify_id');
+        }
+        
     }
 
     public function citizen_patrol($pubkey)
@@ -233,7 +243,7 @@ class MobileController extends Controller
         
         $user = db::table('users')->where('public_token',$pubkey)->get();
         if($user->isEmpty()) {
-            return "NOT FOUND";
+            return redirect()->intended('https://iwasto.ph/');
         }
         else
         return view('home',compact('user'));
@@ -267,9 +277,29 @@ class MobileController extends Controller
             , 'file_path' => $file_name
         ]);
         
-        return redirect()->back()->with('success', 'Please wait for confirmation');
+        return redirect()->back()->with('success', 'Concern Added');
         //return redirect()->back()->withMessage(['Please wait for confirmation']);
+        
+    }
 
+    public function submit_verification(Request $request)
+    {
+        $main_document = $request->file('photo');
+        $main_document->move(public_path('uploads/')
+                , $main_document->getClientOriginalName()); 
+        $file_name = $main_document->getClientOriginalName();
+        $pubkey = Crypt::decrypt(session('session_public_key'));
+        $user_id = db::table('users')->where('public_token',$pubkey)->value('id');
+        
+        db::table('t_citizen_verification')
+        ->insert([
+            'file_path' => $file_name
+            , 'status' => 'pending'
+            , 'user_id' => $user_id
+            , 'created_at' => Carbon::now('Asia/Manila')
+        ]);
+        
+        return redirect()->back()->with('success', 'Pleas wait to access citizen module');
     }
     
 }
