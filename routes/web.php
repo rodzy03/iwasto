@@ -24,6 +24,7 @@ Route::post('/forgot-password','MobileController@forgot_pass')->name('forgot_pas
 Route::post('/location-schedule','MobileController@get_location_schedule');
 Route::post('/next-location','MobileController@get_next_location');
 Route::get('/citizen-patrol/{pubkey}','MobileController@citizen_patrol');
+Route::get('/citizen/patrol/verification/','MobileController@citizen_patrol_verification');
 
 // Filter Address
 Route::post('/get-region','MobileController@get_region');
