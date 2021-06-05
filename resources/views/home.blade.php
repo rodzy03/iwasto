@@ -86,7 +86,7 @@
                     <span class="close" data-dismiss="alert">×</span>
                     <strong>Success!</strong>
                     {{ Session::get('success') }}.
-                   {{-- <a href="#" class="alert-link">an example link</a> --}}
+                   
                 </div>
 					
 				@endif
