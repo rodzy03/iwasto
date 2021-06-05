@@ -102,19 +102,16 @@ class MobileController extends Controller
         echo $output;
 
     }
+
     public function get_profile()
     {
-        
         $pubkey = $_POST['pubkey'];
-
         $result = db::select("call sp_get_profile(?)",array(
             $pubkey ,
             
         ));
-
         $output = json_encode(array('Results' => $result));
         echo $output;
-
     }
 
     public function get_all()
@@ -226,16 +223,21 @@ class MobileController extends Controller
         echo $output;
     }
 
+    public function citizen_patrol_verification()
+    {
+        return view('verify_id');
+    }
 
     public function citizen_patrol($pubkey)
     {   
-        // 5cfb57692a2a70e97d940ee39fb311c2
+        
         $user = db::table('users')->where('public_token',$pubkey)->get();
         if($user->isEmpty()) {
             return "NOT FOUND";
         }
         else
         return view('home',compact('user'));
+        
     }
 
     public function submit_patrol(Request $request)

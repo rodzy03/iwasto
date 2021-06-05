@@ -12,17 +12,17 @@
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-	<link href="../assets/plugins/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="../assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css" rel="stylesheet" />
-	<link href="../assets/plugins/animate/animate.min.css" rel="stylesheet" />
-	<link href="../assets/css/default/style.min.css" rel="stylesheet" />
-	<link href="../assets/css/default/style-responsive.min.css" rel="stylesheet" />
-	<link href="../assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
+	<link href="{{asset('assets/plugins/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins/bootstrap/4.0.0/css/bootstrap.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins/animate/animate.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/css/default/style.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/css/default/style-responsive.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/css/default/theme/default.css')}}" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="../assets/plugins/pace/pace.min.js"></script>
+	<script src="{{asset('assets/plugins/pace/pace.min.js')}}"></script>
 	<!-- ================== END BASE JS ================== -->
     <style>
     #my_camera{
@@ -79,28 +79,29 @@
 			<div class="panel ">
 				<div class="panel-heading">
 					
-					<h4 class="panel-title"><b>CITIZEN PATROL</b> </h4>
+					
 				</div>
 				@if (Session::has('success'))
-					<div class="alert alert-success">
-						<ul>
-							<li>{{ Session::get('success') }}</li>
-						</ul>
-					</div>
+                <div class="alert alert-success fade show">
+                    <span class="close" data-dismiss="alert">×</span>
+                    <strong>Success!</strong>
+                    {{ Session::get('success') }}.
+                   {{-- <a href="#" class="alert-link">an example link</a> --}}
+                </div>
+					
 				@endif
-				{{--@if( $errors->any() )
-                    @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">
-                        {{ $error }}
-                    </div>
-                    @endforeach
-				@else
-
-                @endif--}}
+				
 				<div class="panel-body">
+                    <div class="note note-light">
+                        <div class="note-icon"><i class="far fa-user-circle"></i></div>
+                        <div class="note-content">
+                            <h4><b>CITIZEN PATROL</b></h4>
+                            <p>Add you're concern. </p>
+                        </div>
+                    </div>
                     <form method="POST" action="{{route('submit_patrol')}}" enctype="multipart/form-data">
 					@csrf
-					<div class="row form-group m-b-10">
+					    <div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Select Type</label>
                             <div class="col-md-6">
                                 <div class="input-group">
@@ -185,10 +186,10 @@
                                     <div class="valid-tooltip">Looks good!</div>
                                 </div>
                             </div>
-                            
+                            Verification
                         </div>--}}<br>
                        
-                        <button id="btn-capture" type="submit" class="button form-control btn btn-primary">Submit</button>
+                        <button id="btn-capture" type="submit" class="button form-control" style="background-color: #d65656; color: white">Submit</button>
                         
                     </form>
 				</div>
@@ -208,16 +209,12 @@
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="{{asset('assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-	<script src="../assets/plugins/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-	<!--[if lt IE 9]>
-		<script src="../assets/crossbrowserjs/html5shiv.js"></script>
-		<script src="../assets/crossbrowserjs/respond.min.js"></script>
-		<script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-	<![endif]-->
-	<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="../assets/plugins/js-cookie/js.cookie.js"></script>
-	<script src="../assets/js/theme/default.min.js"></script>
-	<script src="../assets/js/apps.min.js"></script>
+	<script src="{{asset('assets/plugins/bootstrap/4.0.0/js/bootstrap.bundle.min.js')}}"></script>
+	
+	<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<script src="{{asset('assets/plugins/js-cookie/js.cookie.js')}}"></script>
+	<script src="{{asset('assets/js/theme/default.min.js')}}"></script>
+	<script src="{{asset('assets/js/apps.min.js')}}"></script>
     
 	<!-- ================== END BASE JS ================== -->
 	
