@@ -99,10 +99,7 @@
                             
                         </div>
                     @endif
-                    {{ 
-                        session()->forget('message');
-                        session()->save(); 
-                    }}
+                    {{ session()->forget('message') }}
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-6">
