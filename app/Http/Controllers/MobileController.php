@@ -299,7 +299,7 @@ class MobileController extends Controller
             , 'created_at' => Carbon::now('Asia/Manila')
         ]);
         Session::flash('message', "Please wait to access citizen module");
-        return redirect()->route('citizen/patrol/verification/'.$pubkey);
+        return redirect()->route('/citizen/patrol/verification/'.$pubkey);
         
     }
     
