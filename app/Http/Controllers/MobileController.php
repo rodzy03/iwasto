@@ -316,8 +316,10 @@ class MobileController extends Controller
     public function check_id_ifverified()
     {
         $pubkey = $_POST['pubkey'];
-        $result = db::select("call sp_check_id_ifverified(?)",array(
+        $pstatus = $_POST['pstatus'];
+        $result = db::select("call sp_check_id_ifverified(?,?)",array(
             $pubkey ,
+            $pstatus
         ));
 
         $output = json_encode(array('Results' => $result));
