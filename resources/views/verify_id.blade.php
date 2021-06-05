@@ -91,7 +91,7 @@
                             <p>To be approved the iwasto team will check you're uploaded ID. </p>
                         </div>
                     </div>
-                    @if (Session::has('success'))
+                    @if (session('session_public_key'))
                         <div class="alert alert-success fade show">
                             <span class="close" data-dismiss="alert">×</span>
                             <strong>Success!</strong>
