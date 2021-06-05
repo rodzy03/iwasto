@@ -81,17 +81,10 @@
 					
 					
 				</div>
-				@if (Session::has('success'))
-                <div class="alert alert-success fade show">
-                    <span class="close" data-dismiss="alert">×</span>
-                    <strong>Success!</strong>
-                    {{ Session::get('success') }}.
-                   
-                </div>
-					
-				@endif
+				
 				
 				<div class="panel-body">
+                <form method="POST" action="{{route('submit_patrol')}}" enctype="multipart/form-data">
                     <div class="note note-light">
                         <div class="note-icon"><i class="far fa-user-circle"></i></div>
                         <div class="note-content">
@@ -99,8 +92,15 @@
                             <p>Add you're concern. </p>
                         </div>
                     </div>
-                    <form method="POST" action="{{route('submit_patrol')}}" enctype="multipart/form-data">
 					@csrf
+                    @if (Session::has('success'))
+                        <div class="alert alert-success fade show">
+                            <span class="close" data-dismiss="alert">×</span>
+                            <strong>Success!</strong>
+                            {{ Session::get('success') }}.
+                            
+                        </div>
+                    @endif
 					    <div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Select Type</label>
                             <div class="col-md-6">
