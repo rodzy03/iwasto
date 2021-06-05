@@ -224,19 +224,7 @@ class MobileController extends Controller
         echo $output;
     }
 
-    public function citizen_patrol_verification($pubkey)
-    {
-        $user = db::table('users')->where('public_token',$pubkey)->get();
-        if($user->isEmpty()) {
-            return redirect()->intended('https://iwasto.ph/');
-        }
-        else {
-            session(['session_public_key' => Crypt::encrypt($pubkey)]);
-            Session::save(); 
-            return view('verify_id');
-        }
-        
-    }
+    
 
     public function citizen_patrol($pubkey)
     {   
@@ -245,11 +233,15 @@ class MobileController extends Controller
         if($user->isEmpty()) {
             return redirect()->intended('https://iwasto.ph/');
         }
-        else
-        return view('home',compact('user'));
+        else {
+            session(['session_public_key' => Crypt::encrypt($pubkey)]);
+            return view('home',compact('user'));
+        }
+        
         
     }
 
+    
     public function submit_patrol(Request $request)
     {
         $selType = $request->get('selType');
@@ -277,8 +269,23 @@ class MobileController extends Controller
             , 'file_path' => $file_name
         ]);
         
-        return redirect()->back()->with('success', 'Concern Added');
+        session(['message' => "Concern Added"]);
+        session()->forget('session_public_key');
+        return redirect()->back();
         
+        
+    }
+
+    public function citizen_patrol_verification($pubkey)
+    {
+        $user = db::table('users')->where('public_token',$pubkey)->get();
+        if($user->isEmpty()) {
+            return redirect()->intended('https://iwasto.ph/');
+        }
+        else {
+            session(['session_public_key' => Crypt::encrypt($pubkey)]);
+            return view('verify_id');
+        }
         
     }
 
@@ -301,7 +308,6 @@ class MobileController extends Controller
         
         session(['message' => "Please wait to access citizen module"]);
         session()->forget('session_public_key');
-        
         return redirect()->back();
         
     }
