@@ -96,7 +96,8 @@
                 @endif
 
                 <div class="panel-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form method="POST" action="{{route('submit_verification')}}" enctype="multipart/form-data">
+                @csrf
                 <div class="note note-danger">
                         <div class="note-icon"><i class="fas fa-exclamation-circle"></i></div>
                         <div class="note-content">
