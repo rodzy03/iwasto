@@ -298,8 +298,9 @@ class MobileController extends Controller
             , 'user_id' => $user_id
             , 'created_at' => Carbon::now('Asia/Manila')
         ]);
-
-        return redirect()->back()->with('success', 'Please wait to access citizen module');
+        
+        return redirect('citizen_patrol_verification')->with('success', 'Please wait to access citizen module');
+        
     }
     
 }
