@@ -74,7 +74,14 @@
 
 
             <!-- begin panel -->
-            <div class="panel ">
+            <div class="panel ">@if (Session::has('success'))
+                        <div class="alert alert-success fade show">
+                            <span class="close" data-dismiss="alert">×</span>
+                            <strong>Success!</strong>
+                            {{ Session::get('success') }}.
+                            
+                        </div>
+                    @endif
                 <div class="panel-heading">
 
                     <!-- <h4 class="panel-title"><b>CITIZEN PATROL</b> </h4> -->
@@ -91,14 +98,7 @@
                             <p>To be approved the iwasto team will check you're uploaded ID. </p>
                         </div>
                     </div>
-                    @if (Session::has('success'))
-                        <div class="alert alert-success fade show">
-                            <span class="close" data-dismiss="alert">×</span>
-                            <strong>Success!</strong>
-                            {{ Session::get('success') }}.
-                            
-                        </div>
-                    @endif
+                    
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label">Image</label>
                         <div class="col-md-6">

@@ -235,8 +235,6 @@ class MobileController extends Controller
             Session::save(); 
             return view('verify_id');
         }
-
-        
         
     }
 
