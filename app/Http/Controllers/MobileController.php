@@ -300,7 +300,8 @@ class MobileController extends Controller
         ]);
         
         session(['message' => "Please wait to access citizen module"]);
-        Session::save(); 
+        session()->forget('session_public_key');
+        
         return redirect()->back();
         
     }
