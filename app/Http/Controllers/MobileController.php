@@ -235,6 +235,8 @@ class MobileController extends Controller
             Session::save(); 
             return view('verify_id');
         }
+
+        
         
     }
 
@@ -278,7 +280,7 @@ class MobileController extends Controller
         ]);
         
         return redirect()->back()->with('success', 'Concern Added');
-        //return redirect()->back()->withMessage(['Please wait for confirmation']);
+        
         
     }
 
@@ -298,8 +300,8 @@ class MobileController extends Controller
             , 'user_id' => $user_id
             , 'created_at' => Carbon::now('Asia/Manila')
         ]);
-        
-        return redirect()->back()->with('success', 'Pleas wait to access citizen module');
+
+        return redirect()->back()->with('success', 'Please wait to access citizen module');
     }
     
 }

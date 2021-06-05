@@ -70,13 +70,7 @@
 
         <!-- begin #content -->
         <div id="content" class="content">
-            <!-- begin breadcrumb -->
-            {{--<ol class="breadcrumb pull-right">
-				<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-				<li class="breadcrumb-item"><a href="javascript:;">Page Options</a></li>
-				<li class="breadcrumb-item active">Blank Page</li>
-			</ol>--}}
-            <!-- end breadcrumb -->
+           
 
 
             <!-- begin panel -->
@@ -103,7 +97,7 @@
                             <strong>Success!</strong>
                             {{ Session::get('success') }}.
                             
-                        </div>    
+                        </div>
                     @endif
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label">Image</label>
