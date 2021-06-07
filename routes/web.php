@@ -41,6 +41,11 @@ Route::post('/waste-type','MobileController@get_waste_type');
 Route::post('/update/waste-type','MobileController@update_waste_type');
 Route::post('/add/waste-type','MobileController@add_waste_type');
 
+Route::post('/get/routes','MobileController@get_routes');
+Route::post('/update/routes','MobileController@update_routes');
+Route::post('/add/routes','MobileController@add_routes');
+
+
 
 
 // Route::group(['middleware' => ['mobile_routes']], function () {
