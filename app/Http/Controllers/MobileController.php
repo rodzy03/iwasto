@@ -418,7 +418,7 @@ class MobileController extends Controller
             'end_lat' => $pend_lat,
             'end_longh' => $pend_longh,
             'region' => $pregion,
-            'rovince' => $pprovince,
+            'province' => $pprovince,
             'city_municipality' => $pcity_municipality,
             'barangay' => $pbarangay,
             'route_name' => $proute_name,
