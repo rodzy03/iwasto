@@ -39,6 +39,9 @@ Route::get('/verify_email/{email}','MobileController@verify_email')->name('verif
 Route::post('/check/has/id','MobileController@check_id_ifverified');
 Route::post('/waste-type','MobileController@get_waste_type');
 Route::post('/update/waste-type','MobileController@update_waste_type');
+Route::post('/add/waste-type','MobileController@add_waste_type');
+
+
 
 // Route::group(['middleware' => ['mobile_routes']], function () {
     

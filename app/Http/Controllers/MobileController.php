@@ -348,5 +348,20 @@ class MobileController extends Controller
         echo $output;
         
     }
+
+
+    public function add_waste_type()
+    {
+        
+        $waste_type_name = $_POST['pwaste_type_name'];
+        db::table('r_waste_type')
+        ->insert([
+            'waste_type_name' => $waste_type_name
+        ]);
+        $output = json_encode(array('Results' => "success"));
+        echo $output;
+        
+    }
+
     
 }
