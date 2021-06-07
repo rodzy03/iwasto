@@ -47,34 +47,6 @@ Route::post('/add/routes','MobileController@add_routes');
 
 
 
-
-// Route::group(['middleware' => ['mobile_routes']], function () {
-    
+// Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
-
 // });
-
-// Route::get('/VerifyEmail', 'Email@VerifyEmail')
-//     ->NAME('VerifyEmail');
-
-// Auth::routes();
-
-
-// Route::group(['middleware' => ['validateBackHistory']], function () {
-// });
-
-
-// Route::get('backup', function () {
-//     Artisan::call('db:backup',['--database'=>'mysql']);
-
-//     return 'Database backup success.';
-// });
-
-
-// Route::get('thankyou', function () { 
-// 	return view('page_landing');
-// })->name('thankyou');
-
-
-
-
