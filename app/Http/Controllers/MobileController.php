@@ -427,4 +427,12 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => "success"));
         echo $output;
     }
+
+    public function get_schedule()
+    {
+        
+        $zipcodes = db::table('v_get_schedule')->get();
+        $output = json_encode(array('Results' => $zipcodes));
+        echo $output;
+    }
 }
