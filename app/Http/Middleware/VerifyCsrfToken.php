@@ -27,6 +27,7 @@ class VerifyCsrfToken extends Middleware
         'get-barangay',
         'check/has/id',
         'waste-type',
-        'update/waste-type'
+        'update/waste-type',
+        'add/waste-type'
     ];
 }
