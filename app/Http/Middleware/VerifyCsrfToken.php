@@ -31,7 +31,8 @@ class VerifyCsrfToken extends Middleware
         'add/waste-type',
         'get/routes',
         'update/routes',
-        'add/routes'
+        'add/routes',
+        'get/schedule'
         
     ];
 }
