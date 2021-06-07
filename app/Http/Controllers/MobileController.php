@@ -325,12 +325,26 @@ class MobileController extends Controller
 
         $output = json_encode(array('Results' => $result));
         echo $output;
+
     }
     
     public function get_waste_type()
     {
         $zipcodes = db::table('r_waste_type')->get();
         $output = json_encode(array('Results' => $zipcodes));
+        echo $output;
+        
+    }
+
+    public function update_waste_type()
+    {
+        $waste_type_id = $_POST['pwaste_type_id'];
+        $waste_type_name = $_POST['pwaste_type_name'];
+        db::table('r_waste_type')->where('waste_type_id',$waste_type_id)
+        ->update([
+            'waste_type_name' => $waste_type_name
+        ]);
+        $output = json_encode(array('Results' => "success"));
         echo $output;
         
     }
