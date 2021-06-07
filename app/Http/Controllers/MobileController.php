@@ -26,6 +26,7 @@ class MobileController extends Controller
         $zipcodes = db::table('v_get_zipcodes')->get();
         $output = json_encode(array('Results' => $zipcodes));
         echo $output;
+
     }
 
     public function get_barangays()
@@ -326,5 +327,12 @@ class MobileController extends Controller
         echo $output;
     }
     
+    public function get_waste_type()
+    {
+        $zipcodes = db::table('r_waste_type')->get();
+        $output = json_encode(array('Results' => $zipcodes));
+        echo $output;
+        
+    }
     
 }
