@@ -28,6 +28,10 @@ class VerifyCsrfToken extends Middleware
         'check/has/id',
         'waste-type',
         'update/waste-type',
-        'add/waste-type'
+        'add/waste-type',
+        'get/routes',
+        'update/routes',
+        'add/routes'
+        
     ];
 }

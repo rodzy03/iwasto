@@ -363,5 +363,68 @@ class MobileController extends Controller
         
     }
 
-    
+    public function get_routes()
+    {
+        $zipcodes = db::table('r_routes')->get();
+        $output = json_encode(array('Results' => $zipcodes));
+        echo $output;
+    }
+
+    public function update_routes()
+    {
+        $pstart_lat = $_POST['pstart_lat'];
+        $pstart_longh = $_POST['pstart_longh'];
+        $pend_lat = $_POST['pend_lat'];
+        $pend_longh = $_POST['pend_longh'];
+        $pregion = $_POST['pregion'];
+        $pprovince = $_POST['pprovince'];
+        $pcity_municipality = $_POST['pcity_municipality'];
+        $pbarangay = $_POST['pbarangay'];
+        $proute_name = $_POST['proute_name'];
+
+        db::table('r_routes')->where('routes_id',$_POST['proutes_id'])
+        ->update([
+            'start_lat' => $pstart_lat,
+            'start_longh' => $pstart_longh,
+            'end_lat' => $pend_lat,
+            'end_longh' => $pend_longh,
+            'region' => $pregion,
+            'rovince' => $pprovince,
+            'city_municipality' => $pcity_municipality,
+            'barangay' => $pbarangay,
+            'route_name' => $proute_name,
+        ]);
+        
+        $output = json_encode(array('Results' => "success"));
+        echo $output;
+    }
+
+    public function add_routes()
+    {
+        $pstart_lat = $_POST['pstart_lat'];
+        $pstart_longh = $_POST['pstart_longh'];
+        $pend_lat = $_POST['pend_lat'];
+        $pend_longh = $_POST['pend_longh'];
+        $pregion = $_POST['pregion'];
+        $pprovince = $_POST['pprovince'];
+        $pcity_municipality = $_POST['pcity_municipality'];
+        $pbarangay = $_POST['pbarangay'];
+        $proute_name = $_POST['proute_name'];
+
+        db::table('r_routes')
+        ->insert([
+            'start_lat' => $pstart_lat,
+            'start_longh' => $pstart_longh,
+            'end_lat' => $pend_lat,
+            'end_longh' => $pend_longh,
+            'region' => $pregion,
+            'rovince' => $pprovince,
+            'city_municipality' => $pcity_municipality,
+            'barangay' => $pbarangay,
+            'route_name' => $proute_name,
+        ]);
+        
+        $output = json_encode(array('Results' => "success"));
+        echo $output;
+    }
 }
