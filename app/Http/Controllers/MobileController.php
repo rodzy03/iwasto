@@ -435,4 +435,15 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $zipcodes));
         echo $output;
     }
+
+    public function add_schedule()
+    {
+        $pcollection_date = $_POST['pcollection_date'];
+        $pwaste_type = $_POST['pwaste_type'];
+        $proute_name = $_POST['proute_name'];
+        $barangays = db::select("call sp_add_location(?,?,?)"
+        ,array($pcollection_date, $pwaste_type, $proute_name));
+        $output = json_encode(array('Results' => $barangays));
+        echo $output;
+    }
 }
