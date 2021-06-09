@@ -33,7 +33,8 @@ class VerifyCsrfToken extends Middleware
         'update/routes',
         'add/routes',
         'get/schedule',
-        'add/schedule'
+        'add/schedule',
+        'get/schedule/by/day'
         
     ];
 }
