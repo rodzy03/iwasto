@@ -174,6 +174,13 @@ class MobileController extends Controller
         echo $output;
     }
 
+    public function get_location_by_day()
+    {
+        $zipcodes = db::table('v_schedule_by_day')->where('major_area',$_POST['major_area'])->get();
+        $output = json_encode(array('Results' => $zipcodes));
+        echo $output;
+    }
+
     public function get_next_location()
     {
         $pubkey = $_POST['schedule_id'];
