@@ -47,6 +47,8 @@ Route::post('/add/routes','MobileController@add_routes');
 Route::post('/get/schedule','MobileController@get_schedule');
 Route::post('/add/schedule','MobileController@add_schedule');
 
+Route::post('/get/schedule/by/day','MobileController@get_location_by_day');
+
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
