@@ -153,7 +153,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-open"></i></span></div>
-                                    <input name="email" type="text" class="form-control" value="{{$user[0]->email}}"/>
+                                    <input disabled name="email" type="text" class="form-control" value="{{$user[0]->email}}" style="background-color: white;"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
