@@ -470,8 +470,14 @@ class MobileController extends Controller
 
     public function get_verification()
     {
+        $status = $_POST['pstatus'];
+        if($status == "all") {
+            $zipcodes = db::table('v_get_verification')->get();
+        }
+        else {
+            $zipcodes = db::table('v_get_verification')->where('status',$status)->get();
+        }
         
-        $zipcodes = db::table('v_get_verification')->get();
         $output = json_encode(array('Results' => $zipcodes));
         echo $output;
     }
