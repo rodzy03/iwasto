@@ -463,6 +463,16 @@ class MobileController extends Controller
         $barangays = db::select("call sp_update_location(?,?,?,?)"
         ,array($pcollection_date, $pwaste_type, $proute_name, $pschedule_id));
         $output = json_encode(array('Results' => $barangays));
+        echo
+        
+        $output;
+    }
+
+    public function get_verification()
+    {
+        
+        $zipcodes = db::table('v_get_verification')->get();
+        $output = json_encode(array('Results' => $zipcodes));
         echo $output;
     }
 }
