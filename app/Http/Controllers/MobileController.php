@@ -481,4 +481,12 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $zipcodes));
         echo $output;
     }
+
+    public function get_status()
+    {
+        $data = db::table('r_status')->get();
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+
+    }
 }
