@@ -142,7 +142,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
-                                    <input disabled name="full_name" type="text" class="form-control" style="text-transform: capitalize; background-color:white;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
+                                    <input disabled name="full_name" type="text" class="form-control" style="text-transform: capitalize; background-color:white; color: black;" value="{{$user[0]->firstname}} {{$user[0]->middlename}}. {{$user[0]->lastname}}"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope-open"></i></span></div>
-                                    <input disabled name="email" type="text" class="form-control" value="{{$user[0]->email}}" style="background-color: white;"/>
+                                    <input disabled name="email" type="text" class="form-control" value="{{$user[0]->email}}" style="background-color: white; color: black;"/>
                                     <div class="invalid-tooltip" hidden>Please choose a unique and valid username.</div>
                                 </div>
                             </div>
