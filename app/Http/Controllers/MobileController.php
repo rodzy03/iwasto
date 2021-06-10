@@ -494,13 +494,15 @@ class MobileController extends Controller
     {
         
         $pstatus = $_POST['pstatus'];
+        $premarks = $_POST['premarks'];
         $pcitizen_verification_id = $_POST['pcitizen_verification_id'];
         $data = db::table('t_citizen_verification')
         ->where('citizen_verification_id',$pcitizen_verification_id)
         ->update([
             'status' => $pstatus
+            , 'remarks' => $premarks
         ]);
-        
+
         $output = json_encode(array('Results' => $data));
         echo $output;
         
