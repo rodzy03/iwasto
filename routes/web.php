@@ -51,6 +51,10 @@ Route::post('/get/schedule/by/day','MobileController@get_location_by_day');
 
 
 Route::post('/get/verification','MobileController@get_verification');
+
+
+Route::post('/get/status','MobileController@get_status');
+
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
