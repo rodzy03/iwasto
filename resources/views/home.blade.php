@@ -109,7 +109,9 @@
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-chevron-down"></i></span></div>
                                     <select style="background-color: white;" name="selType" class="form-control">
 										<option class="form-control" value="Missing Collection">Missing Collection</option>
-									</select>
+                                        <option class="form-control" value="Illegal Waste Piles On Street">Illegal Waste Piles On Street</option>
+                                        <option class="form-control" value="Illegal Waste Piles On Drainage">Illegal Waste Piles On Drainage</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
