@@ -46,6 +46,7 @@ Route::post('/update/routes','MobileController@update_routes');
 Route::post('/add/routes','MobileController@add_routes');
 Route::post('/get/schedule','MobileController@get_schedule');
 Route::post('/add/schedule','MobileController@add_schedule');
+Route::post('/update/schedule','MobileController@update_schedule');
 
 Route::post('/get/schedule/by/day','MobileController@get_location_by_day');
 
