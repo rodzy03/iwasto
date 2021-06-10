@@ -489,4 +489,20 @@ class MobileController extends Controller
         echo $output;
 
     }
+
+    public function update_status()
+    {
+        
+        $pstatus = $_POST['pstatus'];
+        $pcitizen_verification_id = $_POST['pcitizen_verification_id'];
+        $data = db::table('t_citizen_verification')
+        ->where('citizen_verification_id',$pcitizen_verification_id)
+        ->update([
+            'status' => $pstatus
+        ]);
+        
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+        
+    }
 }
