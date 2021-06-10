@@ -453,4 +453,16 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $barangays));
         echo $output;
     }
+
+    public function update_schedule()
+    {
+        $pcollection_date = $_POST['pcollection_date'];
+        $pwaste_type = $_POST['pwaste_type'];
+        $proute_name = $_POST['proute_name'];
+        $pschedule_id = $_POST['pschedule_id'];
+        $barangays = db::select("call sp_update_location(?,?,?,?)"
+        ,array($pcollection_date, $pwaste_type, $proute_name, $pschedule_id));
+        $output = json_encode(array('Results' => $barangays));
+        echo $output;
+    }
 }
