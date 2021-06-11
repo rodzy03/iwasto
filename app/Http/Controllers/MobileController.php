@@ -259,8 +259,8 @@ class MobileController extends Controller
         $email_address = $request->get('email');
         $contact_number = $request->get('contact_number');
         $main_document = $request->file('photo');
-        
-        
+        $pubkey = Crypt::decrypt(session('session_public_key'));
+        $user_id = db::table('users')->where('public_token',$pubkey)->value('id');
         $main_document->move(public_path('uploads/')
                 , $main_document->getClientOriginalName()); 
         
@@ -275,6 +275,7 @@ class MobileController extends Controller
             , 'email_address' => $email_address
             , 'contact_number' => $contact_number
             , 'file_path' => $file_name
+            , 'user_id' => $user_id
         ]);
         
         session(['message' => "Concern Added"]);
