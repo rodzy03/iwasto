@@ -255,8 +255,7 @@ class MobileController extends Controller
         $selType = $request->get('selType');
         $location = $request->get('location');
         $description = $request->get('description');
-        $full_name = $request->get('full_name');
-        $email_address = $request->get('email');
+       
         $contact_number = $request->get('contact_number');
         $main_document = $request->file('photo');
         $pubkey = Crypt::decrypt(session('session_public_key'));
@@ -271,8 +270,6 @@ class MobileController extends Controller
             'type' => $selType
             , 'location' => $location
             , 'description' => $description
-            , 'full_name' => $full_name
-            , 'email_address' => $email_address
             , 'contact_number' => $contact_number
             , 'file_path' => $file_name
             , 'user_id' => $user_id
