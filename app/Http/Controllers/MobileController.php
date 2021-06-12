@@ -505,4 +505,12 @@ class MobileController extends Controller
         echo $output;
         
     }
+
+    public function get_citizen_patrol()
+    {   
+        $pstatus = $_POST['pstatus'];
+        $data = db::table('v_get_citizen_patrol')->where('status',$pstatus)->get();
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
 }

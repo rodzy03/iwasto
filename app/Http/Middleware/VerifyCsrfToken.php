@@ -38,7 +38,8 @@ class VerifyCsrfToken extends Middleware
         'update/schedule',
         'get/verification',
         'get/status',
-        'update/status'
+        'update/status',
+        'get/citizen/patrol'
         
     ];
 }
