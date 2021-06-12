@@ -513,4 +513,18 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $data));
         echo $output;
     }
+
+    public function update_concern()
+    {   
+        $pcitizen_patrol_id = $_POST['pcitizen_patrol_id'];
+        $premarks = $_POST['premarks'];
+        $data = db::table('t_citizen_patrol')->where('citizen_patrol_id', $pcitizen_patrol_id)
+        ->update([
+            'status' => 'approved'
+            , 'remarks' => $premarks
+        ]);
+
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
 }
