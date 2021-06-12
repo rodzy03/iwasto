@@ -520,7 +520,7 @@ class MobileController extends Controller
         $premarks = $_POST['premarks'];
         $data = db::table('t_citizen_patrol')->where('citizen_patrol_id', $pcitizen_patrol_id)
         ->update([
-            'status' => 'pending'
+            'status' => 'approved'
             , 'remarks' => $premarks
         ]);
 
