@@ -56,6 +56,9 @@ Route::post('/get/verification','MobileController@get_verification');
 Route::post('/get/status','MobileController@get_status');
 
 Route::post('/update/status','MobileController@update_status');
+
+Route::post('/get/citizen/patrol','MobileController@get_citizen_patrol');
+
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
