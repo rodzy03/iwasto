@@ -548,7 +548,7 @@ class MobileController extends Controller
 
     public function get_swm_location()
     {
-        $data = db::table('t_swm_location')->get('active_flag',1)->get();
+        $data = db::table('t_swm_location')->where('active_flag',1)->get();
         $output = json_encode(array('Results' => $data));
         echo $output;
     }
