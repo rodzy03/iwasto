@@ -42,7 +42,9 @@ class VerifyCsrfToken extends Middleware
         'get/citizen/patrol',
         'update/concern',
         'get/waste',
-        'add/waste'
+        'add/waste',
+        'get/swm_location',
+        'add/swm_location'
         
     ];
 }

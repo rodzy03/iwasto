@@ -545,4 +545,29 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $data));
         echo $output;
     }
+
+    public function get_swm_location()
+    {
+        $data = db::table('t_swm_location')->get('active_flag',1)->get();
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
+
+    public function add_swm_location()
+    {
+        $pjunkshop_name = $_POST['pjunkshop_name'];
+        $pjunkshop_address = $_POST['pjunkshop_address'];
+        $platitude = $_POST['platitude'];
+        $plonghitude = $_POST['plonghitude'];
+        $data = db::table('t_swm_location')
+        ->insert([
+            'junkshop_name' => $pjunkshop_name
+            , 'junkshop_address' => $pjunkshop_address
+            , 'latitude' => $platitude
+            , 'longhitude' => $plonghitude
+            ]);
+
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
 }
