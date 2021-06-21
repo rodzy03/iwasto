@@ -535,11 +535,12 @@ class MobileController extends Controller
         echo $output;
     }
 
-    public function add_waste(Request $request)
+    public function add_waste()
     {
         $data = db::table('r_waste')
         ->insert([
-            'waste_name' => $request->pwaste_name
+            'waste_name' => $_POST['pwaste_name']
+            , 'waste_type_id' => db::table('r_waste_type')->where('waste_type_name',$_POST['pwaste_type_name'])->value('waste_type_id')
         ]);
         $output = json_encode(array('Results' => $data));
         echo $output;
