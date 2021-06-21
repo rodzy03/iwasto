@@ -60,6 +60,10 @@ Route::post('/update/status','MobileController@update_status');
 Route::post('/get/citizen/patrol','MobileController@get_citizen_patrol');
 Route::post('/update/concern','MobileController@update_concern');
 
+Route::get('/get/waste','MobileController@get_waste');
+Route::post('/add/waste','MobileController@add_waste');
+
+
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
