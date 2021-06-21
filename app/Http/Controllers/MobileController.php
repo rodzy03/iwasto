@@ -530,7 +530,7 @@ class MobileController extends Controller
 
     public function get_waste()
     {
-        $data = db::table('r_waste')->get();
+        $data = db::table('r_waste as w')->join('r_waste_type as wt','w.waste_type_id','wt.waste_type_id')->get();
         $output = json_encode(array('Results' => $data));
         echo $output;
     }
