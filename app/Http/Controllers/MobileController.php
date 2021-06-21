@@ -527,4 +527,21 @@ class MobileController extends Controller
         $output = json_encode(array('Results' => $data));
         echo $output;
     }
+
+    public function get_waste()
+    {
+        $data = db::table('r_waste')->get();
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
+
+    public function add_waste(Request $request)
+    {
+        $data = db::table('r_waste')
+        ->insert([
+            'waste_name' => $request->pwaste_name
+        ]);
+        $output = json_encode(array('Results' => $data));
+        echo $output;
+    }
 }
