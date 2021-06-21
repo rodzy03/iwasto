@@ -65,7 +65,7 @@ Route::post('/add/waste','MobileController@add_waste');
 
 Route::post('/get/swm_location','MobileController@get_swm_location');
 Route::post('/add/swm_location','MobileController@add_swm_location');
-
+Route::post('/update/swm_location','MobileController@update_swm_location');
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });

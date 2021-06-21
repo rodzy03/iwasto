@@ -44,7 +44,8 @@ class VerifyCsrfToken extends Middleware
         'get/waste',
         'add/waste',
         'get/swm_location',
-        'add/swm_location'
+        'add/swm_location',
+        'update/swm_location'
         
     ];
 }
