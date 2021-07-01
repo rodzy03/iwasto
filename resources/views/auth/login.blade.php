@@ -128,7 +128,7 @@ License: You must have a valid license purchased only from themeforest(the above
         "hideMethod": "fadeOut"
       };
 
-    toastr.info("Logging in...");
+    toastr.error("Logging in...");
   } 
 
   </script>
