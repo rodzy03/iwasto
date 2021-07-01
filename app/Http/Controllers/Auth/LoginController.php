@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Lang;
-
+use DB;
 class LoginController extends Controller
 {
     /*
@@ -49,6 +49,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
+
+        
         return view('auth.login');
     }
 
@@ -151,7 +153,7 @@ class LoginController extends Controller
         // }
 
         //return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
-        return '/employee/dashboard';
+        return '/admin/dashboard';
     }
     protected function clearLoginAttempts(Request $request)
     {
@@ -197,7 +199,7 @@ class LoginController extends Controller
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string|min:5|max:12',
+            'password' => 'required|string|min:5|max:24',
         ]);
 
         

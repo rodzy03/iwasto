@@ -12,17 +12,17 @@
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-	<link href="{{asset('assets/plugins/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet" />
-	<link href="{{asset('assets/plugins/bootstrap/4.0.0/css/bootstrap.min.css')}}" rel="stylesheet" />
-	<link href="{{asset('assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css')}}" rel="stylesheet" />
-	<link href="{{asset('assets/plugins/animate/animate.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins-ca/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins-ca/bootstrap/4.0.0/css/bootstrap.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins-ca/font-awesome/5.0/css/fontawesome-all.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('assets/plugins-ca/animate/animate.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('assets/css/default/style.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('assets/css/default/style-responsive.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('assets/css/default/theme/default.css')}}" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="{{asset('assets/plugins/pace/pace.min.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/pace/pace.min.js')}}"></script>
 	<!-- ================== END BASE JS ================== -->
     <style>
     #my_camera{
@@ -210,12 +210,12 @@
 	<!-- end page container -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="{{asset('assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
-	<script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-	<script src="{{asset('assets/plugins/bootstrap/4.0.0/js/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/jquery/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/jquery-ui/jquery-ui.min.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/bootstrap/4.0.0/js/bootstrap.bundle.min.js')}}"></script>
 	
-	<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-	<script src="{{asset('assets/plugins/js-cookie/js.cookie.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<script src="{{asset('assets/plugins-ca/js-cookie/js.cookie.js')}}"></script>
 	<script src="{{asset('assets/js/theme/default.min.js')}}"></script>
 	<script src="{{asset('assets/js/apps.min.js')}}"></script>
     
