@@ -238,6 +238,7 @@ class MobileController extends Controller
     {   
         
         $user = db::table('users')->where('public_token',$pubkey)->get();
+        
         if($user->isEmpty()) {
             return redirect()->intended('https://iwasto.ph/');
         }
@@ -285,6 +286,7 @@ class MobileController extends Controller
     public function citizen_patrol_verification($pubkey)
     {
         $user = db::table('users')->where('public_token',$pubkey)->get();
+        
         if($user->isEmpty()) {
             return redirect()->intended('https://iwasto.ph/');
         }

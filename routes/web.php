@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 // Mobile routes
 Route::post('/get-zipcodes','MobileController@get_zipcodes')->name('get-zipcodes');
 Route::post('/get-barangays','MobileController@get_barangays')->name('get-barangays');
@@ -66,6 +66,28 @@ Route::post('/add/waste','MobileController@add_waste');
 Route::post('/get/swm_location','MobileController@get_swm_location');
 Route::post('/add/swm_location','MobileController@add_swm_location');
 Route::post('/update/swm_location','MobileController@update_swm_location');
+
+
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
+
+Route::group(['middleware' => ['validateBackHistory']], function () {
+
+	Route::group(['middleware' => ['authenticate']], function () {
+
+		Route::group(['middleware' => ['admin']], function () {
+
+            Route::get('/admin/dashboard','AdminController@admin_dashboard')->name('admin_dashboard');
+
+            Route::get('/waste','AdminController@get_waste')->name('get_waste');
+            
+            // crud waste
+            
+            Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
+            Route::post('/import/waste','AdminController@import_waste')->name('import_waste');
+            
+		});
+	});
+
+});

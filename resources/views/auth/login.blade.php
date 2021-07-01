@@ -1,119 +1,135 @@
+
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if !IE]><!-->
+<!--
+Template Name: Metronic - Bootstrap 4 HTML, React, Angular 11 & VueJS Admin Dashboard Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: https://1.envato.market/EA4JP
+Renew Support: https://1.envato.market/EA4JP
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
 <html lang="en">
-<!--<![endif]-->
-
-<head>
-  <meta charset="utf-8" />
-  <title>DocExpert | Login</title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-  <meta content="" name="description" />
-  <meta content="" name="author" />
-
-  @include('layouts.includes.base-css')
-  <style>
-  #logo {
-    display: inline-block;
-    margin: 15px; 
-    margin-left: 50px;
-    height: 60px;
-    width: auto; /* correct proportions to specified height */
-    border-radius: 50%; /* makes it a circle */
-  }
-  </style>
-  
-</head>
-
-<body class="pace-top bg-white">
-  <!-- begin #page-loader -->
-  <div id="page-loader" class="fade show"><span class="spinner"></span></div>
-  <!-- end #page-loader -->
-
-  <!-- begin #page-container -->
-  <div id="page-container" class="fade">
-    <!-- begin login -->
-    <div class="login login-with-news-feed">
-      <!-- begin news-feed -->
-      <div class="news-feed">
-        <div class="news-image" style="background-image: url({{asset('assets/img/login-bg/doc3.jpg)')}}"></div>
-        <div class="news-caption">
-          <h4 class="caption-title"><b>Doc</b>Xpert</h4>
-          <p>
-            <!-- Download the Color Admin app for iPhone®, iPad®, and Android™. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
-            Document management is a system or process used to capture, track and store electronic documents such as PDFs, word processing files and digital images of paper-based content.
-          </p>
-        </div>
-      </div>
-      <!-- end news-feed -->
-      <!-- begin right-content -->
-      <div class="right-content">
-        <!-- begin login-header -->
-        <div class="login-header" style="text-align: center;">
-          <div class="brand">
-          <a href="#"><img id="logo" src="{{asset('assets/img/logo/pup.png')}}"></a>
-          {{--<link rel="shortcut icon" type="image/x-icon" href="yourLogo.jpg" />--}}
-            <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Polytechnic University of The Philippines</small>
-            <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quezon City Branch.</small>
-          </div>
-          <div class="icon">
-            <i class="fa fa-sign-in"></i>
-          </div>
-        </div>
-        <!-- end login-header -->
-        <!-- begin login-content -->
-        <div class="login-content">
-          <form method="POST" action="{{ route('login') }}" class="margin-bottom-0">
-            @if(Session::get('fail'))
-            <div class="alert alert-danger">
-              {{Session::get('fail')}}
-            </div>
-            @endif
-            @csrf
-            <div class="form-group m-b-20">
-              <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control form-control-lg" placeholder="Email Address" />
-              <span class="text-danger">@error('email') {{ $message}} @enderror</span>
-            </div>
-            <div class="form-group m-b-20">
-              <input id="password" type="password" name="password" class="form-control form-control-lg" placeholder="Password"/>
-              <span class="text-danger">@error('password') {{ $message}} @enderror</span>
-            </div>
-            {{--<div class="checkbox checkbox-css m-b-20">
-                      <input type="checkbox" id="remember_checkbox" /> 
-                      <label for="remember_checkbox">
-                        Remember Me
-                      </label>
-                  </div>--}}
-            <div class="login-buttons">
-              <button type="submit" class="btn btn-success btn-block btn-lg">Sign me in</button>
-            </div>
-            {{--<div class="m-t-20">
-                      Not a member yet? Click <a href="javascript:;">here</a> to register.
-                  </div>--}}
-                  <hr />
-                        <p class="text-center text-grey-darker">
-                            &copy; DocXpert All Right Reserved 2020.
-                        </p>
-          </form>
-        </div>
-        <!-- end login-content -->
-      </div>
-      <!-- end right-container -->
-    </div>
-    <!-- end login -->
-
-
-  </div>
-  <!-- end page container -->
-
-  @include('layouts.includes.base-js')
-
+	<!--begin::Head-->
+	<head>
+		<meta charset="utf-8" />
+		<title>IWasto | Login</title>
+		<meta name="description" content="Login page example" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<link rel="canonical" href="https://keenthemes.com/metronic" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+	
+		<!--begin::Layout Themes(used by all pages)-->
+    @include('layouts.includes.base-css')
+		<!--end::Layout Themes-->
+		<link rel="shortcut icon" href="{{asset('uploads/logo_green.png')}}" />
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+		<!--begin::Main-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Login-->
+			<div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
+				<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('assets/media/bg/bg-3.jpg');">
+					<div class="login-form text-center p-7 position-relative overflow-hidden">
+						<!--begin::Login Header-->
+						<div class="d-flex flex-center mb-15">
+							<a href="#">
+								<img src="{{asset('uploads/logo_green.png')}}" class="max-h-75px" alt="" />
+							</a>
+						</div>
+						<!--end::Login Header-->
+						<!--begin::Login Sign in form-->
+            <div class="login-signin">
+							<div class="mb-20">
+								<h3>IWasto Web App</h3>
+								<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
+							</div>
+              
+							<form method="POST" action="{{ route('login') }}"  id="login_form">
+              @csrf
+								<div class="form-group mb-5">
+									<input type="email" name="email" value="{{ old('email') }}"  class="form-control h-auto form-control-solid py-4 px-8" placeholder="Email or Username" autocomplete="off" />
+                  <span class="text-danger">@error('email') {{ $message }} @enderror</span>
+                </div>
+								<div class="form-group mb-5">
+									<input class="form-control h-auto form-control-solid py-4 px-8" type="password" name="password" placeholder="Password" />
+                  <span class="text-danger">@error('password') {{ $message}} @enderror</span>
+                </div>
+								<button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4" id="kt_btn_1">Login</button>
+                <!-- <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4 spinner spinner-white spinner-right">Login </button> -->
+							</form>
+							<div class="mt-10">
+								<span class="opacity-70 mr-4">&copy; IWasto All Right Reserved 2021.</span>
+								
+							</div>
+						</div>
+						
+						<!--end::Login Sign in form-->
+						
+					
+					</div>
+				</div>
+			</div>
+			<!--end::Login-->
+		</div>
+		<!--end::Main-->
+		
+		<!--begin::Global Config(global config for global JS scripts)-->
+    
+		<!--end::Global Theme Bundle-->
+		<!--begin::Page Scripts(used by this page)-->
+		
+		<!--end::Page Scripts-->
+    @include('layouts.includes.base-js')
+	</body>
+	<!--end::Body-->
   <script>
-    $(document).ready(function() {
-      App.init();
-      LoginV2.init();
-    });
-  </script>
-</body>
 
+  // Demo 1
+  var btn = KTUtil.getById("kt_btn_1");
+
+  $('form').submit(function (e) {
+    loading();
+
+    var form = this;
+    
+    e.preventDefault();
+    
+    setTimeout(function () {
+      KTUtil.btnRelease(btn);
+        form.submit();
+    }, 2000); // in milliseconds
+  });
+
+  function loading() {
+    KTUtil.btnWait(btn, "spinner spinner-right spinner-white pr-15", "Please wait");
+    toastr.options = {
+       
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+    toastr.info("Logging in...");
+  } 
+
+  </script>
 </html>
