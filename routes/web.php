@@ -66,6 +66,7 @@ Route::post('/add/waste','MobileController@add_waste');
 Route::post('/get/swm_location','MobileController@get_swm_location');
 Route::post('/add/swm_location','MobileController@add_swm_location');
 Route::post('/update/swm_location','MobileController@update_swm_location');
+Route::post('/get_nearby','MobileController@get_nearby');
 
 
 // Route::group(['middleware' => ['mobile_routes']], function () {    
@@ -81,12 +82,18 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::get('/admin/dashboard','AdminController@admin_dashboard')->name('admin_dashboard');
 
             Route::get('/waste','AdminController@get_waste')->name('get_waste');
-            
+            Route::get('/routes','AdminController@get_routes')->name('get_routes');
             // crud waste
             
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
             Route::post('/import/waste','AdminController@import_waste')->name('import_waste');
+            Route::post('/provinces','AdminController@provinces')->name('provinces');
             
+            Route::post('/municipality','AdminController@municipality')->name('municipality');
+            Route::post('/barangay','AdminController@barangay')->name('barangay');
+            Route::post('/crud_routes','AdminController@crud_routes')->name('crud_routes');
+            
+
 		});
 	});
 

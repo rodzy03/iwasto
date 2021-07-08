@@ -240,7 +240,19 @@ class MobileController extends Controller
         echo $output;
     }
 
-    
+    public function get_nearby()
+    {
+        $platitude = $_POST['platitude'];
+        $plonghitude = $_POST['plonghitude'];
+        
+        $result = db::select("call sp_get_nearby(?,?)",array(
+            $platitude ,
+            $plonghitude
+        ));
+
+        $output = json_encode(array('Results' => $result));
+        echo $output;
+    }
 
     public function citizen_patrol($pubkey)
     {   
