@@ -23,6 +23,8 @@ class AdminController extends Controller
        
        $type = db::table('r_waste_type')->where('active_flag',1)->get();
        
+       
+       
        return view('admin.manage_waste',compact('data','type'));
    }
    
