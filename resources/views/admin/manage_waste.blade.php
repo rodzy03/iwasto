@@ -94,14 +94,14 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">{{$row->waste_name}}</a>
+                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase;">{{$row->waste_name}}</a>
                                     {{--<span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>--}}
                                 </div>
                             </div>
                         </td>
-                        <td>
+                        <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->waste_type_name}}</span>
+                            <span class="text-dark-75" >{{$row->waste_type_name}}</span>
                         </td>
                         {{--<td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$520</span>
