@@ -190,8 +190,10 @@ class MobileController extends Controller
             $pubkey = $query[0]->date_cur;
         }
 
-        $result = db::select("call sp_get_next_collection(?)",array(
-            $pubkey ,
+        $major_area = $_POST['major_area'];
+        $result = db::select("call sp_get_next_collection(?,?)",array(
+            $pubkey , 
+            $major_area
         ));
 
         $output = json_encode(array('Results' => $result));
