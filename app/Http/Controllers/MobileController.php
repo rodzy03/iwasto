@@ -186,10 +186,10 @@ class MobileController extends Controller
         $pubkey = $_POST['schedule_id'];
         
         if(empty($pubkey)) {
-            $query = db::select('select current_date as date_cur');
+            $query = db::select('select current_timestamp as date_cur');
             $pubkey = $query[0]->date_cur;
         }
-        
+
         $result = db::select("call sp_get_next_collection(?)",array(
             $pubkey ,
         ));
