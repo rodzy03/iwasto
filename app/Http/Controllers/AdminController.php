@@ -20,13 +20,62 @@ class AdminController extends Controller
    {
        $data = db::table('r_waste as w')
        ->join('r_waste_type as wt', 'w.waste_type_id','wt.waste_type_id')->get();
-       
        $type = db::table('r_waste_type')->where('active_flag',1)->get();
-       
-       
        
        return view('admin.manage_waste',compact('data','type'));
    }
+
+    public function get_routes()
+    {
+        $data = db::table('r_routes')->get();
+        $region = db::table('r_region')->get();
+
+        return view('admin.manage_routes',compact('data','region'));
+    }
+
+    public function provinces(Request $request)
+    {
+        $params = $request->get('params');
+        $result = db::select("call sp_get_province(?)",array(
+            $params
+        ));
+
+        return response()->json(['response' => $result]);
+    }
+
+    public function municipality(Request $request)
+    {
+        $params = $request->get('params');
+        $result = db::select("call sp_get_municipality(?)",array(
+            $params ,
+        ));
+
+        return response()->json(['response' => $result]);
+    }
+
+    public function barangay(Request $request)
+    {
+        $params = $request->get('params');
+        $result = db::select("call sp_get_barangay(?)",array(
+            $params ,
+        ));
+
+        return response()->json(['response' => $result]);
+    }
+
+    public function crud_routes(Request $request)
+    {
+        if($request->get('status') == "add") {
+            db::table('r_routes')
+            ->insert([
+                'region' => $request->region
+                , 'province' => $request->province
+                , 'city_municipality' => $request->city_muni
+                , 'barangay' => $request->barangay
+                , 'route_name' => $request->route_name
+            ]);
+        }
+    }
    
    public function import_waste(Request $request) 
    {
