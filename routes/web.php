@@ -83,6 +83,7 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
 
             Route::get('/waste','AdminController@get_waste')->name('get_waste');
             Route::get('/routes','AdminController@get_routes')->name('get_routes');
+            Route::get('/home','AdminController@get_analytics')->name('get_analytics');
             // crud waste
             
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
@@ -92,7 +93,12 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::post('/municipality','AdminController@municipality')->name('municipality');
             Route::post('/barangay','AdminController@barangay')->name('barangay');
             Route::post('/crud_routes','AdminController@crud_routes')->name('crud_routes');
+            Route::post('/crud_swm','AdminController@crud_swm')->name('crud_swm');
+
+
+            Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
             
+            Route::get('/swm','AdminController@swm')->name('swm');
 
 		});
 	});

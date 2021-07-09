@@ -60,7 +60,23 @@ class AdminController extends Controller
             $params ,
         ));
 
-        return response()->json(['response' => $result]);
+        return response()->json(['`response' => $result]);
+    }
+    
+    public function crud_swm(Request $request)
+    {
+        if($request->get('status') == "add") {
+            db::table('t_swm_location')
+            ->insert([
+                'junkshop_name' => $request->get('junkshop_name')
+                , 'junkshop_address' => $request->get('junkshop_address')
+                , 'latitude' => $request->get('latitude')
+                , 'longhitude' => $request->get('longhitude')
+                
+            ]);
+        }
+
+        return response()->json(['`response' => "success"]);
     }
 
     public function crud_routes(Request $request)
@@ -87,6 +103,26 @@ class AdminController extends Controller
             return response()->json(['data' => "not" ]);
    }
 
+   public function get_analytics()
+   {
+    
+        return view('admin.analytics');
+   }
+
+   public function get_swm()
+   {
+        $data = db::table('t_swm_location')->get();
+        return response()->json(['data' => $data ]);
+    
+   }
+
+   public function swm()
+   {
+        $data = db::table('t_swm_location')->get();
+        return view('admin.manage_swm',compact('data'));
+   }
+
+   
    public function crud_waste(Request $request)
    {
         if($request->get('status') == "add") {

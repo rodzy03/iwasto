@@ -80,14 +80,7 @@
               </a>
             
           </li>
-       <!--    <li class="has-sub">
-              <a href="javascript:;">
-                  
-                  <i class="fa fa-share"></i>
-                  <span>Shared</span>
-              </a>
-            
-          </li> -->
+       
           @endif
           @if(Auth::user()->role=='admin')
           <li class="has-sub {{ (Route:: currentRouteName() == 'addoffice')? 'active' : '' }}">
