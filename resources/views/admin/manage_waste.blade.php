@@ -171,9 +171,23 @@
 
                     <div class="form-group">
                         <label class="form-control-label col-lg-24 col-sm-24">Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type">
+                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
                             @foreach($type as $row)
+                            @if($row->waste_type_name == "Both")
+                            <option value="{{$row->waste_type_id}}">Non Biodegradable / Biodegradable</option>
+                            @else
                             <option value="{{$row->waste_type_id}}">{{$row->waste_type_name}}</option>
+                            @endif
+                            @endforeach
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
+                        <select class="form-control" name="sel_seg_type" style="text-transform: capitalize;">
+                            @foreach($seg_type as $row)
+                            <option value="{{$row->segregate_type_id}}" >{{$row->segregate_type_name}}</option>
                             @endforeach
                         </select>
 
@@ -238,6 +252,7 @@
     $('#submit_btn').click(function() {
 
         sel_waste_type = $('select[name=sel_waste_type] option:selected').val()
+        sel_seg_type = $('select[name=sel_seg_type] option:selected').val()
         url = "{{route('crud_waste')}}";
         status = "add";
         modal_id = "waste_modal";
@@ -245,11 +260,15 @@
             _token: "{{csrf_token()}}",
             waste_name: $(".tx_waste_name").val(),
             waste_type_id: sel_waste_type,
+            segregate_type_id:sel_seg_type,
             status: status
 
         };
 
+        modal_id = "add_modal";
+        
         update(data, url, status, modal_id);
+        
     });
 </script>
 @endsection

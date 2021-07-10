@@ -249,7 +249,6 @@
         };
 
         
-
         update(data, url, status, modal_id);
     });
 </script>
