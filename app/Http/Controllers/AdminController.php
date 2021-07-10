@@ -21,8 +21,9 @@ class AdminController extends Controller
        $data = db::table('r_waste as w')
        ->join('r_waste_type as wt', 'w.waste_type_id','wt.waste_type_id')->get();
        $type = db::table('r_waste_type')->where('active_flag',1)->get();
-       
-       return view('admin.manage_waste',compact('data','type'));
+       $seg_type = db::table('r_segregate_type')->where('active_flag',1)->get();
+
+       return view('admin.manage_waste',compact('data','type','seg_type'));
    }
 
     public function get_routes()
@@ -60,7 +61,7 @@ class AdminController extends Controller
             $params ,
         ));
 
-        return response()->json(['`response' => $result]);
+        return response()->json(['response' => $result]);
     }
     
     public function crud_swm(Request $request)
@@ -76,7 +77,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return response()->json(['`response' => "success"]);
+        return response()->json(['response' => "success"]);
     }
 
     public function crud_routes(Request $request)
@@ -130,6 +131,7 @@ class AdminController extends Controller
             ->insert([
                 'waste_name' => $request->get('waste_name')
                 , 'waste_type_id' => $request->get('waste_type_id')
+                , 'segregate_type_id' => $request->get('segregate_type_id')
             ]);
         }
 
