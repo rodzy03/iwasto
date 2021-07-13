@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-@section('title','Waste')
+@section('title','SWM')
 @section('content')
 
 @section('extra-css')
@@ -29,7 +29,7 @@
                     <!--end::Svg Icon-->
                 </span>
             </span>
-            <h3 class="card-label">Waste List</h3>
+            <h3 class="card-label">Guide List</h3>
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
@@ -46,7 +46,7 @@
                 </span>Add
 
             </button>&nbsp;
-            <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+            {{--<button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -60,7 +60,7 @@
                 </span>
                 Import
 
-            </button>
+            </button>--}}
 
 
             <!--end::Dropdown-->
@@ -75,11 +75,13 @@
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">waste name</span>
+                            <span class="text-dark-75">type</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">waste type</span>
+                            <span class="text-dark-75">guide</span>
                         </th>
+
+                       
 
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
@@ -89,36 +91,16 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td class="pl-0 py-0" style="width: 45%;">
-                            <div class="d-flex align-items-center">
-                                <div class="symbol symbol-50 symbol-light mr-4">
-                                    <span class="symbol-label"> {{-- asset('assets/media/svg/avatars/001-boy.svg') --}}
-                                        <img src="{{asset('uploads/trashbin_logo.png')}}" class="h-75 align-self-end" alt="" />
-                                    </span>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase;">{{$row->waste_name}}</a>
-                                    {{--<span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>--}}
-                                </div>
-                            </div>
-                        </td>
                         <td style="text-transform:uppercase;">
+                            <span class="text-dark-75">{{$row->segregate_type_name}}</span>
+                        </td>
 
-                            <span class="text-dark-75">{{$row->waste_type_name}}</span>
+                        <td style="text-transform:uppercase;">
+                            <span class="text-dark-75">{{$row->segregate_guide}}</span>
                         </td>
-                        {{--<td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$520</span>
-                            <span class="text-muted font-weight-bold">Paid</span>
-                        </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Intertico</span>
-                            <span class="text-muted font-weight-bold">Web, UI/UX Design</span>
-                        </td>--}}
-                        <!-- <td>
-                            <img src="assets/media/logos/stars.png" alt="image" style="width: 5.5rem" />
-                            <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
-                        </td> -->
-                        <td class="pr-0 text-left">
+
+                       
+                        <td class="pr-0 text-left" style="width: 14%;">
 
                             <a href="#" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
@@ -165,32 +147,22 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label class="form-control-label">Waste Name</label>
-                        <input type="text" class="form-control tx_waste_name" />
-                    </div>
-
-                    <div class="form-group" hidden>
-                        <label class="form-control-label col-lg-24 col-sm-24">Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
-                            @foreach($type as $row)
-                            @if($row->waste_type_name == "Both")
-                            <option value="{{$row->waste_type_id}}">Non Biodegradable / Biodegradable</option>
-                            @else
-                            <option value="{{$row->waste_type_id}}">{{$row->waste_type_name}}</option>
-                            @endif
-                            @endforeach
-                        </select>
-
+                        <label class="form-control-label">Junkshop Name</label>
+                        <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;"/>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
-                        <select class="form-control" name="sel_seg_type" style="text-transform: capitalize;">
-                            @foreach($seg_type as $row)
-                            <option value="{{$row->segregate_type_id}}" >{{$row->segregate_type_name}}</option>
-                            @endforeach
-                        </select>
+                        <label class="form-control-label">Junkshop Address</label>
+                        <input type="text" class="form-control tx_junkshop_adderess"style="text-transform: uppercase;" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Longhitude</label>
+                        <input type="text" class="form-control tx_longhitude" />
+                    </div>
 
+                    <div class="form-group">
+                        <label class="form-control-label">Latitude</label>
+                        <input type="text" class="form-control tx_latitude" />
                     </div>
 
                 </form>
@@ -251,24 +223,21 @@
 
     $('#submit_btn').click(function() {
 
-        sel_waste_type = $('select[name=sel_waste_type] option:selected').val()
-        sel_seg_type = $('select[name=sel_seg_type] option:selected').val()
-        url = "{{route('crud_waste')}}";
+        
+        url = "{{route('crud_swm')}}";
         status = "add";
-        modal_id = "waste_modal";
+        modal_id = "add_modal";
         data = {
             _token: "{{csrf_token()}}",
-            waste_name: $(".tx_waste_name").val(),
-            waste_type_id: sel_waste_type,
-            segregate_type_id:sel_seg_type,
-            status: status
-
+            junkshop_name: $(".tx_junkshop_name").val(),
+            junkshop_address: $(".tx_junkshop_adderess").val(),
+            latitude: $(".tx_longhitude").val(),
+            longhitude: $(".tx_latitude").val(),
+            status:status
         };
 
-        modal_id = "add_modal";
         
         update(data, url, status, modal_id);
-        
     });
 </script>
 @endsection

@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-@section('title','Waste')
+@section('title','Verification')
 @section('content')
 
 @section('extra-css')
@@ -29,24 +29,11 @@
                     <!--end::Svg Icon-->
                 </span>
             </span>
-            <h3 class="card-label">Waste List</h3>
+            <h3 class="card-label">List</h3>
         </div>
         <div class="card-toolbar">
-            <!--begin::Dropdown-->
-            <button data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder " aria-haspopup="true" aria-expanded="false">
-                <span class="svg-icon svg-icon-2x">
-                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24" />
-                            <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                            <path d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z" fill="#000000" />
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>Add
-
-            </button>&nbsp;
-            <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+           
+            {{--<button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -60,7 +47,7 @@
                 </span>
                 Import
 
-            </button>
+            </button>--}}
 
 
             <!--end::Dropdown-->
@@ -75,63 +62,67 @@
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">waste name</span>
+                            <span class="text-dark-75">image</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">waste type</span>
+                            <span class="text-dark-75">name</span>
                         </th>
 
+                        <th style="min-width: 100px;">
+                            <span class="text-dark-75">date requested</span>
+                        </th>
+                        @if($typeofview == "pending")
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
+                        </th>
+                        @else
+                        <th style="min-width: 30px" class="text-dark-75">
+                            <span class="text-dark-75">remarks</span>
+                        </th>
+                        @endif
+                        <th style="min-width: 30px" class="text-dark-75" hidden>
+                            <span class="text-dark-75">id</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td class="pl-0 py-0" style="width: 45%;">
+                    <td class="pl-0 py-2" style="width: 30%;">
                             <div class="d-flex align-items-center">
                                 <div class="symbol symbol-50 symbol-light mr-4">
-                                    <span class="symbol-label"> {{-- asset('assets/media/svg/avatars/001-boy.svg') --}}
-                                        <img src="{{asset('uploads/trashbin_logo.png')}}" class="h-75 align-self-end" alt="" />
+                                    <span class="symbol-label"> 
+                                        <img src="{{asset('uploads/')}}/{{$row->file_path}}" class="h-75 align-self-end" alt="ERROR CONNECTION" id="img_id"/>
                                     </span>
                                 </div>
                                 <div>
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase;">{{$row->waste_name}}</a>
-                                    {{--<span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>--}}
+                                    <a id=view data-toggle="modal" data-target="#modal-view" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase; cursor:pointer;">VIEW ID</a>
+                                    
                                 </div>
                             </div>
                         </td>
                         <td style="text-transform:uppercase;">
-
-                            <span class="text-dark-75">{{$row->waste_type_name}}</span>
+                            <span class="text-dark-75">{{$row->citizen_name}}</span>
                         </td>
-                        {{--<td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$520</span>
-                            <span class="text-muted font-weight-bold">Paid</span>
+                        <td style="text-transform:uppercase;">
+                            <span class="text-dark-75">{{$row->created_at}}</span>
                         </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Intertico</span>
-                            <span class="text-muted font-weight-bold">Web, UI/UX Design</span>
-                        </td>--}}
-                        <!-- <td>
-                            <img src="assets/media/logos/stars.png" alt="image" style="width: 5.5rem" />
-                            <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
-                        </td> -->
-                        <td class="pr-0 text-left">
 
-                            <a href="#" class="btn btn-light-info font-weight-bolder font-size-sm">
-                                <span class="svg-icon svg-icon-2x">
-                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Design\Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24" />
-                                            <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) " />
-                                            <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1" />
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span></a>
-                            <a href="#" class="btn btn-light-primary font-weight-bolder font-size-sm">
+                        @if($typeofview == "pending")
+                        <td class="pr-0 text-left" style="width: 14%;">
+
+                            <a id=app vals="{{$row->citizen_verification_id}}" data-toggle="modal" data-target="#modal-approved" class="btn btn-light-success font-weight-bolder font-size-sm">
+                            <span class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\General\Like.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000"/>
+                                        <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1"/>
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+
+                            </a>
+                            <a id=dec vals="{{$row->citizen_verification_id}}" class="btn btn-light-primary font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Deleted-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -143,6 +134,12 @@
                                     <!--end::Svg Icon-->
                                 </span></a>
                         </td>
+                        @else
+                        <td style="text-transform:uppercase;">
+                            <span class="text-dark-75">{{$row->remarks}}</span>
+                        </td>
+                        @endif
+                        <td hidden>{{asset('uploads/')}}/{{$row->file_path}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -152,82 +149,57 @@
     </div>
 </div>
 <!--end::Card-->
-<!--begin::Modal-->
-<div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+
+
+
+<!-- Modal-->
+<div class="modal fade" id="modal-view" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Entry</h5>
+                <h5 class="modal-title">VIEW ID</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label class="form-control-label">Waste Name</label>
-                        <input type="text" class="form-control tx_waste_name" />
-                    </div>
-
-                    <div class="form-group" hidden>
-                        <label class="form-control-label col-lg-24 col-sm-24">Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
-                            @foreach($type as $row)
-                            @if($row->waste_type_name == "Both")
-                            <option value="{{$row->waste_type_id}}">Non Biodegradable / Biodegradable</option>
-                            @else
-                            <option value="{{$row->waste_type_id}}">{{$row->waste_type_name}}</option>
-                            @endif
-                            @endforeach
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
-                        <select class="form-control" name="sel_seg_type" style="text-transform: capitalize;">
-                            @foreach($seg_type as $row)
-                            <option value="{{$row->segregate_type_id}}" >{{$row->segregate_type_name}}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submit_btn">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end::Modal-->
-
-<!--begin::Modal-->
-<div class="modal fade" id="import_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Import data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inMainDocument">
-                    <label class="custom-file-label" for="inMainDocument">Choose file</label>
+                <div class="form-group">
+                    <!-- <label class="form-control-label">Junkshop Name</label> -->
+                    <img id="valid_id" src="" alt="UPLOAD VALID ID" width="100%" height="auto">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="import_btn">Submit</button>
+                {{--<button type="button" class="btn btn-primary" id="submit_btn">Submit</button>--}}
             </div>
         </div>
     </div>
 </div>
-<!--end::Modal-->
+
+<div class="modal fade" id="modal-approved" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ADD REMARKS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-control-label">Remarks</label>
+                    <textarea id="remarks" cols="30" rows="2" class="form-control" style="text-transform: uppercase;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="verification_update">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section('extra-js')
 <!--begin::Page Vendors(used by this page)-->
@@ -249,26 +221,61 @@
         update(data, url, status, modal_id);
     });
 
+    var id, status;
+    $('#kt_datatable').on('click','#view', function(){
+        let row = $(this).closest("tr"),
+            file_path = $(row.find("td")[4]).text()
+
+            console.log(file_path)
+            $("#valid_id").attr("src",file_path);
+    });
+
+    $('#kt_datatable').on('click','#app', function(){
+        id = $(this).attr('vals');
+        status = "approved";
+       
+    });
+
+    $('#kt_datatable').on('click','#dec', function(){
+        id = $(this).attr('vals');
+        status = "declined";
+        
+    });
+    
+    
     $('#submit_btn').click(function() {
 
-        sel_waste_type = $('select[name=sel_waste_type] option:selected').val()
-        sel_seg_type = $('select[name=sel_seg_type] option:selected').val()
-        url = "{{route('crud_waste')}}";
+        
+        url = "{{route('crud_swm')}}";
         status = "add";
-        modal_id = "waste_modal";
+        modal_id = "add_modal";
         data = {
             _token: "{{csrf_token()}}",
-            waste_name: $(".tx_waste_name").val(),
-            waste_type_id: sel_waste_type,
-            segregate_type_id:sel_seg_type,
-            status: status
-
+            junkshop_name: $(".tx_junkshop_name").val(),
+            junkshop_address: $(".tx_junkshop_adderess").val(),
+            latitude: $(".tx_longhitude").val(),
+            longhitude: $(".tx_latitude").val(),
+            status:status
         };
 
-        modal_id = "add_modal";
         
         update(data, url, status, modal_id);
+    });
+
+    $('#verification_update').click(function() {
+
+        url = "{{route('verification_update')}}";
         
+        modal_id = "modal-approved";
+        data = {
+            id:id,
+            _token: "{{csrf_token()}}",
+            remarks: $("#remarks").val(),
+            status:status
+        };
+
+        console.log(data)
+        update(data, url, status, modal_id);
     });
 </script>
 @endsection
