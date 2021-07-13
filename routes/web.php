@@ -99,6 +99,18 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
             
             Route::get('/swm','AdminController@swm')->name('swm');
+            Route::get('/guides','AdminController@guides')->name('guides');
+            Route::get('/pending/verification','AdminController@verification')
+            ->defaults('typeofview', 'pending')->name('pending');
+
+            Route::get('/approved/verification','AdminController@verification')
+            ->defaults('typeofview', 'approved')->name('approved');
+
+            Route::get('/declined/verification','AdminController@verification')
+            ->defaults('typeofview', 'declined')->name('declined');
+            
+            Route::post('/verification_update','AdminController@verification_update')->name('verification_update');
+            
 
 		});
 	});
