@@ -46,7 +46,7 @@
                 </span>Add
 
             </button>&nbsp;
-            <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+            {{--<button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -60,7 +60,7 @@
                 </span>
                 Import
 
-            </button>
+            </button>--}}
 
 
             <!--end::Dropdown-->
@@ -92,6 +92,10 @@
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,8 +117,8 @@
                             <span class="text-dark-75">{{$row->latitude}}</span>
                         </td>
                         <td class="pr-0 text-left">
-
-                            <a href="#" class="btn btn-light-info font-weight-bolder font-size-sm">
+                            @if($row->active_flag == 1)
+                            <a id=edit vals="{{$row->swm_location_id}}" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Design\Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -125,7 +129,8 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span></a>
-                            <a href="#" class="btn btn-light-primary font-weight-bolder font-size-sm">
+
+                            <a id=deact vals="{{$row->swm_location_id}}" data-toggle="modal" data-target="#modal-upd" class="btn btn-light-primary font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Deleted-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -135,8 +140,28 @@
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span></a>
+                                </span>
+                            </a>
+
+                            @else
+                            <a id=act vals="{{$row->swm_location_id}}" data-toggle="modal" data-target="#modal-upd" class="btn btn-light-success font-weight-bolder font-size-sm">
+                                <span class="svg-icon svg-icon-2x">
+                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\General\Like.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000" />
+                                            <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </a>
+                            @endif
                         </td>
+                        <td hidden>{{$row->junkshop_name}}</td>
+                        <td hidden>{{$row->junkshop_address}}</td>
+                        <td hidden>{{$row->longhitude}}</td>
+                        <td hidden>{{$row->latitude}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -160,12 +185,12 @@
                 <form>
                     <div class="form-group">
                         <label class="form-control-label">Junkshop Name</label>
-                        <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;"/>
+                        <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;" />
                     </div>
 
                     <div class="form-group">
                         <label class="form-control-label">Junkshop Address</label>
-                        <input type="text" class="form-control tx_junkshop_adderess"style="text-transform: uppercase;" />
+                        <input type="text" class="form-control tx_junkshop_adderess" style="text-transform: uppercase;" />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Longhitude</label>
@@ -182,6 +207,47 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="submit_btn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->
+<!--begin::Modal-->
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit SWM location</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-control-label">Junkshop Name</label>
+                        <input type="text" class="form-control tx_junkshop_name_e" style="text-transform: uppercase;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Junkshop Address</label>
+                        <input type="text" class="form-control tx_junkshop_adderess_e" style="text-transform: uppercase;" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Longhitude</label>
+                        <input type="text" class="form-control tx_longhitude_e" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Latitude</label>
+                        <input type="text" class="form-control tx_latitude_e" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update_btn">Submit</button>
             </div>
         </div>
     </div>
@@ -232,10 +298,44 @@
         var url = "{{route('import_waste')}}";
         update(data, url, status, modal_id);
     });
+    var id, stats;
+    $('#kt_datatable').on('click', '#act', function() {
+
+        id = $(this).attr('vals');
+        stats = "act"
+        $('.header_txt').text('This will activate the data.')
+    });
+
+    $('#kt_datatable').on('click', '#deact', function() {
+
+        id = $(this).attr('vals');
+        stats = "deact"
+        $('.header_txt').text('This will deactivate the data. Continue?');
+    });
+
+    $('#kt_datatable').on('click', '#edit', function() {
+
+        id = $(this).attr('vals');
+        let row = $(this).closest("tr"),
+
+            loc_id = $(row.find("td")[4]).text(),
+            param_1 = $(row.find("td")[5]).text(),
+            param_2 = $(row.find("td")[6]).text(),
+            param_3 = $(row.find("td")[7]).text(),
+            param_4 = $(row.find("td")[8]).text()
+
+
+        $('.tx_junkshop_name_e').val(param_1);
+        $('.tx_junkshop_adderess_e').val(param_2);
+        $('.tx_longhitude_e').val(param_3);
+        $('.tx_latitude_e').val(param_4);
+
+
+    });
 
     $('#submit_btn').click(function() {
 
-        
+
         url = "{{route('crud_swm')}}";
         status = "add";
         modal_id = "add_modal";
@@ -245,10 +345,44 @@
             junkshop_address: $(".tx_junkshop_adderess").val(),
             latitude: $(".tx_longhitude").val(),
             longhitude: $(".tx_latitude").val(),
-            status:status
+            status: status
         };
 
-        
+
+        update(data, url, status, modal_id);
+    });
+
+    $('#update_btn').click(function() {
+
+
+        url = "{{route('crud_swm')}}";
+        status = "normal";
+        modal_id = "modal-edit";
+        data = {
+            _token: "{{csrf_token()}}",
+            junkshop_name: $(".tx_junkshop_name_e").val(),
+            junkshop_address: $(".tx_junkshop_adderess_e").val(),
+            latitude: $(".tx_longhitude_e").val(),
+            longhitude: $(".tx_latitude_e").val(),
+            status: status,
+            id: id
+        };
+
+
+        update(data, url, status, modal_id);
+    });
+
+    $('#continue').click(function() {
+
+        url = "{{route('crud_swm')}}";
+
+        modal_id = "modal-upd";
+        data = {
+            _token: "{{csrf_token()}}",
+            id: id,
+            status: stats
+        };
+
         update(data, url, status, modal_id);
     });
 </script>
