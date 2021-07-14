@@ -146,6 +146,30 @@
                                 </a>
                             </li>
 
+                            <li class="menu-item {{ (Route::currentRouteName() == 'collection_calendar') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{route('collection_calendar')}}" class="menu-link">
+                                    
+
+                                <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Communication\Clipboard-list.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24"/>
+                                            <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"/>
+                                            <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"/>
+                                            <rect fill="#000000" opacity="0.3" x="10" y="9" width="7" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="2" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.3" x="7" y="13" width="2" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.3" x="10" y="13" width="7" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+
+
+                                    <span class="menu-text">Collection Calendar</span>
+                                </a>
+                            </li>
+
                             <li class="menu-item {{ (Route::currentRouteName() == 'pending') 
                             || (Route::currentRouteName() == 'approved') || (Route::currentRouteName() == 'declined') ? 'menu-item-open' : '' }}" aria-haspopup="true">
                                 <a href="javascript:;" class="menu-link menu-toggle">
@@ -203,39 +227,54 @@
                                 </div>
                             </li>
 
-
-
-
-
-
-
-
-                            {{--<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" >
+                            <li class="menu-item {{ (Route::currentRouteName() == 'pending_p') 
+                            || (Route::currentRouteName() == 'approved_p') || (Route::currentRouteName() == 'declined_p') ? 'menu-item-open' : '' }}" aria-haspopup="true">
                                 <a href="javascript:;" class="menu-link menu-toggle">
-                                    <span class="svg-icon menu-icon">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <rect fill="#000000" opacity="0.3" x="4" y="4" width="8" height="16" />
-                                                <path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <span class="menu-text">Manage Picklist</span>
+                                    
+                                <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Communication\Chat2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24"/>
+                                            <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5"/>
+                                            <path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000"/>
+                                        </g>
+                                    </svg><!--end::Svg Icon--></span>
+
+
+
+                                    <span class="menu-text">Citizen Patrol</span>
                                     <i class="menu-arrow"></i>
                                 </a>
                                 <div class="menu-submenu">
                                     <i class="menu-arrow"></i>
                                     <ul class="menu-subnav">
                                        
-                                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                        <li class="menu-item menu-item-submenu {{ (Route::currentRouteName() == 'pending_p') ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="{{route('pending_p')}}" class="menu-link menu-toggle">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
-                                                <span class="menu-text">Login</span>
+                                                <span class="menu-text">Pending</span>
+                                                
+                                            </a>
+                                            
+                                        </li>
+                                        <li class="menu-item menu-item-submenu {{ (Route::currentRouteName() == 'approved_p') ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="{{route('approved_p')}}" class="menu-link menu-toggle">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Approved</span>
+                                                
+                                            </a>
+                                            
+                                        </li>
+
+                                        <li class="menu-item menu-item-submenu {{ (Route::currentRouteName() == 'declined_p') ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="{{route('declined_p')}}" class="menu-link menu-toggle">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Declined</span>
                                                 
                                             </a>
                                             
@@ -243,7 +282,15 @@
                                        
                                     </ul>
                                 </div>
-                            </li>--}}
+                            </li>
+
+
+
+
+
+
+
+                          
                         </ul>
                         <!--end::Menu Nav-->
                     </div>

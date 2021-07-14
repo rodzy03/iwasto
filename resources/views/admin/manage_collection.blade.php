@@ -29,7 +29,7 @@
                     <!--end::Svg Icon-->
                 </span>
             </span>
-            <h3 class="card-label">Guide List</h3>
+            <h3 class="card-label">Collection List</h3>
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
@@ -78,11 +78,13 @@
                             <span class="text-dark-75">type</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">guide</span>
+                            <span class="text-dark-75">collection date</span>
+                        </th>
+                        <th style="min-width: 100px;">
+                            <span class="text-dark-75">route name</span>
                         </th>
 
-                       
-
+                    
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
@@ -91,12 +93,19 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
+                        @php
+                            $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
+                        @endphp
+                        
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->segregate_type_name}}</span>
+                            <span class="text-dark-75">{{ $type_name }}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->segregate_guide}}</span>
+                            <span class="text-dark-75">{{$row->collection_date}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;">
+                            <span class="text-dark-75">{{$row->route_name}}</span>
                         </td>
 
                        
@@ -139,7 +148,7 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Entry</h5>
+                <h5 class="modal-title">Add collection schedule</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -147,15 +156,34 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                            <label class="form-control-label">Type</label>
-                            <input type="text" class="form-control tx_type" style="text-transform:uppercase;"/>
+                    <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Route</label><br>
+                        <select class="form-control" name="sel_route" style="text-transform: capitalize;">
+                            @foreach($routes as $row)
+                            
+                                <option value="{{$row->routes_id}}" >{{$row->route_name}}</option>
+                            
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group" >
+                        <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Waste Type</label><br>
+                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
+                            @foreach($type as $row)
+                                @if($row->waste_type_name == "Both")
+                                    <option value="{{$row->waste_type_id}}" selected>Non Biodegradable and Biodegradable</option>
+                                @else
+                                    <option value="{{$row->waste_type_id}}" >{{$row->waste_type_name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Guide</label>
-                        <textarea cols="30" rows="2" class="form-control guide" style="text-transform: uppercase;"></textarea>
+                        <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
+                        <input type="date" class="form-control tx_col_date" />
                     </div>
-                    
 
                 </form>
             </div>
@@ -201,7 +229,12 @@
 
 
 <script>
-    $('#kt_datatable').DataTable();
+    $('#kt_datatable').DataTable({
+        'paging'      : true,
+        'searching'   : true,
+        'ordering' : true,
+        "aaSorting": []
+    });
     $('#import_btn').click(function() {
 
         var data = new FormData();
@@ -216,13 +249,14 @@
     $('#submit_btn').click(function() {
 
         
-        url = "{{route('crud_guide')}}";
+        url = "{{route('crud_collection')}}";
         status = "add";
         modal_id = "add_modal";
         data = {
             _token: "{{csrf_token()}}",
-            segregate_type_name: $(".tx_type").val(),
-            segregate_guide: $(".guide").val(),
+            col_date: $(".tx_col_date").val(),
+            waste_type_id: $('select[name=sel_waste_type] option:selected').val(),
+            routes_id: $('select[name=sel_route] option:selected').val(),
             status:status
         };
 
