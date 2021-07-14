@@ -617,12 +617,35 @@
         </span>
     </div>
     <!--end::Scrolltop-->
-
+<!--begin::Modal-->
+<div class="modal fade" id="modal-upd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title header_txt"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="continue">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->
     @include('layouts.includes.base-js')
     @yield('extra-js')
 
     <!--end::Page Scripts-->
+    
 </body>
 <!--end::Body-->
-
+<script>
+function selectElement(id, valueToSelect) {    
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
+    }</script>
 </html>

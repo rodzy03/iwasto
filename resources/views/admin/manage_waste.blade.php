@@ -84,6 +84,8 @@
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        <th hidden>waste_name</th>
+                        <th hidden>waste_type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,23 +106,12 @@
                         </td>
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->waste_type_name}}</span>
+                            <span class="text-dark-75">{{$row->segregate_type_name}}</span>
                         </td>
-                        {{--<td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$520</span>
-                            <span class="text-muted font-weight-bold">Paid</span>
-                        </td>
-                        <td>
-                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Intertico</span>
-                            <span class="text-muted font-weight-bold">Web, UI/UX Design</span>
-                        </td>--}}
-                        <!-- <td>
-                            <img src="assets/media/logos/stars.png" alt="image" style="width: 5.5rem" />
-                            <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
-                        </td> -->
-                        <td class="pr-0 text-left">
 
-                            <a href="#" class="btn btn-light-info font-weight-bolder font-size-sm">
+                        <td class="pr-0 text-left">
+                            @if($row->active_flag == 1)
+                            <a id=edit vals="{{$row->waste_id}}" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Design\Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -131,7 +122,8 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span></a>
-                            <a href="#" class="btn btn-light-primary font-weight-bolder font-size-sm">
+
+                            <a id=deact vals="{{$row->waste_id}}" data-toggle="modal" data-target="#modal-upd" class="btn btn-light-primary font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Deleted-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -141,8 +133,26 @@
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span></a>
+                                </span>
+                            </a>
+
+                            @else
+                            <a id=act vals="{{$row->waste_id}}" data-toggle="modal" data-target="#modal-upd" class="btn btn-light-success font-weight-bolder font-size-sm">
+                                <span class="svg-icon svg-icon-2x">
+                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\General\Like.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000" />
+                                            <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>
+                            </a>
+                            @endif
                         </td>
+                        <td hidden>{{$row->waste_name}}</td>
+                        <td hidden>{{$row->segregate_type_id}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -169,25 +179,13 @@
                         <input type="text" class="form-control tx_waste_name" />
                     </div>
 
-                    <div class="form-group" hidden>
-                        <label class="form-control-label col-lg-24 col-sm-24">Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
-                            @foreach($type as $row)
-                            @if($row->waste_type_name == "Both")
-                            <option value="{{$row->waste_type_id}}">Non Biodegradable / Biodegradable</option>
-                            @else
-                            <option value="{{$row->waste_type_id}}">{{$row->waste_type_name}}</option>
-                            @endif
-                            @endforeach
-                        </select>
 
-                    </div>
 
                     <div class="form-group">
                         <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
                         <select class="form-control" name="sel_seg_type" style="text-transform: capitalize;">
                             @foreach($seg_type as $row)
-                            <option value="{{$row->segregate_type_id}}" >{{$row->segregate_type_name}}</option>
+                            <option value="{{$row->segregate_type_id}}">{{$row->segregate_type_name}}</option>
                             @endforeach
                         </select>
 
@@ -198,6 +196,46 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="submit_btn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->
+
+<!--begin::Modal-->
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Waste</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-control-label">Waste Name</label>
+                        <input type="text" class="form-control tx_waste_name_e" />
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
+                        <select id=sel_seg_type_e class="form-control" name="sel_seg_type_e" style="text-transform: capitalize;">
+                            @foreach($seg_type as $row)
+                            <option value="{{$row->segregate_type_id}}">{{$row->segregate_type_name}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update_btn">Submit</button>
             </div>
         </div>
     </div>
@@ -229,6 +267,8 @@
 </div>
 <!--end::Modal-->
 
+
+
 @section('extra-js')
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
@@ -238,6 +278,7 @@
 
 <script>
     $('#kt_datatable').DataTable();
+
     $('#import_btn').click(function() {
 
         var data = new FormData();
@@ -249,26 +290,91 @@
         update(data, url, status, modal_id);
     });
 
+    var id, stats;
+    $('#kt_datatable').on('click', '#edit', function() {
+
+        id = $(this).attr('vals');
+        let row = $(this).closest("tr"),
+            param_1 = $(row.find("td")[3]).text(),
+            param_2 = $(row.find("td")[4]).text()
+
+
+        $('.tx_waste_name_e').val(param_1);
+
+        selectElement('sel_seg_type_e', param_2)
+
+    });
+
+    $('#kt_datatable').on('click', '#act', function() {
+
+        id = $(this).attr('vals');
+        stats = "act"
+        $('.header_txt').text('This will activate the data.')
+    });
+
+    $('#kt_datatable').on('click', '#deact', function() {
+
+        id = $(this).attr('vals');
+        stats = "deact"
+        $('.header_txt').text('This will deactivate the data. Continue?');
+    });
+
+    $('#continue').click(function() {
+
+        url = "{{route('crud_waste')}}";
+
+        modal_id = "modal-upd";
+        data = {
+            _token: "{{csrf_token()}}",
+            waste_id: id,
+            status: stats
+        };
+
+        update(data, url, status, modal_id);
+    });
+
+
+
+
     $('#submit_btn').click(function() {
 
-        sel_waste_type = $('select[name=sel_waste_type] option:selected').val()
+
         sel_seg_type = $('select[name=sel_seg_type] option:selected').val()
         url = "{{route('crud_waste')}}";
         status = "add";
-        modal_id = "waste_modal";
+        modal_id = "add_modal";
         data = {
             _token: "{{csrf_token()}}",
             waste_name: $(".tx_waste_name").val(),
-            waste_type_id: sel_waste_type,
-            segregate_type_id:sel_seg_type,
+            // waste_type_id: sel_waste_type,
+            segregate_type_id: sel_seg_type,
             status: status
 
         };
 
-        modal_id = "add_modal";
-        
         update(data, url, status, modal_id);
-        
+    });
+
+
+    $('#update_btn').click(function() {
+
+
+        sel_seg_type = $('select[name=sel_seg_type_e] option:selected').val()
+        url = "{{route('crud_waste')}}";
+        status = "normal";
+        modal_id = "modal-edit";
+        data = {
+            _token: "{{csrf_token()}}",
+            waste_name: $(".tx_waste_name_e").val(),
+            segregate_type_id: sel_seg_type,
+            status: status,
+            waste_id: id
+
+        };
+
+
+        update(data, url, status, modal_id);
+
     });
 </script>
 @endsection

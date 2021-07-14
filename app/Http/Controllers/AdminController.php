@@ -21,11 +21,12 @@ class AdminController extends Controller
     public function get_waste()
     {
         $data = db::table('r_waste as w')
-            ->join('r_waste_type as wt', 'w.waste_type_id', 'wt.waste_type_id')->get();
-        $type = db::table('r_waste_type')->where('active_flag', 1)->get();
+            ->join('r_segregate_type as wt', 'w.segregate_type_id', 'wt.segregate_type_id')
+            ->get(['w.waste_name','w.active_flag','wt.segregate_type_name','w.waste_id','wt.segregate_type_id']);
+        
         $seg_type = db::table('r_segregate_type')->where('active_flag', 1)->get();
 
-        return view('admin.manage_waste', compact('data', 'type', 'seg_type'));
+        return view('admin.manage_waste', compact('data', 'seg_type'));
     }
 
     public function get_routes()
@@ -71,9 +72,31 @@ class AdminController extends Controller
         if ($request->get('status') == "add") {
             db::table('t_swm_location')
                 ->insert([
-                    'junkshop_name' => $request->get('junkshop_name'), 'junkshop_address' => $request->get('junkshop_address'), 'latitude' => $request->get('latitude'), 'longhitude' => $request->get('longhitude')
+                    'junkshop_name' => $request->get('junkshop_name')
+                    , 'junkshop_address' => $request->get('junkshop_address')
+                    , 'latitude' => $request->get('latitude')
+                    , 'longhitude' => $request->get('longhitude')
 
                 ]);
+        }
+        else if ($request->get('status') == "normal") {
+            db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
+                ->update([
+                    'junkshop_name' => $request->get('junkshop_name')
+                    , 'junkshop_address' => $request->get('junkshop_address')
+                    , 'latitude' => $request->get('latitude')
+                    , 'longhitude' => $request->get('longhitude')
+
+                ]);
+        }
+
+        else if ($request->get('status') == "deact") {
+            db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
+                ->update([ 'active_flag' => 1 ]);
         }
 
         return response()->json(['response' => "success"]);
@@ -84,8 +107,30 @@ class AdminController extends Controller
         if ($request->get('status') == "add") {
             db::table('r_routes')
                 ->insert([
-                    'region' => $request->region, 'province' => $request->province, 'city_municipality' => $request->city_muni, 'barangay' => $request->barangay, 'route_name' => $request->route_name
+                    'region' => $request->region
+                    , 'province' => $request->province
+                    , 'city_municipality' => $request->city_muni
+                    , 'barangay' => $request->barangay
+                    , 'route_name' => $request->route_name
                 ]);
+        }
+        else if($request->get('status') == "normal") {
+            db::table('r_routes')->where('routes_id',$request->get('id'))
+            ->update([
+                'region' => $request->region
+                , 'province' => $request->province
+                , 'city_municipality' => $request->city_muni
+                , 'barangay' => $request->barangay
+                , 'route_name' => $request->route_name
+            ]);
+        }
+        else if ($request->get('status') == "deact") {
+            db::table('r_routes')->where('routes_id',$request->get('id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('r_routes')->where('routes_id',$request->get('id'))
+                ->update([ 'active_flag' => 1 ]);
         }
     }
 
@@ -155,8 +200,25 @@ class AdminController extends Controller
         if ($request->get('status') == "add") {
             db::table('r_waste')
                 ->insert([
-                    'waste_name' => $request->get('waste_name'), 'waste_type_id' => $request->get('waste_type_id'), 'segregate_type_id' => $request->get('segregate_type_id')
+                    'waste_name' => $request->get('waste_name')
+                    , 'segregate_type_id' => $request->get('segregate_type_id')
                 ]);
+        }
+        else if ($request->get('status') == "normal") {
+            db::table('r_waste')->where('waste_id',$request->get('waste_id'))
+                ->update([
+                    'waste_name' => $request->get('waste_name')
+                    
+                    , 'segregate_type_id' => $request->get('segregate_type_id')
+                ]);
+        }
+        else if ($request->get('status') == "deact") {
+            db::table('r_waste')->where('waste_id',$request->get('waste_id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('r_waste')->where('waste_id',$request->get('waste_id'))
+                ->update([ 'active_flag' => 1 ]);
         }
     }
 
@@ -186,7 +248,7 @@ class AdminController extends Controller
         $type = db::table('r_waste_type')->get();
         $routes = db::table('r_routes')->get();
 
-
+        
         return view('admin.manage_collection', compact('data','type','routes'));
     }
 
@@ -201,6 +263,23 @@ class AdminController extends Controller
                     , 'routes_id' => $request->get('routes_id')
                 ]);
         }
+        else if ($request->get('status') == "normal") {
+
+            db::table('t_location_schedule')->where('schedule_id',$request->get('id'))
+                ->update([
+                    'collection_date' => $request->get('col_date')
+                    , 'waste_type_id' => $request->get('waste_type_id')
+                    , 'routes_id' => $request->get('routes_id')
+                ]);
+        }
+        else if ($request->get('status') == "deact") {
+            db::table('t_location_schedule')->where('schedule_id',$request->get('id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('t_location_schedule')->where('schedule_id',$request->get('id'))
+                ->update([ 'active_flag' => 1 ]);
+        }
     }
 
     public function crud_guide(Request $request)
@@ -213,6 +292,23 @@ class AdminController extends Controller
                     , 'segregate_guide' => $request->get('segregate_guide')
                     
                 ]);
+        }
+        else if ($request->get('status') == "normal") {
+
+            db::table('r_segregate_type')->where('segregate_type_id',$request->get('id'))
+                ->update([
+                    'segregate_type_name' => $request->get('segregate_type_name')
+                    , 'segregate_guide' => $request->get('segregate_guide')
+                    
+                ]);
+        }
+        else if ($request->get('status') == "deact") {
+            db::table('r_segregate_type')->where('segregate_type_id',$request->get('id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('r_segregate_type')->where('segregate_type_id',$request->get('id'))
+                ->update([ 'active_flag' => 1 ]);
         }
     }
 }
