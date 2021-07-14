@@ -120,6 +120,7 @@ class AdminController extends Controller
     public function guides()
     {
         $data = db::table('r_segregate_type')->get();
+        
         return view('admin.manage_guide', compact('data'));
     }
 
@@ -132,8 +133,21 @@ class AdminController extends Controller
         else
             $data = db::table('v_get_verification')->where('status','declined')->get();
 
-        
         return view('admin.manage_verification', compact('data','typeofview'));
+    }
+
+    public function citizen_patrol($typeofview)
+    {
+        if($typeofview == "pending")
+            $data = db::table('v_get_citizen_patrol')->where('status','pending')->get();
+        else if($typeofview == "approved")
+            $data = db::table('v_get_citizen_patrol')->where('status','approved')->get();
+        else
+            $data = db::table('v_get_citizen_patrol')->where('status','declined')->get();
+
+        
+            
+        return view('admin.manage_citizen_patrol', compact('data','typeofview'));
     }
 
     public function crud_waste(Request $request)
@@ -154,5 +168,51 @@ class AdminController extends Controller
             'remarks' => $request->get('remarks')
             , 'status' => $request->get('status')
         ]);
+    }
+
+    public function patrol_update(Request $request)
+    {
+        db::table('t_citizen_patrol')
+        ->where('citizen_patrol_id', $request->get('id'))
+        ->update([
+            'remarks' => $request->get('remarks')
+            , 'status' => $request->get('status')
+        ]);
+    }
+
+    public function collection_calendar()
+    {
+        $data = db::table('v_get_schedule')->orderby(DB::raw('DATE(collection_date_full)'),'desc')->get();
+        $type = db::table('r_waste_type')->get();
+        $routes = db::table('r_routes')->get();
+
+
+        return view('admin.manage_collection', compact('data','type','routes'));
+    }
+
+    public function crud_collection(Request $request)
+    {
+        if ($request->get('status') == "add") {
+
+            db::table('t_location_schedule')
+                ->insert([
+                    'collection_date' => $request->get('col_date')
+                    , 'waste_type_id' => $request->get('waste_type_id')
+                    , 'routes_id' => $request->get('routes_id')
+                ]);
+        }
+    }
+
+    public function crud_guide(Request $request)
+    {
+        if ($request->get('status') == "add") {
+
+            db::table('r_segregate_type')
+                ->insert([
+                    'segregate_type_name' => $request->get('segregate_type_name')
+                    , 'segregate_guide' => $request->get('segregate_guide')
+                    
+                ]);
+        }
     }
 }

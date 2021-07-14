@@ -96,7 +96,7 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <a id=view data-toggle="modal" data-target="#modal-view" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase; cursor:pointer;">VIEW ID</a>
+                                    <a id=view data-toggle="modal" data-target="#modal-view" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase; cursor:pointer;">VIEW IMAGE</a>
                                     
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                             </span>
 
                             </a>
-                            <a id=dec vals="{{$row->citizen_verification_id}}" class="btn btn-light-primary font-weight-bolder font-size-sm">
+                            <a id=dec vals="{{$row->citizen_verification_id}}" class="btn btn-light-primary font-weight-bolder font-size-sm" data-toggle="modal" data-target="#modal-declined">
                                 <span class="svg-icon svg-icon-2x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Deleted-folder.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -180,7 +180,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">ADD REMARKS</h5>
+                <h5 class="modal-title">APPROVE </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -199,6 +199,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-declined" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">DECLINE </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-control-label">Remarks</label>
+                    <textarea id="remarks_d" cols="30" rows="2" class="form-control" style="text-transform: uppercase;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="verification_update_d">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section('extra-js')
@@ -277,6 +299,23 @@
         console.log(data)
         update(data, url, status, modal_id);
     });
+
+    $('#verification_update_d').click(function() {
+
+        url = "{{route('verification_update')}}";
+
+        modal_id = "modal-declined";
+        data = {
+            id:id,
+            _token: "{{csrf_token()}}",
+            remarks: $("#remarks_d").val(),
+            status:status
+        };
+
+        console.log(data)
+        update(data, url, status, modal_id);
+    });
+
 </script>
 @endsection
 @endsection

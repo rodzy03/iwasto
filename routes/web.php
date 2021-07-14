@@ -100,6 +100,9 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             
             Route::get('/swm','AdminController@swm')->name('swm');
             Route::get('/guides','AdminController@guides')->name('guides');
+
+            // Verification
+
             Route::get('/pending/verification','AdminController@verification')
             ->defaults('typeofview', 'pending')->name('pending');
 
@@ -108,10 +111,27 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
 
             Route::get('/declined/verification','AdminController@verification')
             ->defaults('typeofview', 'declined')->name('declined');
+
+            // Patrol
+
+            Route::get('/pending/patrol','AdminController@citizen_patrol')
+            ->defaults('typeofview', 'pending')->name('pending_p');
+
+            Route::get('/approved/patrol','AdminController@citizen_patrol')
+            ->defaults('typeofview', 'approved')->name('approved_p');
+
+            Route::get('/declined/patrol','AdminController@citizen_patrol')
+            ->defaults('typeofview', 'declined')->name('declined_p');
             
             Route::post('/verification_update','AdminController@verification_update')->name('verification_update');
-            
+            Route::post('/patrol_update','AdminController@patrol_update')->name('patrol_update');
 
+            Route::get('/collection','AdminController@collection_calendar')->name('collection_calendar');
+
+                        
+            Route::post('/crud_collection','AdminController@crud_collection')->name('crud_collection');
+            
+            Route::post('/crud_guide','AdminController@crud_guide')->name('crud_guide');
 		});
 	});
 
