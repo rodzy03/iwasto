@@ -70,6 +70,7 @@ Route::post('/get_nearby','MobileController@get_nearby');
 
 Route::get('/swm/facilities','AdminController@swm_facilities')->name('swm_facilities');
 Route::post('/search/facilities','AdminController@search_facilities')->name('search_facilities');
+Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
 
 Route::group(['middleware' => ['validateBackHistory']], function () {
 
@@ -94,7 +95,7 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::post('/crud_swm','AdminController@crud_swm')->name('crud_swm');
 
 
-            Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
+            
             
             Route::get('/swm','AdminController@swm')->name('swm');
             Route::get('/guides','AdminController@guides')->name('guides');

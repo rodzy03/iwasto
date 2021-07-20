@@ -269,7 +269,7 @@
                                         <!--end::Svg Icon-->
                                     </span>
                                 </div>
-                                @php $url = asset('assets/media/bg/swm_bg.png') @endphp
+                                @php $url = asset('assets/media/bg/search_bg.png') @endphp
 
                                 <div class="position-absolute d-flex top-0 right-0 offset-lg-5 col-lg-7 opacity-30 opacity-lg-100">
                                     <span class="svg-icon svg-icon-full flex-row-fluid p-0 ">
@@ -470,7 +470,7 @@
 
 
         map.addControl(new mapboxgl.NavigationControl());
-
+        get_locations();
 
         $('#search_swm').keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -610,6 +610,71 @@
             }
         });
 
+        function get_locations() {
+
+            setTimeout(function() {
+                $.ajax({
+                    url: "{{route('get_swm')}}",
+                    method: "post",
+                    
+                    data: {
+                        _token: "{{csrf_token()}}"
+                    },
+                    success: function(response) {
+                        console.log(response['data'])
+                        if (response['data'].length > 0) {
+
+                            for (i = 0; i < response['data'].length; i++) 
+                            {
+
+
+                                markerElement = document.createElement('div')
+                                markerElement.className = 'marker ' + response['data'][i]['swm_location_id']
+                                markerElement.id = response['data'][i]['swm_location_id']
+
+                                markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
+                                markerElement.style.backgroundSize = 'cover'
+                                markerElement.style.width = '50px'
+                                markerElement.style.height = '50px'
+
+                                
+                                const content = `
+                                    <center ><br>
+
+                                            <div class="font-weight-bolder font-size-h3">${response['data'][i]['junkshop_name']}</div>
+                                            <div class="text-dark-50 font-weight-bold">Address: ${response['data'][i]['junkshop_address']}</div>
+                                                        <br>
+                                    </center>
+                                    `;
+                                const popUp = new mapboxgl.Popup({
+                                    closeButton: false,
+                                    closeOnClick: true,
+                                    closeOnMove: true,
+                                    
+
+                                }).setHTML(content).setMaxWidth("600px");
+
+
+                                new mapboxgl.Marker(markerElement)
+                                    .setLngLat([
+                                        response['data'][i]['longhitude'],response['data'][i]['latitude']
+                                    ])
+                                    .setPopup(popUp)
+                                    .addTo(map)
+
+                            }
+                        } else {
+                            
+                        }
+                        
+                    },
+                    error: function(response) {
+                        
+                    }
+                })
+            }, 1000);
+
+        }
 
         function sort_days(ordered) 
         {
