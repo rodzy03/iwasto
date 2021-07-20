@@ -374,12 +374,13 @@
         update(data, url, status, modal_id);
     });
 
-    $('#update_btn').click(function() {
-
+    $('#update_btn').click(function() 
+    {
 
         url = "{{route('crud_collection')}}";
         status = "normal";
         modal_id = "modal-edit";
+        
         data = {
             _token: "{{csrf_token()}}",
             col_date: $(".tx_col_date_e").val(),
@@ -388,7 +389,6 @@
             status: status,
             id: id
         };
-
 
         update(data, url, status, modal_id);
     });

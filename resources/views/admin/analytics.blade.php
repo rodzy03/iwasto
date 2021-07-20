@@ -7,11 +7,9 @@
 <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Page Vendors Styles-->
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
 
-<style>
 
-</style>
 @endsection
 
 <!--begin::Card-->
@@ -38,36 +36,12 @@
 
     </div>
 
-</div><br>
-{{--<!--begin::Progress-->
-        <div class="progress progress-xs">
-            <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <!--end::Progress-->
-        
-<div class="col-xl-2">
-    <!--begin::Tiles Widget 4-->
-    <div class="card card-custom gutter-b" style="height: 130px">
-        <!--begin::Body-->
-        <div class="card-body d-flex flex-column">
-            <!--begin::Stats-->
-            <div class="flex-grow-1">
-                <div class="font-weight-bolder font-size-h3">4,9M</div>
-                <div class="text-dark-50 font-weight-bold">Total Sales</div>
-
-            </div>
-            <!--end::Stats-->
-
-        </div>
-        <!--end::Body-->
-    </div>
-    <!--end::Tiles Widget 4-->
 </div>
---}}
+<br>
 <br>
 
 <div id='map' style='height: 700px; margin-top:-15px; '>
-    </div>
+</div>
     
 
 
@@ -138,7 +112,6 @@
                 <div class="text-dark-50 font-weight-bold">Address: ${response['data'][i]['junkshop_address']}</div>
                             <br>
           </center>
-    <!--end::Tiles Widget 4-->
 `;
                             const popUp = new mapboxgl.Popup({
                                 closeButton: false,

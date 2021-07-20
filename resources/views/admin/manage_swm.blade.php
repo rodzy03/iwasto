@@ -6,8 +6,53 @@
 <!--begin::Page Vendors Styles(used by this page)-->
 <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Page Vendors Styles-->
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
+<style>
+    .customSuggestionsList>div {
+        max-height: 300px;
 
+        overflow: auto;
+    }
+
+    .tags-manual-suggestions {
+        --tags-disabled-bg: #F1F1F1;
+        --tags-border-color: #DDD;
+        --tags-hover-border-color: #CCC;
+        --tags-focus-border-color: #3595f6;
+        --tag-bg: #E5E5E5;
+        --tag-hover: #D3E2E2;
+        --tag-text-color: black;
+        --tag-text-color--edit: black;
+        --tag-pad: 0.3em 0.5em;
+        --tag-inset-shadow-size: 1.1em;
+        --tag-invalid-color: #D39494;
+        --tag-invalid-bg: rgba(211, 148, 148, 0.5);
+        --tag-remove-bg: none;
+        --tag-remove-btn-color: black;
+        --tag-remove-btn-bg: none;
+        --tag-remove-btn-bg--hover: #c77777;
+        --input-color: inherit;
+        --tag--min-width: 1ch;
+        --tag--max-width: auto;
+        --tag-hide-transition: 0.3s;
+        --placeholder-color: rgba(0, 0, 0, 0.4);
+        --placeholder-color-focus: rgba(0, 0, 0, 0.25);
+        --loader-size: .8em;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        border: 1px solid #ddd;
+        border: 1px solid var(--tags-border-color);
+        padding: 0;
+        line-height: normal;
+        cursor: text;
+        outline: 0;
+        position: relative;
+        box-sizing: border-box;
+        transition: .1s;
+    }
+</style>
 @endsection
 
 <!--begin::Card-->
@@ -116,7 +161,7 @@
                         <td style="text-transform:uppercase;">
                             <span class="text-dark-75">{{$row->latitude}}</span>
                         </td>
-                        <td class="pr-0 text-left">
+                        <td class="pr-0 text-left" style="width: 15%;">
                             @if($row->active_flag == 1)
                             <a id=edit vals="{{$row->swm_location_id}}" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
@@ -183,24 +228,58 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                            <label class="form-control-label">Junkshop Name</label>
+                            <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;" />
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            
+                            <label class="form-control-label">Junkshop Address</label>
+                            <input type="text" class="form-control tx_junkshop_adderess" style="text-transform: uppercase;" />
+                            
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label class="form-control-label">Junkshop Name</label>
-                        <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;" />
+                        <label class="form-control-label">Acceptable Materials</label>
+                        <input type="text" class="form-control tx_acc_mat" style="text-transform: uppercase;" />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Junkshop Address</label>
-                        <input type="text" class="form-control tx_junkshop_adderess" style="text-transform: uppercase;" />
+                        <label class="form-control-label">Working Days</label>
+
+                        <input name='tags-manual-suggestions' class="form-control tags-manual-suggestions" placeholder='write some tags'>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Longhitude</label>
-                        <input type="text" class="form-control tx_longhitude" />
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Working Hours Start Time</label>
+                            <input type="time" class="form-control tx_start" style="text-transform: uppercase;" />
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Working Hours End Time</label>
+                            <input type="time" class="form-control tx_end" style="text-transform: uppercase;" />
+                        </div>
+                        
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-control-label">Latitude</label>
-                        <input type="text" class="form-control tx_latitude" />
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Longhitude</label>
+                                <input type="text" class="form-control tx_longhitude" />
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Latitude</label>
+                                <input type="text" class="form-control tx_latitude" />
+                              
+                        </div>
                     </div>
+                    
 
                 </form>
             </div>
@@ -283,6 +362,8 @@
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
 <!--end::Page Vendors-->
 
 
@@ -333,9 +414,55 @@
 
     });
 
+    var TagValues;
+    var input = document.querySelector('input[name=tags-manual-suggestions]'),
+        // init Tagify script on the above inputs
+        tagify = new Tagify(input, {
+            whitelist: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            dropdown: {
+                position: "manual",
+                maxItems: Infinity,
+                enabled: 0,
+                classname: "customSuggestionsList"
+            },
+            enforceWhitelist: true
+        })
+
+    tagify.on("dropdown:show", onSuggestionsListUpdate)
+        .on("dropdown:hide", onSuggestionsListHide)
+        .on('dropdown:scroll', onDropdownScroll)
+
+        
+        
+    renderSuggestionsList()
+
+    // ES2015 argument destructuring
+    function onSuggestionsListUpdate({
+        detail: suggestionsElm
+    }) {
+        //console.log(  suggestionsElm  )
+    }
+
+    function onSuggestionsListHide() {
+        console.log("hide dropdown")
+    }
+
+    function onDropdownScroll(e) {
+        //console.log(e.detail)
+    }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+    function renderSuggestionsList() {
+        tagify.dropdown.show() // load the list
+        tagify.DOM.scope.parentNode.appendChild(tagify.DOM.dropdown)
+    }
+
+    var wd_string = "";
     $('#submit_btn').click(function() {
-
-
+        
+        var wd = document.querySelector('input[name=tags-manual-suggestions]').value;
+        get_wdays(wd);
+        
         url = "{{route('crud_swm')}}";
         status = "add";
         modal_id = "add_modal";
@@ -345,13 +472,26 @@
             junkshop_address: $(".tx_junkshop_adderess").val(),
             latitude: $(".tx_longhitude").val(),
             longhitude: $(".tx_latitude").val(),
-            status: status
+            status: status,
+            acceptable_materials: $('.tx_acc_mat').val(),
+            working_hours_start: $('.tx_start').val(),
+            working_hours_end: $('.tx_end').val(),
+            working_days: wd_string
         };
-
-
+        
         update(data, url, status, modal_id);
     });
 
+    function get_wdays(wd) {
+
+        wd_arr = JSON.parse( wd );
+        groupLength = wd_arr.length;
+        for (var i = 0;i < groupLength;i++) 
+        {
+            var item = wd_arr[i]['value'];
+            ((i + 1) == (groupLength)) ? wd_string += item : wd_string += item + ",";
+        }
+    }
     $('#update_btn').click(function() {
 
 
