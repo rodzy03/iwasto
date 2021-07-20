@@ -76,6 +76,10 @@ class AdminController extends Controller
                     , 'junkshop_address' => $request->get('junkshop_address')
                     , 'latitude' => $request->get('latitude')
                     , 'longhitude' => $request->get('longhitude')
+                    , 'acceptable_materials' => $request->get('acceptable_materials')
+                    , 'working_hours_start' => $request->get('working_hours_start')
+                    , 'working_hours_end' => $request->get('working_hours_end')
+                    , 'working_days' => $request->get('working_days')
 
                 ]);
         }
@@ -86,6 +90,10 @@ class AdminController extends Controller
                     , 'junkshop_address' => $request->get('junkshop_address')
                     , 'latitude' => $request->get('latitude')
                     , 'longhitude' => $request->get('longhitude')
+                    , 'acceptable_materials' => $request->get('acceptable_materials')
+                    , 'working_hours_start' => $request->get('working_hours_start')
+                    , 'working_hours_end' => $request->get('working_hours_end')
+                    , 'working_days' => $request->get('working_days')
 
                 ]);
         }
@@ -310,5 +318,46 @@ class AdminController extends Controller
             db::table('r_segregate_type')->where('segregate_type_id',$request->get('id'))
                 ->update([ 'active_flag' => 1 ]);
         }
+    }
+
+    public function swm_facilities()
+    {
+        return view('admin.public_swm');
+    }
+
+    public function search_facilities(Request $request)
+    {
+        $search_val = $request->get('search_swm');
+        $result = db::select("call sp_search_facility(?)", array(
+            $search_val,
+        ));
+
+        
+        #default array
+        // $daysOfWeek = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
+        // #your array
+        // $days = explode (",", $result[0]->working_days); 
+        // #create a new array with key association property
+        // $daysAux = array();
+        // foreach($days as $k => $v) {
+        //     $key = array_search($v, $daysOfWeek);
+        //     if($key !== FALSE) {
+        //         $daysAux[$key] = $v;
+        //     }
+        // }
+        // array before sort
+        // echo '<pre/>';
+        // print_r($daysAux);
+
+        // ksort($daysAux);
+        // $days = $daysAux;
+        // #final result
+        // echo '<pre/>';
+        // print_r($days);
+
+        //return view('admin.public_swm',compact('result'));
+        
+        return response()->json(['result' => $result]);
+        
     }
 }

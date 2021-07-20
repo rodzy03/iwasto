@@ -72,6 +72,8 @@ Route::post('/get_nearby','MobileController@get_nearby');
 // Route::group(['middleware' => ['mobile_routes']], function () {    
 //     Route::get('/test','MobileController@test');
 // });
+Route::get('/swm/facilities','AdminController@swm_facilities')->name('swm_facilities');
+Route::post('/search/facilities','AdminController@search_facilities')->name('search_facilities');
 
 Route::group(['middleware' => ['validateBackHistory']], function () {
 
