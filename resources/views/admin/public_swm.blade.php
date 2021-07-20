@@ -622,7 +622,7 @@
                         _token: "{{csrf_token()}}"
                     },
                     success: function(response) {
-                        console.log(response['data'])
+                        
                         if (response['data'].length > 0) {
 
                             for (i = 0; i < response['data'].length; i++) 
