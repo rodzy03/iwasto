@@ -470,6 +470,7 @@
 
 
         map.addControl(new mapboxgl.NavigationControl());
+        var markerElement;
         get_locations();
 
         $('#search_swm').keypress(function(event) {
@@ -500,7 +501,7 @@
                         
                         if(len > 0) 
                         {
-
+                            $('.marker').remove();
                             $('.has_data').show();
                             $('.no_data').hide();
 
@@ -555,8 +556,8 @@
                             // maps
                                 $('.card_div').empty();
                                 $('.card_div').append(cards);
-                             
-                                var markerElement = document.createElement('div')
+                                
+                                markerElement = document.createElement('div')
                                 markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
                                 markerElement.id = response['result'][j]['swm_location_id']
 
@@ -595,7 +596,7 @@
                         else {
                             $('.has_data').hide();
                             $('.no_data').show();
-                            $('.marker').remove();
+                            get_locations();
                         } 
                         
                     }
