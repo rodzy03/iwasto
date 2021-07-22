@@ -76,23 +76,51 @@
     map.addControl(new mapboxgl.NavigationControl());
     
     var markerElement;
-    get_locations();
-    function get_locations() {
+    
+    function get_locations() 
+    {
 
         setTimeout(function() {
             $.ajax({
                 url: "{{route('get_swm')}}",
                 method: "post",
-                async:false,
+                
                 data: {
                     _token: "{{csrf_token()}}"
                 },
                 success: function(response) {
-                    console.log(response['data'])
+                    
                     if (response['data'].length > 0) {
-
+                        
                         for (i = 0; i < response['data'].length; i++) 
                         {
+                            var wd_display = "";
+                            var unordered = response['data'][i]['working_days'].split(',');
+                            
+                            u_len = unordered.length;
+
+                            var ordered = [];
+                            for(var j=0; j < u_len; j++) {
+                                
+                                obj = {}; // <----- new Object
+                                obj['day'] = unordered[j];
+                                ordered.push(obj);
+                                
+                            }
+                            ordered = sort_days(ordered);
+                            groupLength = ordered.length;
+                            
+                            for (var y = 0;y < u_len;y++) 
+                            {
+                                var item = ordered[y]['day'];
+                                ((y + 1) == (groupLength)) ? wd_display += item : wd_display += item + " , ";
+                            }
+                            // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+                            //wd_display = response['data'][i]['working_days'];
+                            j_address = response['data'][i]['junkshop_address'];
+                            j_name = response['data'][i]['junkshop_name'];
+                            j_a_mat = response['data'][i]['acceptable_materials'];
+                            j_hours = response['data'][i]['working_hours'];
 
 
                             markerElement = document.createElement('div')
@@ -106,13 +134,26 @@
 
                             
                             const content = `
-        <center ><br>
-    
-                <div class="font-weight-bolder font-size-h3">${response['data'][i]['junkshop_name']}</div>
-                <div class="text-dark-50 font-weight-bold">Address: ${response['data'][i]['junkshop_address']}</div>
-                            <br>
-          </center>
-`;
+            
+            
+                                    <div style="text-align:left;">&nbsp;
+                                    <center>
+                                    <img  src="{{asset('uploads/junkshops/resize')}}/${response['data'][i]['file_name']}" />
+                                    </center>
+                                        <div class="card-block">
+                                        <p style="text-transform:uppercase; color:#94cc7e; font-weight: bold; font-size: 13px; text-align:center">${j_name}</p>
+                                        <hr style="height: 1px; background-color: gray;">
+                                        <p class="card-text" style="font-size:10px; text-transform:uppercase;">
+                                        <b>LOCATION : </b>${j_address}
+                                        <br><b>WORKING DAYS : </b><br>${wd_display}
+                                        <br><b>WORKING HOURS : </b>${j_hours}
+                                        <br><b>ACCEPTABLE MATERIALS : </b>${j_a_mat}
+                                        
+                                        </p>
+                                        </div>
+                                    </div>`
+                                ;
+
                             const popUp = new mapboxgl.Popup({
                                 closeButton: false,
                                 closeOnClick: true,
@@ -140,8 +181,33 @@
                 }
             })
         }, 1000);
+
+    }
+    
+    function sort_days(ordered) 
+    {
+        const sorter = 
+            {
+            // "sunday": 0, // << if sunday is first day of week
+                "monday": 1,
+                "tuesday": 2,
+                "wednesday": 3,
+                "thursday": 4,
+                "friday": 5,
+                "saturday": 6,
+                "sunday": 7
+            }
+
+        ordered.sort(function sortByDay(a, b) {
+            let day1 = a.day.toLowerCase();
+            let day2 = b.day.toLowerCase();
+            return sorter[day1] - sorter[day2];
+        });
+
+        return ordered;
     }
 
+    get_locations();
 
     $('#kt_datatable').DataTable();
     $('#import_btn').click(function() {
