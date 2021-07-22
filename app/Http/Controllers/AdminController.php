@@ -160,7 +160,7 @@ class AdminController extends Controller
 
     public function get_swm()
     {
-        $data = db::table('t_swm_location')->get();
+        $data = db::table('v_get_all_swm')->get();
         return response()->json(['data' => $data]);
     }
 
