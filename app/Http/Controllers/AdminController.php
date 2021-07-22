@@ -71,6 +71,7 @@ class AdminController extends Controller
 
     public function crud_swm(Request $request)
     {
+        ini_set('memory_limit','50MB');
         if ($request->get('status') == "add") 
         {
             
@@ -116,7 +117,7 @@ class AdminController extends Controller
         }
         else if ($request->get('status') == "normal") 
         {
-
+            
             $id = $request->get('id');
             $current_pic = db::table('t_swm_location')->where('swm_location_id',$id)->value('file_name');
             $file_name = $current_pic;
