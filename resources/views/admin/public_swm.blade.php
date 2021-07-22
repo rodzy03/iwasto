@@ -519,6 +519,7 @@
                             for(var j=0; j<len; j++) 
                             {
                                 var unordered = response['result'][j]['working_days'].split(',');
+                                var wd_display = "";
                                 u_len = unordered.length;
 
                                 var ordered = [];
@@ -530,8 +531,16 @@
                                     
                                 }
                                 ordered = sort_days(ordered);
-
-                                wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+                                
+                                groupLength = ordered.length;
+                                
+                                for (var y = 0;y < u_len;y++) 
+                                {
+                                    var item = ordered[y]['day'];
+                                    ((y + 1) == (groupLength)) ? wd_display += item : wd_display += item + " , ";
+                                }
+                                // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+                                
                                 j_address = response['result'][j]['junkshop_address'];
                                 j_name = response['result'][j]['junkshop_name'];
                                 j_a_mat = response['result'][j]['acceptable_materials'];
@@ -583,7 +592,7 @@
                   
                                         <div style="text-align:left;">&nbsp;
                                         <center>
-                                        <img  src="{{asset('uploads/test')}}" />
+                                        <img  src="{{asset('uploads/junkshops/resize')}}/${response['result'][j]['file_name']}" />
                                         </center>
                                             <div class="card-block">
                                             <p style="text-transform:uppercase; color:#94cc7e; font-weight: bold; font-size: 13px; text-align:center">${j_name}</p>
