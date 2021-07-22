@@ -151,14 +151,14 @@ class AdminController extends Controller
                 $img = Image::make($image->path());
                 $derive_name = md5("swm_".$id);
                 // $img->fit(650) // Try this with and without a callback
-                $img->fit(100, 100)
-                ->encode('png', 100) // this will returns the new encoded object and save it, don't save the old one that was in your code.
-                ->save($dir_resize.'/'.$derive_name, 100);
+                // $img->resize(100, 100)
+                // ->encode('png', 100) // this will returns the new encoded object and save it, don't save the old one that was in your code.
+                // ->save($dir_resize.'/'.$derive_name, 100);
                 
-                // $img->resize(96, 96, function ($constraint) {
-                //     $constraint->aspectRatio();
+                $img->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
                     
-                // })->save($dir_resize.'/'.$derive_name);
+                })->save($dir_resize.'/'.$derive_name);
                 
                 
                 $file = $request->file('file');
