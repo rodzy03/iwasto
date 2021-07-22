@@ -477,8 +477,8 @@
         data.append("_token", "{{csrf_token()}}");
         data.append("junkshop_name", $(".tx_junkshop_name").val());
         data.append("junkshop_address", $(".tx_junkshop_adderess").val());
-        data.append("latitude", $(".tx_longhitude").val());
-        data.append("longhitude", $(".tx_latitude").val());
+        data.append("latitude", $(".tx_latitude").val());
+        data.append("longhitude", $(".tx_longhitude").val());
         data.append("status", status);
         data.append("acceptable_materials", $('.tx_acc_mat').val());
         data.append("working_hours_start", $('.tx_start').val());

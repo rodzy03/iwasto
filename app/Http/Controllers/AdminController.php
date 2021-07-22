@@ -96,8 +96,10 @@ class AdminController extends Controller
                     
                     $img->resize(96, 96, function ($constraint) {
                         $constraint->aspectRatio();
+                        $constraint->upsize();
                     })->save($dir_resize.'/'.$derive_name);
-    
+                    
+                
     
                     
                     $file = $request->file('file');
