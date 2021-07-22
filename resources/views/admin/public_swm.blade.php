@@ -689,7 +689,7 @@
                   
                                         <div style="text-align:left;">&nbsp;
                                         <center>
-                                        <img  src="{{asset('uploads/test')}}" />
+                                        <img  src="{{asset('uploads/junkshops/resize')}}/${response['data'][i]['file_name']}" />
                                         </center>
                                             <div class="card-block">
                                             <p style="text-transform:uppercase; color:#94cc7e; font-weight: bold; font-size: 13px; text-align:center">${j_name}</p>

@@ -279,6 +279,11 @@
                               
                         </div>
                     </div>
+
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inMainDocument">
+                        <label class="custom-file-label" for="inMainDocument">Choose file</label>
+                    </div>
                     
 
                 </form>
@@ -345,8 +350,8 @@
             </div>
             <div class="modal-body">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inMainDocument">
-                    <label class="custom-file-label" for="inMainDocument">Choose file</label>
+                    <input type="file" class="custom-file-input" >
+                    <label class="custom-file-label" >Choose file</label>
                 </div>
             </div>
             <div class="modal-footer">
@@ -465,21 +470,23 @@
         
         url = "{{route('crud_swm')}}";
         status = "add";
-        modal_id = "add_modal";
-        data = {
-            _token: "{{csrf_token()}}",
-            junkshop_name: $(".tx_junkshop_name").val(),
-            junkshop_address: $(".tx_junkshop_adderess").val(),
-            latitude: $(".tx_longhitude").val(),
-            longhitude: $(".tx_latitude").val(),
-            status: status,
-            acceptable_materials: $('.tx_acc_mat').val(),
-            working_hours_start: $('.tx_start').val(),
-            working_hours_end: $('.tx_end').val(),
-            working_days: wd_string
-        };
         
-        update(data, url, status, modal_id);
+        modal_id = "add_modal";
+        var data = new FormData();
+        data.append("file", document.getElementById('inMainDocument').files[0]);
+        data.append("_token", "{{csrf_token()}}");
+        data.append("junkshop_name", $(".tx_junkshop_name").val());
+        data.append("junkshop_address", $(".tx_junkshop_adderess").val());
+        data.append("latitude", $(".tx_longhitude").val());
+        data.append("longhitude", $(".tx_latitude").val());
+        data.append("status", status);
+        data.append("acceptable_materials", $('.tx_acc_mat').val());
+        data.append("working_hours_start", $('.tx_start').val());
+        data.append("working_hours_end", $('.tx_end').val());
+        data.append("working_days", wd_string);
+
+        
+        crud_file(data, url, status, modal_id);
     });
 
     function get_wdays(wd) {
@@ -492,6 +499,7 @@
             ((i + 1) == (groupLength)) ? wd_string += item : wd_string += item + ",";
         }
     }
+
     $('#update_btn').click(function() {
 
 

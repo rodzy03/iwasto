@@ -43,6 +43,13 @@
         reload();
     }
 
+    function crud_file(data,url,status,modal_id) {
+        block_modal(modal_id);
+        crud_main(data,url,status);
+        toast_message("Success");
+        reload();
+    }
+
     function block_modal(modal_id) {
 
         var modal = '#'+modal_id;
@@ -91,7 +98,31 @@
         },1000)
         
     }
-
+    async function crud_main(data,url,status)
+    {
+        try {
+                // crud with file
+                await $.ajax({
+                        url: url,
+                        type: 'post',
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json',
+                        data: data,
+                        
+                        success: function(data) {
+                            console.log(data)
+                            
+                        },
+                        error: function(error) {
+                            console.log(error)
+                        }
+                    });
+                
+            } catch (error) {
+                console.log(error)
+            }
+    }
     async function main(data,url,status) 
     {
         
@@ -118,7 +149,7 @@
         }
         else {
             try {
-                
+                // for import only
                 await $.ajax({
                         url: url,
                         type: 'post',
