@@ -651,10 +651,12 @@
                     success: function(response) {
                         
                         if (response['data'].length > 0) {
-
+                            
                             for (i = 0; i < response['data'].length; i++) 
                             {
+                                var wd_display = "";
                                 var unordered = response['data'][i]['working_days'].split(',');
+                                
                                 u_len = unordered.length;
 
                                 var ordered = [];
@@ -666,8 +668,15 @@
                                     
                                 }
                                 ordered = sort_days(ordered);
-
-                                wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+                                groupLength = ordered.length;
+                                
+                                for (var y = 0;y < u_len;y++) 
+                                {
+                                    var item = ordered[y]['day'];
+                                    ((y + 1) == (groupLength)) ? wd_display += item : wd_display += item + " , ";
+                                }
+                                // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+                                //wd_display = response['data'][i]['working_days'];
                                 j_address = response['data'][i]['junkshop_address'];
                                 j_name = response['data'][i]['junkshop_name'];
                                 j_a_mat = response['data'][i]['acceptable_materials'];
@@ -696,7 +705,7 @@
                                             <hr style="height: 1px; background-color: gray;">
                                             <p class="card-text" style="font-size:10px; text-transform:uppercase;">
                                             <b>LOCATION : </b>${j_address}
-                                            <br><b>WORKING DAYS : </b>${wd_display}
+                                            <br><b>WORKING DAYS : </b><br>${wd_display}
                                             <br><b>WORKING HOURS : </b>${j_hours}
                                             <br><b>ACCEPTABLE MATERIALS : </b>${j_a_mat}
                                             
