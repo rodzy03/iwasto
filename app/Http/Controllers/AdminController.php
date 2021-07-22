@@ -12,6 +12,7 @@ use Excel;
 use DB;
 use Image;
 
+
 class AdminController extends Controller
 {
     public function admin_dashboard()
@@ -70,7 +71,8 @@ class AdminController extends Controller
 
     public function crud_swm(Request $request)
     {
-        if ($request->get('status') == "add") {
+        if ($request->get('status') == "add") 
+        {
             
             $last_id = db::table('t_swm_location')
                 ->insertgetid([
@@ -85,7 +87,8 @@ class AdminController extends Controller
 
                 ]);
 
-                if ($request->hasFile('file')) {
+                if ($request->hasFile('file')) 
+                {
                 
                     $dir_normal = public_path('uploads/junkshops/normal_size');
                     $dir_resize = public_path('uploads/junkshops/resize');
@@ -99,9 +102,8 @@ class AdminController extends Controller
                         $constraint->upsize();
                     })->save($dir_resize.'/'.$derive_name);
                     
-                
-    
                     
+    
                     $file = $request->file('file');
                     $file->move($dir_normal, $derive_name); 
                     $file_name = $derive_name;
@@ -112,20 +114,72 @@ class AdminController extends Controller
                     ]);
                 }
         }
-        else if ($request->get('status') == "normal") {
-            db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
-                ->update([
-                    'junkshop_name' => $request->get('junkshop_name')
-                    , 'junkshop_address' => $request->get('junkshop_address')
-                    , 'latitude' => $request->get('latitude')
-                    , 'longhitude' => $request->get('longhitude')
-                    , 'acceptable_materials' => $request->get('acceptable_materials')
-                    , 'working_hours_start' => $request->get('working_hours_start')
-                    , 'working_hours_end' => $request->get('working_hours_end')
-                    , 'working_days' => $request->get('working_days')
+        else if ($request->get('status') == "normal") 
+        {
 
-                ]);
+            $id = $request->get('id');
+            $current_pic = db::table('t_swm_location')->where('swm_location_id',$id)->value('file_name');
+            $file_name = $current_pic;
+            
 
+            if ($request->hasFile('file')) {
+
+                $dir_normal = public_path('uploads/junkshops/normal_size');
+                $dir_resize = public_path('uploads/junkshops/resize');
+
+                if($current_pic != "default") {
+
+                    if(file_exists($dir_normal.$current_pic) && file_exists($dir_resize.$current_pic)) 
+                    {
+                        File::delete($dir_normal.$current_pic);
+                        File::delete($dir_resize.$current_pic);
+                    }
+                }
+
+                // $file_name = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+                // $file_name = cloudinary()->upload($request->file('file')->getRealPath(), [
+                //     'folder' => 'avatar',
+                //     'transformation' => [
+                //               'width' => 100,
+                //               'height' => 100,
+                //       'gravity' => 'faces',
+                //       'crop' => 'fill'
+                //      ]
+                // ])->getSecurePath();
+
+                $image = $request->file('file');
+                $img = Image::make($image->path());
+                $derive_name = md5("swm_".$id);
+                // $img->fit(650) // Try this with and without a callback
+                $img->fit(100, 100)
+                ->encode('png', 100) // this will returns the new encoded object and save it, don't save the old one that was in your code.
+                ->save($dir_resize.'/'.$derive_name, 100);
+                
+                // $img->resize(96, 96, function ($constraint) {
+                //     $constraint->aspectRatio();
+                    
+                // })->save($dir_resize.'/'.$derive_name);
+                
+                
+                $file = $request->file('file');
+                $file->move($dir_normal, $derive_name); 
+                $file_name = $derive_name;
+                
+                
+            }
+
+            db::table('t_swm_location')->where('swm_location_id',$id)
+            ->update([
+                'junkshop_name' => $request->get('junkshop_name')
+                , 'junkshop_address' => $request->get('junkshop_address')
+                , 'latitude' => $request->get('latitude')
+                , 'longhitude' => $request->get('longhitude')
+                , 'acceptable_materials' => $request->get('acceptable_materials')
+                , 'working_hours_start' => $request->get('working_hours_start')
+                , 'working_hours_end' => $request->get('working_hours_end')
+                , 'working_days' => $request->get('working_days')
+                , 'file_name' => $file_name
+            ]);
 
         }
 
@@ -197,7 +251,7 @@ class AdminController extends Controller
 
     public function swm()
     {
-        $data = db::table('t_swm_location')->get();
+        $data = db::table('v_get_all_swm')->get();
         return view('admin.manage_swm', compact('data'));
     }
 

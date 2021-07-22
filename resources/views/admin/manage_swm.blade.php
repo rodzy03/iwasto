@@ -78,7 +78,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
-            <button data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+            <button data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder add_modal" aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -120,9 +120,9 @@
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">junkshop name</span>
+                            <span class="text-dark-75">junkshop information</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 100px;" hidden>
                             <span class="text-dark-75">junkshop address</span>
                         </th>
 
@@ -141,25 +141,34 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($data as $row)
                     <tr>
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->junkshop_name}}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{$row->junkshop_name}}</span>
+                            <br><span style="font-size: 11px;">WORKING DAYS : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">WORKING HOURS : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">ADDRESS : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">ACCEPTABLE MATERIALS : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
+                            
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td style="text-transform:uppercase;" hidden>
                             <span class="text-dark-75">{{$row->junkshop_address}}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->longhitude}}</span>
+                            <span class="text-dark-75">{!! (!empty($row->longhitude)) ? $row->longhitude : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->latitude}}</span>
+                            <span class="text-dark-75">{!! (!empty($row->latitude)) ? $row->latitude : "N/A" !!}</span>
                         </td>
                         <td class="pr-0 text-left" style="width: 15%;">
                             @if($row->active_flag == 1)
@@ -207,6 +216,10 @@
                         <td hidden>{{$row->junkshop_address}}</td>
                         <td hidden>{{$row->longhitude}}</td>
                         <td hidden>{{$row->latitude}}</td>
+                        <td hidden>{{$row->working_days}}</td>
+                        <td hidden>{{$row->acceptable_materials}}</td>
+                        <td hidden>{{$row->working_hours_start}}</td>
+                        <td hidden>{{$row->working_hours_end}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -317,6 +330,29 @@
                         <label class="form-control-label">Junkshop Address</label>
                         <input type="text" class="form-control tx_junkshop_adderess_e" style="text-transform: uppercase;" />
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Acceptable Materials</label>
+                        <input type="text" class="form-control tx_acc_mat_e" style="text-transform: uppercase;" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Working Days</label>
+
+                        <input name='tags-manual-suggestions_e' class="form-control tags-manual-suggestions days_e" placeholder='write some tags'>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Working Hours Start Time</label>
+                            <input type="time" class="form-control tx_start_e" style="text-transform: uppercase;" />
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Working Hours End Time</label>
+                            <input type="time" class="form-control tx_end_e" style="text-transform: uppercase;" />
+                        </div>
+                        
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Longhitude</label>
                         <input type="text" class="form-control tx_longhitude_e" />
@@ -325,6 +361,11 @@
                     <div class="form-group">
                         <label class="form-control-label">Latitude</label>
                         <input type="text" class="form-control tx_latitude_e" />
+                    </div>
+
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inMainDocument_e">
+                        <label class="custom-file-label" for="inMainDocument_e">Choose file</label>
                     </div>
 
                 </form>
@@ -374,6 +415,52 @@
 
 <script>
     $('#kt_datatable').DataTable();
+    
+    $(document).ready(function(){
+        init_tagify('input[name=tags-manual-suggestions]');
+        init_tagify('input[name=tags-manual-suggestions_e]');
+    });
+
+    function init_tagify(name) {
+
+        input = document.querySelector(name),
+            // init Tagify script on the above inputs
+            tagify = new Tagify(input, {
+                whitelist: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                dropdown: {
+                    position: "manual",
+                    maxItems: 7,
+                    enabled: 0,
+                    classname: "customSuggestionsList"
+                },
+                enforceWhitelist: true
+            })
+            
+        renderSuggestionsList()
+    }
+
+    // ES2015 argument destructuring
+    function onSuggestionsListUpdate({
+        detail: suggestionsElm
+    }) {
+        console.log(  suggestionsElm  )
+    }
+
+    function onSuggestionsListHide() {
+        console.log("hide dropdown")
+    }
+
+    function onDropdownScroll(e) {
+        //console.log(e.detail)
+    }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+    function renderSuggestionsList() {
+        tagify.dropdown.show() // load the list
+        tagify.DOM.scope.parentNode.appendChild(tagify.DOM.dropdown)
+    }
+
+
     $('#import_btn').click(function() {
 
         var data = new FormData();
@@ -384,6 +471,7 @@
         var url = "{{route('import_waste')}}";
         update(data, url, status, modal_id);
     });
+    
     var id, stats;
     $('#kt_datatable').on('click', '#act', function() {
 
@@ -401,6 +489,7 @@
 
     $('#kt_datatable').on('click', '#edit', function() {
 
+        tagify.removeAllTags();
         id = $(this).attr('vals');
         let row = $(this).closest("tr"),
 
@@ -408,60 +497,34 @@
             param_1 = $(row.find("td")[5]).text(),
             param_2 = $(row.find("td")[6]).text(),
             param_3 = $(row.find("td")[7]).text(),
-            param_4 = $(row.find("td")[8]).text()
-
+            param_4 = $(row.find("td")[8]).text(),
+            param_5 = $(row.find("td")[9]).text(),
+            param_6 = $(row.find("td")[10]).text(),
+            param_7 = $(row.find("td")[11]).text(),
+            param_8 = $(row.find("td")[12]).text()
 
         $('.tx_junkshop_name_e').val(param_1);
         $('.tx_junkshop_adderess_e').val(param_2);
         $('.tx_longhitude_e').val(param_3);
         $('.tx_latitude_e').val(param_4);
+        $('.tx_acc_mat_e').val(param_6);
+        $('.tx_start_e').val(param_7);
+        $('.tx_end_e').val(param_8);
+        
 
-
+        
+        var splited = [];
+        var tags = [];
+        
+        splited = param_5.split(",");
+        for(i=0; i<splited.length; i++) {
+            tags.push(splited[i]);
+        }
+        tagify.addTags(tags);
     });
 
-    var TagValues;
-    var input = document.querySelector('input[name=tags-manual-suggestions]'),
-        // init Tagify script on the above inputs
-        tagify = new Tagify(input, {
-            whitelist: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            dropdown: {
-                position: "manual",
-                maxItems: Infinity,
-                enabled: 0,
-                classname: "customSuggestionsList"
-            },
-            enforceWhitelist: true
-        })
-
-    tagify.on("dropdown:show", onSuggestionsListUpdate)
-        .on("dropdown:hide", onSuggestionsListHide)
-        .on('dropdown:scroll', onDropdownScroll)
-
-        
-        
-    renderSuggestionsList()
-
-    // ES2015 argument destructuring
-    function onSuggestionsListUpdate({
-        detail: suggestionsElm
-    }) {
-        //console.log(  suggestionsElm  )
-    }
-
-    function onSuggestionsListHide() {
-        console.log("hide dropdown")
-    }
-
-    function onDropdownScroll(e) {
-        //console.log(e.detail)
-    }
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
-    function renderSuggestionsList() {
-        tagify.dropdown.show() // load the list
-        tagify.DOM.scope.parentNode.appendChild(tagify.DOM.dropdown)
-    }
-
+    
+    
     var wd_string = "";
     $('#submit_btn').click(function() {
         
@@ -503,21 +566,30 @@
     $('#update_btn').click(function() {
 
 
+        var wd = document.querySelector('input[name=tags-manual-suggestions_e]').value;
+        get_wdays(wd);
+        
         url = "{{route('crud_swm')}}";
         status = "normal";
         modal_id = "modal-edit";
-        data = {
-            _token: "{{csrf_token()}}",
-            junkshop_name: $(".tx_junkshop_name_e").val(),
-            junkshop_address: $(".tx_junkshop_adderess_e").val(),
-            latitude: $(".tx_longhitude_e").val(),
-            longhitude: $(".tx_latitude_e").val(),
-            status: status,
-            id: id
-        };
+        
+        var data = new FormData();
+        data.append("file", document.getElementById('inMainDocument_e').files[0]);
+        data.append("_token", "{{csrf_token()}}");
+        data.append("junkshop_name", $(".tx_junkshop_name_e").val());
+        data.append("junkshop_address", $(".tx_junkshop_adderess_e").val());
+        data.append("latitude", $(".tx_latitude_e").val());
+        data.append("longhitude", $(".tx_longhitude_e").val());
+        data.append("status", status);
+        data.append("acceptable_materials", $('.tx_acc_mat_e').val());
+        data.append("working_hours_start", $('.tx_start_e').val());
+        data.append("working_hours_end", $('.tx_end_e').val());
+        data.append("working_days", wd_string);
+        data.append("id", id);
 
+        
+        crud_file(data, url, status, modal_id);
 
-        update(data, url, status, modal_id);
     });
 
     $('#continue').click(function() {
