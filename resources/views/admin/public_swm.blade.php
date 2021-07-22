@@ -599,7 +599,7 @@
                                             <hr style="height: 1px; background-color: gray;">
                                             <p class="card-text" style="font-size:10px; text-transform:uppercase;">
                                             <b>LOCATION : </b>${j_address}
-                                            <br><b>WORKING DAYS : </b>${wd_display}
+                                            <br><b>WORKING DAYS : </b><br>${wd_display}
                                             <br><b>WORKING HOURS : </b>${j_hours}
                                             <br><b>ACCEPTABLE MATERIALS : </b>${j_a_mat}
                                             
