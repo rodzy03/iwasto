@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use App\Imports\WasteImport;
 use Excel;
 use DB;
+use Image;
 
 class AdminController extends Controller
 {
@@ -70,8 +71,9 @@ class AdminController extends Controller
     public function crud_swm(Request $request)
     {
         if ($request->get('status') == "add") {
-            db::table('t_swm_location')
-                ->insert([
+            
+            $last_id = db::table('t_swm_location')
+                ->insertgetid([
                     'junkshop_name' => $request->get('junkshop_name')
                     , 'junkshop_address' => $request->get('junkshop_address')
                     , 'latitude' => $request->get('latitude')
@@ -82,6 +84,31 @@ class AdminController extends Controller
                     , 'working_days' => $request->get('working_days')
 
                 ]);
+
+                if ($request->hasFile('file')) {
+                
+                    $dir_normal = public_path('uploads/junkshops/normal_size');
+                    $dir_resize = public_path('uploads/junkshops/resize');
+    
+                    $image = $request->file('file');
+                    $img = Image::make($image->path());
+                    $derive_name = md5("swm_".$last_id);
+                    
+                    $img->resize(96, 96, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($dir_resize.'/'.$derive_name);
+    
+    
+                    
+                    $file = $request->file('file');
+                    $file->move($dir_normal, $derive_name); 
+                    $file_name = $derive_name;
+
+                    db::table('t_swm_location')->where('swm_location_id',$last_id)
+                    ->update([
+                        'file_name' => $file_name
+                    ]);
+                }
         }
         else if ($request->get('status') == "normal") {
             db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
@@ -96,6 +123,8 @@ class AdminController extends Controller
                     , 'working_days' => $request->get('working_days')
 
                 ]);
+
+
         }
 
         else if ($request->get('status') == "deact") {
