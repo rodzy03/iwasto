@@ -101,7 +101,7 @@
                         @endphp
 
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{ $type_name }}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{ $type_name }}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
@@ -178,20 +178,20 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
+                    <div class="form-group" style="text-transform:uppercase;">
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Route</label><br>
-                        <select class="form-control" name="sel_route" style="text-transform: capitalize;">
+                        <select class="form-control" name="sel_route" id="sel_route" style=" width:100%; ">
                             @foreach($routes as $row)
 
-                            <option value="{{$row->routes_id}}">{{$row->route_name}}</option>
+                            <option style="text-transform:uppercase;" value="{{$row->routes_id}}" >{{$row->route_name}}</option>
 
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="text-transform:uppercase;">
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type" style="text-transform: capitalize;">
+                        <select class="form-control" name="sel_waste_type" id="sel_waste_type" style="text-transform: capitalize; width:100%">
                             @foreach($type as $row)
                             @if($row->waste_type_name == "Both")
                             <option value="{{$row->waste_type_id}}" selected>Non Biodegradable and Biodegradable</option>
@@ -231,9 +231,9 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
+                    <div class="form-group" style="text-transform: uppercase;">
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Route</label><br>
-                        <select id=sel_route_e class="form-control" name="sel_route_e" style="text-transform: capitalize;">
+                        <select id=sel_route_e class="form-control" name="sel_route_e" style="text-transform: capitalize; width:100%">
                             @foreach($routes as $row)
 
                             <option value="{{$row->routes_id}}">{{$row->route_name}}</option>
@@ -242,9 +242,9 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="text-transform: uppercase;">
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Waste Type</label><br>
-                        <select id=sel_waste_type_e class="form-control" name="sel_waste_type_e" style="text-transform: capitalize;">
+                        <select id=sel_waste_type_e class="form-control" name="sel_waste_type_e" style="text-transform: capitalize; width:100%">
                             @foreach($type as $row)
                             @if($row->waste_type_name == "Both")
                             <option value="{{$row->waste_type_id}}" selected>Non Biodegradable and Biodegradable</option>
@@ -255,7 +255,20 @@
                         </select>
 
                     </div>
-
+                    <div class="form-group row">
+                        <label class="col-3 col-form-label">Is Recurring</label>
+                        <div class="col-9 col-form-label">
+                            <div class="checkbox-inline">
+                                <label class="checkbox checkbox-success">
+                                <input type="checkbox" name="Checkboxes5">
+                                <span></span>Yes</label>
+                                <label class="checkbox checkbox-success">
+                                <input type="checkbox" name="Checkboxes5" checked="checked">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
                         <input type="date" class="form-control tx_col_date_e" />
@@ -310,6 +323,14 @@
         'ordering': true,
         "aaSorting": []
     });
+    $('#sel_route').select2({ });
+    $('#sel_waste_type').select2({ });
+    $('#sel_route_e').select2({ });
+    $('#sel_waste_type_e').select2({ });
+
+    
+
+    
     $('#import_btn').click(function() {
 
         var data = new FormData();
