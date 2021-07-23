@@ -10,9 +10,11 @@
     <script src="{{ asset('assets/plugins/js-cookie/js.cookie.js') }}"></script>
     <script src="{{ asset('assets/js/theme/default.min.js') }}"></script>
     <script src="{{ asset('assets/js/apps.min.js') }}"></script>
-    <script src="{{ asset ('assets/plugins/bootstrap-sweetalert/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweetalert.min.js')}}"></script>
     
-    
+    <!--begin::Page Scripts(used by this page)-->
+	<script src="{{ asset('assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
+		<!--end::Page Scripts-->
     
     <script src="{{ asset('assets/js/demo/login-v2.demo.min.js') }}"></script>
     
