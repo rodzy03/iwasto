@@ -204,8 +204,9 @@ class AdminController extends Controller
                     'region' => $request->region
                     , 'province' => $request->province
                     , 'city_municipality' => $request->city_muni
-                    , 'barangay' => $request->barangay
+                    
                     , 'route_name' => $request->route_name
+                    , 'route_details' => $request->route_details
                 ]);
         }
         else if($request->get('status') == "normal") {
@@ -214,8 +215,9 @@ class AdminController extends Controller
                 'region' => $request->region
                 , 'province' => $request->province
                 , 'city_municipality' => $request->city_muni
-                , 'barangay' => $request->barangay
+                
                 , 'route_name' => $request->route_name
+                , 'route_details' => $request->route_details
             ]);
         }
         else if ($request->get('status') == "deact") {
