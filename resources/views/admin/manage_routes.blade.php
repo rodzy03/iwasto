@@ -76,7 +76,7 @@
                         <th style="min-width: 160px" class="pl-7">
                             <span class="text-dark-75">route information</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 100px;" hidden>
                             <span class="text-dark-75">region</span>
                         </th>
                         <th style="min-width: 100px;">
@@ -107,9 +107,9 @@
                             <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td style="text-transform:uppercase;" hidden>
 
-                            <span class="text-dark-75">{{$row->region}}</span>
+                            
                         </td>
                         <td style="text-transform:uppercase;">
 
@@ -223,35 +223,41 @@
                     <input type="text" class="form-control tx_route_name" style="text-transform:uppercase;" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Region</label><br>
-                    <select id=sel_region_a class="form-control" name="sel_region_a" `>
-                        @foreach($region as $row)
-                        <option value="{{$row->region_desc}}">{{$row->region_desc}}</option>
-                        @endforeach
+                    <select id=sel_region_a class="form-control" name="sel_region_a" >
+                       
                     </select>
 
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Province</label><br>
-                    <select id=sel_province_a class="form-control sel_province_a" name="sel_province_a">
+    
+                    <select class="form-control sel_province_a" id="sel_province_a" name="sel_province_a" style="width: 100%;">
+                        
 
                     </select>
-
+        
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;City / Municipality</label><br>
-                    <select class="form-control sel_muni_a" name="sel_muni_a">
+    
+                    <select class="form-control sel_muni_a" id="sel_muni_a" name="sel_muni_a" style="width: 100%;">
+                        
 
                     </select>
-
+        
                 </div>
+
+               
                 <div class="form-group">
                     <label class="form-control-label">&nbsp;Route Details</label>
                     <textarea id="tx_route_details" cols="30" rows="2" class="form-control tx_route_details" style="text-transform: uppercase;"></textarea>
                 </div>
+
+
+                
+
                 <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Barangay</label><br>
                     <select class="form-control sel_barangay_a" name="sel_barangay_a">
@@ -284,35 +290,36 @@
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label class="form-control-label">Route Name</label>
+                    <label class="form-control-labekt_select2_1l">Route Name</label>
                     <input type="text" class="form-control tx_route_name_e" style="text-transform:uppercase;" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Region</label><br>
                     <select id=sel_region_e class="form-control" name="sel_region_e" `>
-                        @foreach($region as $row)
-                        <option value="{{$row->region_desc}}">{{$row->region_desc}}</option>
-                        @endforeach
+                       
                     </select>
 
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Province</label><br>
-                    <select id=sel_province_e class="form-control sel_province_e" name="sel_province_e">
+    
+                    <select class="form-control sel_province_e" id="sel_province_e" name="sel_province_e" style="width: 100%;">
+                        
 
                     </select>
-
+        
                 </div>
-
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;City / Municipality</label><br>
-                    <select id=sel_muni_e class="form-control sel_muni_e" name="sel_muni_e">
+    
+                    <select class="form-control sel_muni_e" id="sel_muni_e" name="sel_muni_e" style="width: 100%;">
+                        
 
                     </select>
-
+        
                 </div>
+               
                 <div class="form-group">
                     <label class="form-control-label">&nbsp;Route Details</label>
                     <textarea id="tx_route_details_e" cols="30" rows="2" class="form-control tx_route_details_e" style="text-transform: uppercase;"></textarea>
@@ -355,6 +362,22 @@
         var url = "{{route('import_waste')}}";
         update(data, url, status, modal_id);
     });
+    $('#sel_province_a').select2({
+         placeholder: "Select Province"
+    });
+
+    $('#sel_muni_a').select2({
+         placeholder: "Select Province"
+    });
+
+    $('#sel_province_e').select2({
+         placeholder: "Select Province"
+    });
+
+    $('#sel_muni_e').select2({
+         placeholder: "Select Province"
+    });
+    
 
     var id, stats;
     var is_edit = false,
