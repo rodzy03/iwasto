@@ -98,7 +98,7 @@ class AdminController extends Controller
                     $img = Image::make($image->path());
                     $derive_name = md5("swm_".$last_id);
                     
-                    $img->resize(200, 200, function ($constraint) {
+                    $img->resize(300, 300, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })->save($dir_resize.'/'.$derive_name);
@@ -144,7 +144,7 @@ class AdminController extends Controller
                 $derive_name = md5("swm_".$id);
              
                 
-                $img->resize(200, 200, function ($constraint) {
+                $img->resize(300, 300, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($dir_resize.'/'.$derive_name);
