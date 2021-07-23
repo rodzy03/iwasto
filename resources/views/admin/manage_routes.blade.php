@@ -46,7 +46,7 @@
                 </span>Add
 
             </button>&nbsp;
-            <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+            {{--<button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -59,7 +59,7 @@
                     <!--end::Svg Icon-->
                 </span>Import
 
-            </button>
+            </button>--}}
 
 
             <!--end::Dropdown-->
@@ -73,8 +73,8 @@
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left text-uppercase">
-                        <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">route name</span>
+                        <th style="min-width: 160px" class="pl-7">
+                            <span class="text-dark-75">route information</span>
                         </th>
                         <th style="min-width: 100px;">
                             <span class="text-dark-75">region</span>
@@ -82,20 +82,20 @@
                         <th style="min-width: 100px;">
                             <span class="text-dark-75">province</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 80px;">
                             <span class="text-dark-75">city / municipality</span>
                         </th>
-                        <th style="min-width: 100px;">
-                            <span class="text-dark-75">barangay</span>
-                        </th>
+                       
                         <th style="min-width: 100px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        <th hidden>das</th>
                         <th hidden>region</th>
                         <th hidden>pro</th>
                         <th hidden>cit</th>
                         <th hidden>bara</th>
                         <th hidden>route</th>
+                        <th hidden>details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +103,8 @@
                     <tr>
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->route_name}}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{$row->route_name}}</span>
+                            <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
@@ -118,10 +119,7 @@
 
                             <span class="text-dark-75">{{$row->city_municipality}}</span>
                         </td>
-                        <td style="text-transform:uppercase;">
-
-                            <span class="text-dark-75">{{$row->barangay}}</span>
-                        </td>
+                        
 
                         <td class="pr-0 text-left">
                             @if($row->active_flag == 1)
@@ -165,11 +163,13 @@
                             </a>
                             @endif
                         </td>
+                        <td hidden>asd</td>
                         <td hidden>{{$row->region}}</td>
                         <td hidden>{{$row->province}}</td>
                         <td hidden>{{$row->city_municipality}}</td>
                         <td hidden>{{$row->barangay}}</td>
                         <td hidden>{{$row->route_name}}</td>
+                        <td hidden>{{$row->route_details}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -248,8 +248,11 @@
                     </select>
 
                 </div>
-
                 <div class="form-group">
+                    <label class="form-control-label">&nbsp;Route Details</label>
+                    <textarea id="tx_route_details" cols="30" rows="2" class="form-control tx_route_details" style="text-transform: uppercase;"></textarea>
+                </div>
+                <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Barangay</label><br>
                     <select class="form-control sel_barangay_a" name="sel_barangay_a">
 
@@ -310,8 +313,11 @@
                     </select>
 
                 </div>
-
                 <div class="form-group">
+                    <label class="form-control-label">&nbsp;Route Details</label>
+                    <textarea id="tx_route_details_e" cols="30" rows="2" class="form-control tx_route_details_e" style="text-transform: uppercase;"></textarea>
+                </div>
+                <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Barangay</label><br>
                     <select id=sel_barangay_e class="form-control sel_barangay_e" name="sel_barangay_e">
 
@@ -365,6 +371,7 @@
         is_change = false;
 
         $('.tx_route_name_e').val($(row.find("td")[10]).text())
+        $('.tx_route_details_e').val($(row.find("td")[11]).text())
         selectElement('sel_region_e', param_1)
         get_provinces(param_1);
 
@@ -390,6 +397,7 @@
 
     $('#update_btn').click(function() {
 
+        console.log($('.tx_route_details_e').val())
         region = $('select[name=sel_region_e] option:selected').val();
         province = $('select[name=sel_province_e] option:selected').val();
         city_muni = $('select[name=sel_muni_e] option:selected').val();
@@ -406,6 +414,8 @@
             city_muni: city_muni,
             barangay: barangay,
             route_name: $('.tx_route_name_e').val(),
+            route_details: $('.tx_route_details_e').val(),
+            
             id: id
         };
 
@@ -444,7 +454,8 @@
             province: province,
             city_muni: city_muni,
             barangay: barangay,
-            route_name: $('.tx_route_name').val()
+            route_name: $('.tx_route_name').val(),
+            route_details: $('.tx_route_details').val()
 
         };
 
