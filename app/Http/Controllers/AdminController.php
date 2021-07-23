@@ -71,7 +71,7 @@ class AdminController extends Controller
 
     public function crud_swm(Request $request)
     {
-        ini_set('memory_limit','50MB');
+        
         if ($request->get('status') == "add") 
         {
             
