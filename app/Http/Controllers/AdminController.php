@@ -98,7 +98,7 @@ class AdminController extends Controller
                     $img = Image::make($image->path());
                     $derive_name = md5("swm_".$last_id);
                     
-                    $img->resize(96, 96, function ($constraint) {
+                    $img->resize(200, 200, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })->save($dir_resize.'/'.$derive_name);
@@ -137,30 +137,17 @@ class AdminController extends Controller
                     }
                 }
 
-                // $file_name = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
-                // $file_name = cloudinary()->upload($request->file('file')->getRealPath(), [
-                //     'folder' => 'avatar',
-                //     'transformation' => [
-                //               'width' => 100,
-                //               'height' => 100,
-                //       'gravity' => 'faces',
-                //       'crop' => 'fill'
-                //      ]
-                // ])->getSecurePath();
+               
 
                 $image = $request->file('file');
                 $img = Image::make($image->path());
                 $derive_name = md5("swm_".$id);
-                // $img->fit(650) // Try this with and without a callback
-                // $img->resize(100, 100)
-                // ->encode('png', 100) // this will returns the new encoded object and save it, don't save the old one that was in your code.
-                // ->save($dir_resize.'/'.$derive_name, 100);
+             
                 
-                $img->resize(300, 300, function ($constraint) {
+                $img->resize(200, 200, function ($constraint) {
                     $constraint->aspectRatio();
-                    
+                    $constraint->upsize();
                 })->save($dir_resize.'/'.$derive_name);
-                
                 
                 $file = $request->file('file');
                 $file->move($dir_normal, $derive_name); 
@@ -195,7 +182,16 @@ class AdminController extends Controller
 
         return response()->json(['response' => "success"]);
     }
-
+ // $file_name = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+                // $file_name = cloudinary()->upload($request->file('file')->getRealPath(), [
+                //     'folder' => 'avatar',
+                //     'transformation' => [
+                //               'width' => 100,
+                //               'height' => 100,
+                //       'gravity' => 'faces',
+                //       'crop' => 'fill'
+                //      ]
+                // ])->getSecurePath();
     public function crud_routes(Request $request)
     {
         if ($request->get('status') == "add") {
