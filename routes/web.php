@@ -69,7 +69,11 @@ Route::post('/update/swm_location','MobileController@update_swm_location');
 Route::post('/get_nearby','MobileController@get_nearby');
 
 Route::get('/swm/facilities','AdminController@swm_facilities')->name('swm_facilities');
+Route::get('/swm/waste/guide','AdminController@waste_guide')->name('waste_guide');
+
 Route::post('/search/facilities','AdminController@search_facilities')->name('search_facilities');
+Route::post('/search/waste/facilities','AdminController@search_waste_facility')->name('search_waste_facility');
+
 Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
 
 Route::group(['middleware' => ['validateBackHistory']], function () {
