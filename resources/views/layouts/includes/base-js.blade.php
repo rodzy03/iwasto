@@ -37,7 +37,11 @@
 <script src="{{asset('assets/js/pages/features/miscellaneous/toastr.js')}}"></script>
 <!--end::Page Scripts-->
 <script>
-    
+    function selectElement(id, valueToSelect) {    
+        $('#'+id).val(valueToSelect);
+        $('#'+id).trigger('change'); 
+    }
+
     function update(data,url,status,modal_id) {
         block_modal(modal_id);
         main(data,url,status);

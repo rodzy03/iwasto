@@ -336,7 +336,7 @@ class AdminController extends Controller
 
     public function collection_calendar()
     {
-        $data = db::table('v_get_schedule')->orderby(DB::raw('DATE(collection_date_full)'),'desc')->get();
+        $data = db::table('v_get_schedule')->orderby(DB::raw('DATE(date_added)'),'desc')->get();
         $type = db::table('r_waste_type')->get();
         $routes = db::table('r_routes')->get();
 
@@ -348,20 +348,26 @@ class AdminController extends Controller
     {
         if ($request->get('status') == "add") {
 
+            $recurring = ($request->get('collection_days') == "") ? 0 : 1;
             db::table('t_location_schedule')
                 ->insert([
                     'collection_date' => $request->get('col_date')
                     , 'waste_type_id' => $request->get('waste_type_id')
                     , 'routes_id' => $request->get('routes_id')
+                    , 'recurring' => $recurring
+                    , 'collection_days' => $request->get('collection_days') 
                 ]);
         }
         else if ($request->get('status') == "normal") {
 
+            $recurring = ($request->get('collection_days') == "") ? 0 : 1;
             db::table('t_location_schedule')->where('schedule_id',$request->get('id'))
                 ->update([
                     'collection_date' => $request->get('col_date')
                     , 'waste_type_id' => $request->get('waste_type_id')
                     , 'routes_id' => $request->get('routes_id')
+                    , 'recurring' => $recurring
+                    , 'collection_days' => $request->get('collection_days') 
                 ]);
         }
         else if ($request->get('status') == "deact") {

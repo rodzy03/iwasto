@@ -6,7 +6,51 @@
 <!--begin::Page Vendors Styles(used by this page)-->
 <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Page Vendors Styles-->
+<style>
+    .customSuggestionsList>div {
+        max-height: 300px;
 
+        overflow: auto;
+    }
+
+    .tags-manual-suggestions {
+        --tags-disabled-bg: #F1F1F1;
+        --tags-border-color: #DDD;
+        --tags-hover-border-color: #CCC;
+        --tags-focus-border-color: #3595f6;
+        --tag-bg: #E5E5E5;
+        --tag-hover: #D3E2E2;
+        --tag-text-color: black;
+        --tag-text-color--edit: black;
+        --tag-pad: 0.3em 0.5em;
+        --tag-inset-shadow-size: 1.1em;
+        --tag-invalid-color: #D39494;
+        --tag-invalid-bg: rgba(211, 148, 148, 0.5);
+        --tag-remove-bg: none;
+        --tag-remove-btn-color: black;
+        --tag-remove-btn-bg: none;
+        --tag-remove-btn-bg--hover: #c77777;
+        --input-color: inherit;
+        --tag--min-width: 1ch;
+        --tag--max-width: auto;
+        --tag-hide-transition: 0.3s;
+        --placeholder-color: rgba(0, 0, 0, 0.4);
+        --placeholder-color-focus: rgba(0, 0, 0, 0.25);
+        --loader-size: .8em;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        border: 1px solid #ddd;
+        border: 1px solid var(--tags-border-color);
+        padding: 0;
+        line-height: normal;
+        cursor: text;
+        outline: 0;
+        position: relative;
+        box-sizing: border-box;
+        transition: .1s;
+    }
+</style>
 
 @endsection
 
@@ -74,20 +118,22 @@
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left text-uppercase">
-                        <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">type</span>
+                        <th style="min-width: 200px" class="pl-7">
+                            <span class="text-dark-75">collection information</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 100px;" hidden>
                             <span class="text-dark-75">collection date</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">route name</span>
+                            <span class="text-dark-75">date added</span>
                         </th>
 
 
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        <th hidden></th>
+                        <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
@@ -102,13 +148,20 @@
 
                         <td style="text-transform:uppercase;">
                             <span class="text-dark-75" style="font-weight: bold;">{{ $type_name }}</span>
+                            <br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
+                            @if($row->recurring == 1)
+                                <br><span style="font-size: 11px;">collection days : {!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
+                            @else
+                            <br><span style="font-size: 11px;">collection date : {!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
+                            @endif
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td style="text-transform:uppercase;" hidden>
                             <span class="text-dark-75">{{$row->collection_date}}</span>
                         </td>
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->route_name}}</span>
+                            <span class="text-dark-75">{{$row->date_added}}</span>
                         </td>
 
 
@@ -157,6 +210,8 @@
                         <td hidden>{{$row->waste_type_id}}</td>
                         <td hidden>{{$row->routes_id}}</td>
                         <td hidden>{{$row->collection_date_full}}</td>
+                        <td hidden>{{$row->recurring}}</td>
+                        <td hidden>{{$row->collection_days}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -202,8 +257,25 @@
                         </select>
 
                     </div>
-
-                    <div class="form-group">
+                    
+                    <div class="form-group row ">
+                        <label class="col-3 col-form-label">&nbsp;Is Recurring</label>
+                        <div class="col-9 col-form-label">
+                            <div class="checkbox-inline">
+                                <label class="checkbox checkbox-success">
+                                <input type="checkbox" name="is_recurring" class="is_recurring">
+                                <span></span>Yes</label>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group div_wd" style="display: none;">
+                        <label class="form-control-label">Working Days</label>
+                        <input name='tags-manual-suggestions' class="form-control tags-manual-suggestions days_e" placeholder='write some tags'>
+                    </div>
+                    <div class="form-group div_collection">
                         <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
                         <input type="date" class="form-control tx_col_date" />
                     </div>
@@ -255,21 +327,24 @@
                         </select>
 
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row ">
                         <label class="col-3 col-form-label">Is Recurring</label>
                         <div class="col-9 col-form-label">
                             <div class="checkbox-inline">
                                 <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="Checkboxes5">
+                                <input type="checkbox" name="is_recurring_e" class="is_recurring_e">
                                 <span></span>Yes</label>
-                                <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="Checkboxes5" checked="checked">
+                                
                                 
                             </div>
                             
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group div_wd_e" style="display: none;">
+                        <label class="form-control-label">Working Days</label>
+                        <input name='tags-manual-suggestions_e' class="form-control tags-manual-suggestions days_e" placeholder='write some tags'>
+                    </div>
+                    <div class="form-group div_collection_e">
                         <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
                         <input type="date" class="form-control tx_col_date_e" />
                     </div>
@@ -314,22 +389,104 @@
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
 <!--end::Page Vendors-->
-
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
 
 <script>
-    $('#kt_datatable').DataTable({
-        'paging': true,
-        'searching': true,
-        'ordering': true,
-        "aaSorting": []
-    });
-    $('#sel_route').select2({ });
-    $('#sel_waste_type').select2({ });
-    $('#sel_route_e').select2({ });
-    $('#sel_waste_type_e').select2({ });
+    $('#kt_datatable').DataTable();
 
+    $(document).ready(function(){
+        $('#sel_route').select2({ });
+        $('#sel_waste_type').select2({ });
+        $('#sel_route_e').select2({ });
+        $('#sel_waste_type_e').select2({ });
+        init_tagify('input[name=tags-manual-suggestions]');
+        init_tagify('input[name=tags-manual-suggestions_e]');
+        //init_tagify('input[name=tags-manual-suggestions_e]');
+    });
     
 
+    function init_tagify(name) {
+
+        input = document.querySelector(name),
+            // init Tagify script on the above inputs
+            tagify = new Tagify(input, {
+                whitelist: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                dropdown: {
+                    position: "manual",
+                    maxItems: 7,
+                    enabled: 0,
+                    classname: "customSuggestionsList"
+                },
+                enforceWhitelist: true
+            })
+            
+        renderSuggestionsList()
+        }
+
+        // ES2015 argument destructuring
+        function onSuggestionsListUpdate({
+            detail: suggestionsElm
+            }) {
+            console.log(  suggestionsElm  )
+        }
+
+        function onSuggestionsListHide() {
+            
+        }
+
+        function onDropdownScroll(e) {
+        
+        }
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+        function renderSuggestionsList() {
+            tagify.dropdown.show() // load the list
+            tagify.DOM.scope.parentNode.appendChild(tagify.DOM.dropdown)
+        }
+
+        function get_wdays(wd) {
+            if(wd != "") {
+                wd_arr = JSON.parse( wd );
+                groupLength = wd_arr.length;
+                for (var i = 0;i < groupLength;i++) 
+                {
+                    var item = wd_arr[i]['value'];
+                    ((i + 1) == (groupLength)) ? wd_string += item : wd_string += item + ",";
+                }
+            }
+            
+        }
+
+
+    var is_recurring = 0;
+
+    $('.is_recurring').change(function() {
+
+        if($('.is_recurring:checkbox:checked').length > 0) {
+            $('.div_wd').show();
+            $('.div_collection').hide();
+            
+        }
+        else {
+            $('.div_wd').hide();
+            $('.div_collection').show();
+        }
+    });
+
+    $('.is_recurring_e').change(function() {
+
+        if($('.is_recurring_e:checkbox:checked').length > 0) {
+            $('.div_wd_e').show();
+            $('.div_collection_e').hide();
+        }
+        else {
+            $('.div_wd_e').hide();
+            $('.div_collection_e').show();
+        }
+    });
+
+        
     
     $('#import_btn').click(function() {
 
@@ -353,11 +510,26 @@
             param_1 = $(row.find("td")[4]).text(),
             param_2 = $(row.find("td")[5]).text(),
             param_3 = $(row.find("td")[6]).text().split(" ")
+            param_4 = $(row.find("td")[7]).text()
+            param_5 = $(row.find("td")[8]).text()
 
-
-
-        $('.tx_col_date_e').val(param_3[0]);
-
+        console.log(param_4)
+        var splited = [];
+        var tags = [];
+        if(param_4 == 1) {
+            splited = param_5.split(",");
+            for(i=0; i<splited.length; i++) {
+                tags.push(splited[i]);
+            }
+            tagify.addTags(tags);
+            $('.div_wd_e').show();
+            $('.div_collection_e').hide();
+            $('.is_recurring_e').attr('checked','checked');
+        }
+        else {
+            $('.tx_col_date_e').val(param_3[0]);
+        }
+        
         selectElement('sel_waste_type_e', param_1)
         selectElement('sel_route_e', param_2)
 
@@ -376,10 +548,12 @@
         stats = "deact"
         $('.header_txt').text('This will deactivate the data. Continue?');
     });
-
+    var wd_string = "";
     $('#submit_btn').click(function() {
 
-
+        var wd = document.querySelector('input[name=tags-manual-suggestions]').value;
+        get_wdays(wd);
+        
         url = "{{route('crud_collection')}}";
         status = "add";
         modal_id = "add_modal";
@@ -388,7 +562,8 @@
             col_date: $(".tx_col_date").val(),
             waste_type_id: $('select[name=sel_waste_type] option:selected').val(),
             routes_id: $('select[name=sel_route] option:selected').val(),
-            status: status
+            status: status,
+            collection_days:wd_string
         };
 
 
@@ -398,6 +573,8 @@
     $('#update_btn').click(function() 
     {
 
+        var wd = document.querySelector('input[name=tags-manual-suggestions_e]').value;
+        get_wdays(wd);
         url = "{{route('crud_collection')}}";
         status = "normal";
         modal_id = "modal-edit";
@@ -408,6 +585,7 @@
             waste_type_id: $('select[name=sel_waste_type_e] option:selected').val(),
             routes_id: $('select[name=sel_route_e] option:selected').val(),
             status: status,
+            collection_days:wd_string,
             id: id
         };
 
