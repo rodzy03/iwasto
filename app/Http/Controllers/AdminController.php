@@ -415,6 +415,25 @@ class AdminController extends Controller
         return view('admin.public_swm');
     }
 
+    public function waste_guide()
+    {
+        return view('admin.public_guide');
+    }
+
+    public function search_waste_facility(Request $request)
+    {
+        $search_val = $request->get('search_swm');
+        $facility = db::select("call sp_search_facility(?)", array(
+            $search_val,
+        ));
+
+        $waste_guide = db::select("call sp_search_waste(?)", array(
+            $search_val,
+        ));
+
+        return response()->json(['facility' => $facility, 'waste_guide' => $waste_guide ]);
+    }
+
     public function search_facilities(Request $request)
     {
         $search_val = $request->get('search_swm');
