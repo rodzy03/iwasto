@@ -360,7 +360,7 @@
 
 
 
-                                        <input class="typeahead form-control h-auto py-7 px-1;" id="search_swm" type="text" dir="ltr" placeholder="Search Waste" autocomplete="off" spellcheck="false" style="width:300px; border-radius: 0.20rem; font-size:large; color:#5e7a66">
+                                        <input class="typeahead form-control h-auto py-5 px-1;" id="search_swm" type="text" dir="ltr" placeholder="Search Waste" autocomplete="off" spellcheck="false" style="width:300px; border-radius: 0.20rem; font-size:large; color:#5e7a66">
 
 
                                     </div>
