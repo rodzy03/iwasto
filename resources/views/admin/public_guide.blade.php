@@ -119,7 +119,7 @@
         }
 
         .tt-menu {
-            width: 500px;
+            width: 300px;
             margin: 12px 0;
             padding: 8px 0;
             background-color: #fff;
