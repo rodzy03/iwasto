@@ -364,11 +364,7 @@
 
 
                                     </div>
-
                                     <!--end::Input-->
-
-
-
                                 </form>
                                 <!--end::Form-->
                             </div>
