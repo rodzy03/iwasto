@@ -440,7 +440,8 @@
 
                             var len = response['result'].length;
 
-                            if (len > 0) {
+                            if (len > 0) 
+                            {
                                 $('.card_div').empty();
                                 $('.marker').remove();
                                 $('.has_data').show();
@@ -673,7 +674,7 @@
 
                     }
                 });
-                
+
             }, 1000);
 
         }

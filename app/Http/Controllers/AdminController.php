@@ -417,7 +417,24 @@ class AdminController extends Controller
 
     public function waste_guide()
     {
+        
+        $data = db::table('r_waste')->get();
         return view('admin.public_guide');
+    }
+
+    public function return_waste()
+    {
+        $search_val = $_GET['search_val'];
+        $data = db::select("call sp_typehead_waste(?)", array(
+            $search_val,
+        ));
+        $wastes = [];
+        
+        for($i=0; $i<count($data); $i++) {
+            $wastes[$i] = $data[$i]->waste_name;
+        }
+        
+        echo json_encode($wastes);
     }
 
     public function search_waste_facility(Request $request)

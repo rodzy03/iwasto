@@ -55,7 +55,7 @@
                     </span>
 
 
-                    <span class="menu-text">SWM Facilities</span>
+                    <span class="menu-text">Waste Collection Facilities</span>
                 </a>
             </li>
 
