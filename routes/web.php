@@ -71,6 +71,8 @@ Route::post('/get_nearby','MobileController@get_nearby');
 Route::get('/swm/facilities','AdminController@swm_facilities')->name('swm_facilities');
 Route::get('/swm/waste/guide','AdminController@waste_guide')->name('waste_guide');
 
+Route::get('/waste/return','AdminController@return_waste')->name('return_waste');
+
 Route::post('/search/facilities','AdminController@search_facilities')->name('search_facilities');
 Route::post('/search/waste/facilities','AdminController@search_waste_facility')->name('search_waste_facility');
 
