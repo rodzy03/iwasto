@@ -155,6 +155,25 @@
         .tt-suggestion p {
             margin: 0;
         }
+        .input-group-text-new {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0.65rem 1rem;
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #3F4254;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #F3F6F9;
+            border: 1px solid #E4E6EF;
+            
+        }
     </style>
 </head>
 <!--end::Head-->
@@ -271,7 +290,7 @@
                                         <form method="get" class="quick-search-form">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">
+                                                    <span class="input-group-text" >
                                                         <span class="svg-icon svg-icon-lg">
                                                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -333,12 +352,12 @@
                                 <!--begin::Heading-->
                                 <h1 class="text-dark font-weight-bolder mb-12">How can we help?</h1>
                                 <!--end::Heading-->
-                                <!--begin::Form-->
+                               <!--begin::Form-->
                                 <form class="d-flex position-relative w-2 m-auto">
-                                    <div class="input-group">
+                                    <div class="input-group-prepend">
                                         <!--begin::Icon-->
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-white ">
+                                            <span class="input-group-text-new bg-white ">
                                                 <span class="svg-icon svg-icon-xl">
                                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
