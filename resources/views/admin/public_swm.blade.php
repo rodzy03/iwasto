@@ -29,11 +29,47 @@
             padding-bottom: 12px;
             padding-left: 12px;
         }
+
+        /* .panel-float {
+            
+            
+            z-index: 1;
+            opacity: 0.99;
+            
+            left: 170px;
+            top: 750px ;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+
+.flex-item {
+  flex-basis: 100%;
+  margin: 5px;
+}
+
+.floating-menu {
+  position: absolute;
+  z-index: 1; 
+
+  margin: 30px;
+  top: 700px;
+  left:150px;
+  right:50px;
+  width: 200px;
+  
+} */
+
     </style>
 
 </head>
-<!--end::Head-->
-<!--begin::Body-->
+
+
+
+
 
 <body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed aside-enabled aside-static page-loading">
     <!--begin::Main-->
@@ -105,18 +141,7 @@
                                 <img alt="Logo" src="{{asset('uploads/logo_green.png')}}" class="logo-sticky max-h-35px" />
                             </a>
                             <!--end::Logo-->
-                            <!--begin::Desktop Search-->
-                            {{--<div class="quick-search quick-search-inline ml-20 w-300px" id="kt_quick_search_inline">
-                               
-                                <!--begin::Search Toggle-->
-                                <div id="kt_quick_search_toggle" data-toggle="dropdown" data-offset="0px,1px"></div>
-                                <!--end::Search Toggle-->
-                                <!--begin::Dropdown-->
-                                <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg dropdown-menu-anim-up">
-                                    <div class="quick-search-wrapper scroll" data-scroll="true" data-height="350" data-mobile-height="200"></div>
-                                </div>
-                                <!--end::Dropdown-->
-                            </div>--}}
+                           
                             <!--end::Desktop Search-->
                         </div>
                         <!--end::Left-->
@@ -197,6 +222,7 @@
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
                         <div class="container">
+                                
                             <!--begin::Hero-->
                             <div class="card card-custom overflow-hidden position-relative mb-8">
                                 <!--begin::SVG-->
@@ -244,7 +270,7 @@
                                             </div>
                                             <!--end::Icon-->
                                             <!--begin::Input-->
-
+                                            
                                             <input type="text" class="form-control h-auto border-0 py-7 px-1 font-size-lg " id="search_swm" placeholder="Bote, Tanso" />
 
 
@@ -266,8 +292,7 @@
                                 </div>
                                 <div class="alert-text">No data found</div>
                             </div>
-                            <!--begin::Section-->
-
+                                
                             <div class="row has_data" style="display: none;">
                                 <div class="col-lg-12">
                                     <div class="card mb-8">
@@ -323,9 +348,37 @@
                             </div><br>
 
 
-                            <br>
+                                
+                            <div class="row" data-sticky-container="" >
+									
+									<div class="col-lg-12 col-xl-12">
+									<div class="card card-custom gutter-b example example-compact">
+										<div class="card-header">
+											<div class="card-title">
+												<h3 class="card-label">Waste Facilities Map
+												</h3>
+                                                <h3 class="value">
+												</h3>
+                                                
+											</div>
+											{{--<div class="card-toolbar">
+												<div class="example-tools justify-content-center">
+													<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+													<span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+												</div>
+											</div>--}}
+										</div>
+										<div class="card-body">
+											
+                                        <div id='map' style='height: 700px; margin-top:-15px; '></div>
+										
+										</div>
+									</div>
+								</div>
+									
+								</div>
                             <!--end::Section-->
-                            <div id='map' style='height: 700px; margin-top:-15px; '></div>
+                            
 
 
 
@@ -367,6 +420,7 @@
     </div>
     <!--end::Main-->
 
+<!--begin::Body-->
 
     <!--begin::Scrolltop-->
     <div id="kt_scrolltop" class="scrolltop">
@@ -390,8 +444,10 @@
     <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
+    <script src="{{asset('assets/js/pages/features/miscellaneous/sticky-panels.js')}}"></script>
     <!--end::Page Scripts-->
-
+    
+    
     <script>
         mapboxgl.accessToken = "{{env('MAPBOX_KEY')}}";
 
@@ -406,7 +462,7 @@
 
         });
 
-
+        map.addControl(new mapboxgl.FullscreenControl());
         map.addControl(new mapboxgl.NavigationControl());
         var markerElement;
         get_locations();

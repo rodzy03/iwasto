@@ -74,7 +74,7 @@
                     <!--end::Svg Icon-->
                 </span>
             </span>
-            <h3 class="card-label">SWM List</h3>
+            <h3 class="card-label">Waste Collection Facilities</h3>
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
@@ -120,7 +120,7 @@
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">junkshop information</span>
+                            <span class="text-dark-75">Waste Collection Facility Information</span>
                         </th>
                         <th style="min-width: 100px;" hidden>
                             <span class="text-dark-75">junkshop address</span>
@@ -242,7 +242,7 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add SWM location</h5>
+                <h5 class="modal-title">Add Waste Collection Facility</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
