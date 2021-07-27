@@ -220,7 +220,7 @@
                                 <!--begin::Hero Body-->
                                 <div class="card-body d-flex justify-content-center flex-column col-lg-6 px-8 py-20 px-lg-20 py-lg-40">
                                     <!--begin::Heading-->
-                                    <h2 class="text-dark font-weight-bolder mb-8"> Search SWM Facility</h2>
+                                    <h2 class="text-dark font-weight-bolder mb-8"> Waste Collection Facilities</h2>
                                     <!--end::Heading-->
                                     <!--begin::Form-->
                                     <div class="d-flex position-relative flex-row-fluid">
@@ -315,7 +315,7 @@
                                                 <!--end::Svg Icon-->
                                             </span>
                                         </span>
-                                        <h3 class="card-label">SWM Facilities Map</h3>
+                                        <h3 class="card-label">Waste Collection Facilities</h3>
                                     </div>
 
                                 </div>
