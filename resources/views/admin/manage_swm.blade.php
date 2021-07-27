@@ -622,10 +622,10 @@
             param_8 = $(row.find("td")[12]).text(),
             param_9 = $(row.find("td")[13]).text(),
             param_10 = $(row.find("td")[14]).text();
-
+            param_11 = $(row.find("td")[15]).text();
             
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).prop( "disabled", false ) : $( ".tx_c_rate_e" ).prop( "disabled", true );
-        (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val("") : $( ".tx_c_rate_e" ).val(100);
+        (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val(param_11) : $( ".tx_c_rate_e" ).val(100);
 
         $("input[name=rd_capacity_e][value='"+param_10+"']").prop("checked",true);
         //$('input[name=rd_capacity_e]').trigger('change');
