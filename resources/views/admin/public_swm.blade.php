@@ -559,11 +559,13 @@
                                     j_name = response['result'][j]['junkshop_name'];
                                     j_a_mat = response['result'][j]['acceptable_materials'];
                                     j_hours = response['result'][j]['working_hours'];
+                                    j_type = response['result'][j]['facility_type'];
+                                    j_capacity = response['result'][j]['capacity'];
+                                    j_capacity_r = response['result'][j]['capacity_rate'];
 
 
 
-
-                                    const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}`
+                                    const info = `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
 
                                     const cards = `<div class="card-header" id="headingOne7">
                                                             <div class="card-title"  aria-expanded="true" role="button">
@@ -582,7 +584,7 @@
                                                         
                                                         <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
                                                             <div class="card-body text-dark-50 font-size-lg pl-12">
-                                                                <p style="text-transform: lowercase;" class="swm_info">${info}</p>
+                                                                <p style="text-transform: uppercase;" class="swm_info">${info}</p>
                                                                 
                                                             </div>
                                                         </div>
@@ -599,7 +601,9 @@
                                     markerElement.style.backgroundSize = 'cover'
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
-
+                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                    markerElement.vals = `${j_name}`;
+                                    markerElement.profile = `${response['result'][j]['file_name']}`;
 
                                     const content = `
                   
@@ -625,26 +629,76 @@
 
 
 
-                                    const popUp = new mapboxgl.Popup({
-                                        closeButton: false,
-                                        closeOnClick: true,
-                                        closeOnMove: true,
-
-
-                                    }).setHTML(content).setMaxWidth("600px");
+                                    
 
 
                                     new mapboxgl.Marker(markerElement)
                                         .setLngLat([
                                             response['result'][j]['longhitude'], response['result'][j]['latitude']
                                         ])
-                                        .setPopup(popUp)
+                                        // .setPopup(popUp)
                                         .addTo(map);
 
                                     markerElement.addEventListener('click', (event) => { 
-                                        console.log(event.target.id)
-
+                                        var swm_id = event.target.id;
+                                        $('.modal_card_div').empty();
+                                        const modal_content = `<div class="form-group">
                                         
+                                        <img id="valid_id" src="{{asset('uploads/junkshops/normal_size')}}/${event.target.profile}" alt="NO IMAGE FOUND" width="100%" height="auto">
+                                            </div>
+                                            
+                                            <div class="col-lg-12">
+                                                <div class="card mb-8">
+                                                    <div class="card-body">
+                                                        
+                                                            <h5 class="text-dark mb-8">SWM Information </h5>
+                                                            
+                                                            <div class="accordion accordion-light ">
+                                                                
+                                                                <div class="card ">
+                                                                        
+                                                                        
+                                                                    <div class="card-header" id="headingOne7">
+                                                                        <div class="card-title"  aria-expanded="true" role="button">
+                                                                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                                <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
+                                                                            </g>
+                                                                            </svg></span>
+
+
+                                                                            <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${event.target.vals}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+                                                                        <div class="card-body text-dark-50 font-size-md pl-2">
+                                                                            <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                                <!--end::Item-->
+
+                                                            </div>
+                                                            <!--end::Accordion-->
+                                                        
+                                                    </div>
+                                                </div>
+                                            
+
+                                            </div>
+                                                        `
+                                        // maps
+                                    
+                                        $('.modal_card_div').append(modal_content);
+                                        $('#popout-modal').modal('show');
+
                                     });
                                 }
 
@@ -769,59 +823,59 @@
                                     const modal_content = `<div class="form-group">
                                     
                                     <img id="valid_id" src="{{asset('uploads/junkshops/normal_size')}}/${event.target.profile}" alt="NO IMAGE FOUND" width="100%" height="auto">
-                                </div>
-                                
-                                <div class="col-lg-12">
-                                    <div class="card mb-8">
-                                        <div class="card-body">
-                                            
-                                                <h5 class="text-dark mb-8">SWM Information </h5>
-                                                
-                                                <div class="accordion accordion-light ">
-                                                    
-                                                    <div class="card ">
-                                                            
-                                                            
-                                                        <div class="card-header" id="headingOne7">
-                                                            <div class="card-title"  aria-expanded="true" role="button">
-                                                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                    <rect x="0" y="0" width="24" height="24"/>
-                                                                    <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
-                                                                </g>
-                                                                </svg></span>
-
-
-                                                                <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${event.target.vals}</div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
-                                                            <div class="card-body text-dark-50 font-size-md pl-2">
-                                                                <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
-                                                                
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <!--end::Item-->
-
-                                                </div>
-                                                <!--end::Accordion-->
-                                            
                                         </div>
-                                    </div>
-                                
+                                        
+                                        <div class="col-lg-12">
+                                            <div class="card mb-8">
+                                                <div class="card-body">
+                                                    
+                                                        <h5 class="text-dark mb-8">SWM Information </h5>
+                                                        
+                                                        <div class="accordion accordion-light ">
+                                                            
+                                                            <div class="card ">
+                                                                    
+                                                                    
+                                                                <div class="card-header" id="headingOne7">
+                                                                    <div class="card-title"  aria-expanded="true" role="button">
+                                                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                            <rect x="0" y="0" width="24" height="24"/>
+                                                                            <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
+                                                                        </g>
+                                                                        </svg></span>
 
-                                </div>
+
+                                                                        <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${event.target.vals}</div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                
+                                                                <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+                                                                    <div class="card-body text-dark-50 font-size-md pl-2">
+                                                                        <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                        
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!--end::Item-->
+
+                                                        </div>
+                                                        <!--end::Accordion-->
+                                                    
+                                                </div>
+                                            </div>
+                                        
+
+                                        </div>
                                                     `
                                     // maps
                                 
-                                $('.modal_card_div').append(modal_content);
-                                $('#popout-modal').modal('show');
+                                    $('.modal_card_div').append(modal_content);
+                                    $('#popout-modal').modal('show');
 
                                 });
                             }
