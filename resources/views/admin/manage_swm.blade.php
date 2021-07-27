@@ -145,6 +145,9 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -156,7 +159,9 @@
                             <br><span style="font-size: 11px;">WORKING HOURS : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">ADDRESS : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">ACCEPTABLE MATERIALS : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
-                            
+                            <br><span style="font-size: 11px;">FACILITY TYPE : {!! (!empty($row->facility_type)) ? $row->facility_type : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">CAPACITY : {!! (!empty($row->capacity)) ? $row->capacity : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">CAPACITY RATE: {!! (!empty($row->capacity_rate)) ? $row->capacity_rate."%" : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" hidden>
@@ -220,6 +225,9 @@
                         <td hidden>{{$row->acceptable_materials}}</td>
                         <td hidden>{{$row->working_hours_start}}</td>
                         <td hidden>{{$row->working_hours_end}}</td>
+                        <td hidden>{{$row->facility_type}}</td>
+                        <td hidden>{{$row->capacity}}</td>
+                        <td hidden>{{$row->capacity_rate}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -255,11 +263,50 @@
                             
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Acceptable Materials</label>
-                        <input type="text" class="form-control tx_acc_mat" style="text-transform: uppercase;" />
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                        
+                            <label class="form-control-label">Acceptable Materials</label>
+                            <input type="text" class="form-control tx_acc_mat" style="text-transform: uppercase;" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Facility Type</label><br>
+    
+                                <select id="sel_type" class="form-control sel_type" name="sel_type" style="width: 100%;">
+                                    <option value="Sanitary Landfills">Sanitary Landfills</option>
+                                    <option value="Dumpsites">Dumpsites</option>
+                                    <option value="Junkshops">Junkshops</option>
+                                    <option value="Materials Recovery Facility">Materials Recovery Facility</option>
+                            </select>
+                        </div>
                     </div>
-
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                            <label class="form-control-label">Capacity</label>
+                                <div class="form-group">
+														
+                                    <div class="radio-inline">
+                                        <label class="radio radio-success radio-square">
+                                        <input type="radio" checked="checked" name="rd_capacity" value="Free">
+                                        <span></span>Free</label>
+                                        <label class="radio radio-success radio-square">
+                                        <input type="radio" name="rd_capacity" value="Fully Occupied">
+                                        <span></span>Fully Occupied</label>
+                                        <label class="radio radio-square">
+                                        
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                        <div class="col-lg-6 div_c_rate">
+                            
+                            <label class="form-control-label">Capacity Rate</label>
+                            <input type="text" class="form-control tx_c_rate" style="text-transform: uppercase;" placeholder="50/80"/>
+                            
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Working Days</label>
 
@@ -330,12 +377,50 @@
                         <label class="form-control-label">Junkshop Address</label>
                         <input type="text" class="form-control tx_junkshop_adderess_e" style="text-transform: uppercase;" />
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-control-label">Acceptable Materials</label>
-                        <input type="text" class="form-control tx_acc_mat_e" style="text-transform: uppercase;" />
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                        
+                            <label class="form-control-label">Acceptable Materials</label>
+                            <input type="text" class="form-control tx_acc_mat_e" style="text-transform: uppercase;" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Facility Type</label><br>
+    
+                                <select id="sel_type_e" class="form-control sel_type_e" name="sel_type_e" style="width: 100%;">
+                                    <option value="Sanitary Landfills">Sanitary Landfills</option>
+                                    <option value="Dumpsites">Dumpsites</option>
+                                    <option value="Junkshops">Junkshops</option>
+                                    <option value="Materials Recovery Facility">Materials Recovery Facility</option>
+                            </select>
+                        </div>
                     </div>
-
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                            <label class="form-control-label">Capacity</label>
+                                <div class="form-group">
+														
+                                    <div class="radio-inline">
+                                        <label class="radio radio-success radio-square">
+                                        <input type="radio" name="rd_capacity_e" value="Free">
+                                        <span></span>Free</label>
+                                        <label class="radio radio-success radio-square">
+                                        <input type="radio" name="rd_capacity_e" value="Fully Occupied">
+                                        <span></span>Fully Occupied</label>
+                                        <label class="radio radio-square">
+                                        
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                        <div class="col-lg-6 div_c_rate_e">
+                            
+                            <label class="form-control-label">Capacity Rate</label>
+                            <input type="text" class="form-control tx_c_rate_e" style="text-transform: uppercase;" placeholder="50/80"/>
+                            
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Working Days</label>
 
@@ -411,7 +496,7 @@
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
 <!--end::Page Vendors-->
-
+<script src="{{asset('assets/js/pages/widgets.js')}}"></script>
 
 <script>
     $('#kt_datatable').DataTable();
@@ -420,6 +505,39 @@
         init_tagify('input[name=tags-manual-suggestions]');
         init_tagify('input[name=tags-manual-suggestions_e]');
     });
+
+    $('.sel_type').select2({
+         placeholder: "Select Type"
+    });
+
+    $('.sel_type_e').select2({
+         placeholder: "Select Type"
+    });
+
+    $('input[name=rd_capacity]').change(function(e){
+
+        if(e.target.value.toLowerCase() == "fully occupied") {
+            $('.tx_c_rate').val(100);
+            $( ".tx_c_rate" ).prop( "disabled", true );
+        }
+        else {
+            $('.tx_c_rate').val('');
+            $( ".tx_c_rate" ).prop( "disabled", false );
+        }
+    });
+
+    $('input[name=rd_capacity_e]').change(function(e){
+
+        if(e.target.value.toLowerCase() == "fully occupied") {
+            $('.tx_c_rate_e').val(100);
+            $( ".tx_c_rate_e" ).prop( "disabled", true );
+        }
+        else {
+            $('.tx_c_rate_e').val('');
+            $( ".tx_c_rate_e" ).prop( "disabled", false );
+        }
+    });
+
 
     function init_tagify(name) {
 
@@ -501,8 +619,17 @@
             param_5 = $(row.find("td")[9]).text(),
             param_6 = $(row.find("td")[10]).text(),
             param_7 = $(row.find("td")[11]).text(),
-            param_8 = $(row.find("td")[12]).text()
+            param_8 = $(row.find("td")[12]).text(),
+            param_9 = $(row.find("td")[13]).text(),
+            param_10 = $(row.find("td")[14]).text();
 
+            
+        (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).prop( "disabled", false ) : $( ".tx_c_rate_e" ).prop( "disabled", true );
+        (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val("") : $( ".tx_c_rate_e" ).val(100);
+
+        $("input[name=rd_capacity_e][value='"+param_10+"']").prop("checked",true);
+        //$('input[name=rd_capacity_e]').trigger('change');
+     
         $('.tx_junkshop_name_e').val(param_1);
         $('.tx_junkshop_adderess_e').val(param_2);
         $('.tx_longhitude_e').val(param_3);
@@ -510,7 +637,7 @@
         $('.tx_acc_mat_e').val(param_6);
         $('.tx_start_e').val(param_7);
         $('.tx_end_e').val(param_8);
-        
+        selectElement('sel_type_e', param_9)
 
         
         var splited = [];
@@ -547,6 +674,9 @@
         data.append("working_hours_start", $('.tx_start').val());
         data.append("working_hours_end", $('.tx_end').val());
         data.append("working_days", wd_string);
+        data.append("facility_type", $('select[name=sel_type] option:selected').val());
+        data.append("capacity", $('input[name="rd_capacity"]:checked').val());
+        data.append("capacity_rate", $('.tx_c_rate').val());
 
         
         crud_file(data, url, status, modal_id);
@@ -564,6 +694,7 @@
     }
 
     $('#update_btn').click(function() {
+        
 
 
         var wd = document.querySelector('input[name=tags-manual-suggestions_e]').value;
@@ -585,10 +716,13 @@
         data.append("working_hours_start", $('.tx_start_e').val());
         data.append("working_hours_end", $('.tx_end_e').val());
         data.append("working_days", wd_string);
+        data.append("facility_type", $('select[name=sel_type_e] option:selected').val());
+        data.append("capacity", $('input[name="rd_capacity_e"]:checked').val());
+        data.append("capacity_rate", $('.tx_c_rate_e').val());
         data.append("id", id);
 
         
-        crud_file(data, url, status, modal_id);
+       crud_file(data, url, status, modal_id);
 
     });
 

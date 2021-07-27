@@ -31,7 +31,7 @@
                     <!--end::Svg Icon-->
                 </span>
             </span>
-            <h3 class="card-label">SWM Facilities</h3>
+            <h3 class="card-label">Waste Collection Facilities</h3>
         </div>
 
     </div>

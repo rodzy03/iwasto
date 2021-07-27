@@ -17,7 +17,7 @@ class AdminController extends Controller
 {
     public function admin_dashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.analytics');
     }
 
     public function get_waste()
@@ -85,7 +85,9 @@ class AdminController extends Controller
                     , 'working_hours_start' => $request->get('working_hours_start')
                     , 'working_hours_end' => $request->get('working_hours_end')
                     , 'working_days' => $request->get('working_days')
-
+                    , 'facility_type' => $request->get('facility_type')
+                    , 'capacity' => $request->get('capacity')
+                    , 'capacity_rate' => $request->get('capacity_rate')
                 ]);
 
                 if ($request->hasFile('file')) 
@@ -167,6 +169,9 @@ class AdminController extends Controller
                 , 'working_hours_end' => $request->get('working_hours_end')
                 , 'working_days' => $request->get('working_days')
                 , 'file_name' => $file_name
+                , 'facility_type' => $request->get('facility_type')
+                , 'capacity' => $request->get('capacity')
+                , 'capacity_rate' => $request->get('capacity_rate')
             ]);
 
         }
