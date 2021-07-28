@@ -431,8 +431,8 @@ class AdminController extends Controller
     {
         
         $data = db::table('r_routes')->where('city_municipality', 'like', '%' . $city . '%')->get();
-        
-        return view('admin.public_routes',compact('data'));
+        $mobile = "true";
+        return view('admin.public_routes',compact('data','mobile'));
     }
 
     public function waste_guide()
