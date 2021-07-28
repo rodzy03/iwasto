@@ -107,12 +107,13 @@
             <!--begin::Aside-->
             <div class="aside aside-left d-flex flex-column flex-row-auto" id="kt_aside">
                 <!--begin::Aside Menu-->
-                @include('admin.public_sidenav')
+                
                 <!--end::Aside Menu-->
             </div>
             <!--end::Aside-->
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                @if(empty($mobile))
                 <!--begin::Header-->
                 <div id="kt_header" class="header header-fixed">
                     <!--begin::Container-->
@@ -213,7 +214,7 @@
                     <!--end::Container-->
                 </div>
                 <!--end::Header-->
-
+                @endif
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Entry-->
