@@ -340,13 +340,10 @@
                     <div class="d-flex flex-row-fluid bgi-size-cover bgi-position-center" style="background-image: url('{{asset('assets/media/bg/bg-8.jpg')}}')">
                         <div class="container">
                             <!--begin::Topbar-->
-                            <div class="d-flex justify-content-between align-items-center border-bottom border-white py-7">
-                                <h3 class="h4 text-dark mb-0">Help Center</h3>
                                 {{--<div class="d-flex">
 										<a href="#" class="font-size-h6 font-weight-bold">Community</a>
 										<a href="#" class="font-size-h6 font-weight-bold ml-8">Visit Blog</a>
 									</div>--}}
-                            </div>
                             <!--end::Topbar-->
                             <div class="d-flex align-items-stretch text-center flex-column py-40">
                                 <!--begin::Heading-->
@@ -376,10 +373,7 @@
                                         <!-- kt_typeahead_3 search_swm -->
 
                                         <!-- <input type="text" class="form-control h-auto border-0 py-7 px-1 font-size-h6"  id="search_swm" /> -->
-
-
-
-                                        <input class="typeahead form-control h-auto py-5 px-1;" id="search_swm" type="text" dir="ltr" placeholder="Search Waste" autocomplete="off" spellcheck="false" style="width:300px; border-radius: 0.20rem; font-size:large; color:#5e7a66">
+                                        <input class="typeahead form-control h-auto py-5 px-1;" id="search_swm" type="text" dir="ltr" placeholder="Search Waste" autocomplete="off" spellcheck="false" style="width:280px; border-radius: 0.20rem; font-size:large; color:#5e7a66">
 
 
                                     </div>
@@ -533,16 +527,8 @@
                     <!--begin::Container-->
                     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
                         <!--begin::Copyright-->
-                        <div class="text-dark order-2 order-md-1">
-                            <span class="text-mutes font-weight-bold mr-2">2021©</span>
-                            <a href="https://iwasto.ph" target="_blank" class="text-dark-75 text-hover-primary">Iwasto</a>
-                        </div>
                         <!--end::Copyright-->
                         <!--begin::Nav-->
-                        <div class="nav nav-dark order-1 order-md-2">
-                            <a target="_blank" class="nav-link pr-3 pl-0">About</a>
-                            <a target="_blank" class="nav-link px-3">Team</a>
-                            <a target="_blank" class="nav-link pl-3 pr-0">Contact</a>
                         </div>
                         <!--end::Nav-->
                     </div>

@@ -29,6 +29,10 @@
             padding-bottom: 12px;
             padding-left: 12px;
         }
+@media (max-width: 991.98px)
+.header-mobile-fixed .header-mobile {
+display:none;
+}
 
         /* .panel-float {
             
@@ -73,7 +77,7 @@
 <body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed aside-enabled aside-static page-loading">
     <!--begin::Main-->
     <!--begin::Header Mobile-->
-    <div id="kt_header_mobile" class="header-mobile header-mobile-fixed">
+    <div id="kt_header_mobile" class="header-mobile header-mobile-fixed" style="display:none;">
         <!--begin::Logo-->
         <a href="index.html">
             <img alt="Logo" src="{{asset('uploads/logo_green.png')}}" class="logo-default max-h-30px" />
