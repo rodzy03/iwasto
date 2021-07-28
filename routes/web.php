@@ -17,6 +17,8 @@ Route::get('/', function() {
       return redirect()->intended(route('login'));
   });
 // Mobile routes
+Route::get('/mobile/routes/{city}','AdminController@mobile_routes')->name('mobile_routes');
+
 Route::post('/get-zipcodes','MobileController@get_zipcodes')->name('get-zipcodes');
 Route::post('/get-barangays','MobileController@get_barangays')->name('get-barangays');
 Route::post('/register-mobile','MobileController@register_user')->name('register-mobile');
@@ -72,6 +74,8 @@ Route::post('/update/swm_location','MobileController@update_swm_location');
 Route::post('/get_nearby','MobileController@get_nearby');
 
 Route::get('/swm/facilities','AdminController@swm_facilities')->name('swm_facilities');
+Route::get('collection/routes','AdminController@routes')->name('routes');
+
 Route::get('/swm/waste/guide','AdminController@waste_guide')->name('waste_guide');
 
 Route::get('/waste/return','AdminController@return_waste')->name('return_waste');

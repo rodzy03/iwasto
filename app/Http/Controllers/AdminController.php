@@ -420,6 +420,21 @@ class AdminController extends Controller
         return view('admin.public_swm');
     }
 
+    public function routes()
+    {
+        
+        $data = db::table('r_routes')->get();
+        return view('admin.public_routes',compact('data'));
+    }
+
+    public function mobile_routes($city)
+    {
+        
+        $data = db::table('r_routes')->where('city_municipality', 'like', '%' . $city . '%')->get();
+        
+        return view('admin.public_routes',compact('data'));
+    }
+
     public function waste_guide()
     {
         

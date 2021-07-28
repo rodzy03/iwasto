@@ -21,8 +21,8 @@
                 </a>
             </li>
 
-            <li class="menu-item " aria-haspopup="true">
-                <a href="#" class="menu-link">
+            <li class="menu-item {{ (Route::currentRouteName() == 'routes') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{route('routes')}}" class="menu-link">
 
 
                     <span class="svg-icon menu-icon">
@@ -35,7 +35,7 @@
                         <!--end::Svg Icon-->
                     </span>
 
-                    <span class="menu-text">Collection Calendar</span>
+                    <span class="menu-text">Collection Routes</span>
                 </a>
             </li>
 
