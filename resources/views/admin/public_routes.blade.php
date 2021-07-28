@@ -101,6 +101,7 @@
         <!--end::Toolbar-->
     </div>
     <!--end::Header Mobile-->
+    
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
         <div class="d-flex flex-row flex-column-fluid page">
@@ -108,13 +109,15 @@
             <div class="aside aside-left d-flex flex-column flex-row-auto" id="kt_aside">
                 <!--begin::Aside Menu-->
                 
+                    @include('admin.public_sidenav')
+                
                 <!--end::Aside Menu-->
             </div>
             <!--end::Aside-->
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-                @if(empty($mobile))
                 <!--begin::Header-->
+                @if(empty($mobile))
                 <div id="kt_header" class="header header-fixed">
                     <!--begin::Container-->
                     <div class="container d-flex align-items-stretch justify-content-between">
@@ -331,7 +334,7 @@
         <!--end::Page-->
     </div>
     <!--end::Main-->
-
+    
     <!--begin::Body-->
 
     <!--begin::Scrolltop-->
