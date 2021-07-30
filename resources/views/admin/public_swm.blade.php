@@ -22,6 +22,18 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
 
     <style>
+      .mapbox-logo {
+            display: none;
+        }
+
+        .mapboxgl-ctrl-logo {
+            display: none !important;
+        }
+
+        .mapbox-improve-map {
+            display: none;
+        }
+        
         .card-block {
             padding: 12px;
             padding-top: 12px;
