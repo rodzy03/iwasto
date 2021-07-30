@@ -107,7 +107,8 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::post('/crud_routes','AdminController@crud_routes')->name('crud_routes');
             Route::post('/crud_swm','AdminController@crud_swm')->name('crud_swm');
 
-
+            Route::post('/crud_waste_composition','AdminController@crud_waste_composition')->name('crud_waste_composition');
+            Route::post('/crud_waste_data','AdminController@crud_waste_data')->name('crud_waste_data');
             
             
             Route::get('/swm','AdminController@swm')->name('swm');
@@ -144,7 +145,16 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             Route::post('/crud_collection','AdminController@crud_collection')->name('crud_collection');
             
             Route::post('/crud_guide','AdminController@crud_guide')->name('crud_guide');
-		});
+
+            
+            Route::get('/waste/composition','AdminController@get_waste_composition')->name('get_waste_composition');
+            
+            Route::get('/waste/data','AdminController@get_waste_data')->name('get_waste_data');
+
+            
+            Route::post('/search_waste_data','AdminController@search_waste_data')->name('search_waste_data');
+            
+      });
 	});
 
 });

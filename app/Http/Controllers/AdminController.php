@@ -39,6 +39,98 @@ class AdminController extends Controller
         return view('admin.manage_routes', compact('data', 'region'));
     }
 
+    public function get_waste_composition()
+    {
+        // $data = db::table('r_waste_composition as wd')
+        // ->join('r_segregate_type as st','wd.waste_type','st.segregate_type_id')->get();
+        $city = db::table('r_citymun')->get();
+        $type = db::table('r_segregate_type')->get();
+
+        $data = db::table("v_get_waste_comp")->get();
+
+        
+        return view('admin.manage_waste_composition', compact('data','city','type'));
+    }
+
+    public function search_waste_data(Request $request)
+    {
+        $compo = db::table('r_waste_composition')->where('city',$request->city)
+        ->where('waste_type',$request->waste_type)->count();
+
+        if($compo > 0) {
+            $data = db::table('r_waste_composition')->where('city',$request->city)->where('waste_type',$request->waste_type)->get();
+        }
+        else {
+            
+            $data = db::table('r_waste_data')->where('city',$request->city)->get();
+        }
+        
+        return response()->json(['result' => $data, 'is_null' => $compo]);
+        
+    }
+
+    public function get_waste_data()
+    {
+        $data = db::table('r_waste_data')->get();
+        $city = db::table('r_citymun')->get();
+        
+
+        return view('admin.manage_waste_data', compact('data','city'));
+    }
+
+    public function crud_waste_data(Request $request)
+    {
+        if ($request->get('status') == "add") {
+            db::table('r_waste_data')
+                ->insert([
+                    'city' => $request->city
+                    , 'gen_kg_day' => $request->gen_kg_day
+                    , 'psa_population' => $request->psa_population
+                    , 'per_capita_kg_day' => $request->per_capita_kg_day
+                    , 'mrf_kg_day' => $request->mrf_kg_day
+                    , 'diversion_rate' => $request->diversion_rate
+                    , 'landfill' => $request->landfill
+                    , 'disposed' => $request->disposed
+                ]);
+        }
+        else if($request->get('status') == "normal") {
+            db::table('r_waste_data')->where('waste_data_id',$request->get('id'))
+            ->update([
+                'city' => $request->city
+                , 'gen_kg_day' => $request->gen_kg_day
+                , 'psa_population' => $request->psa_population
+                , 'per_capita_kg_day' => $request->per_capita_kg_day
+                , 'mrf_kg_day' => $request->mrf_kg_day
+                , 'diversion_rate' => $request->diversion_rate
+                , 'landfill' => $request->landfill
+                , 'disposed' => $request->disposed
+            ]);
+        }
+        
+    }
+    public function crud_waste_composition(Request $request)
+    {
+        if ($request->get('status') == "add") {
+            db::table('r_waste_composition')
+                ->insert([
+                    'city' => $request->city
+                    , 'waste_type' => $request->waste_type
+                    , 'percentage' => $request->percentage
+                    , 'total_kg' => $request->total_kg
+                ]);
+        }
+        else if($request->get('status') == "normal") {
+            db::table('r_waste_composition')->where('waste_composition_id',$request->get('id'))
+            ->update([
+                'city' => $request->city
+                , 'waste_type' => $request->waste_type
+                , 'percentage' => $request->percentage
+                , 'total_kg' => $request->total_kg
+            ]);
+        }
+        
+    }
+
     public function provinces(Request $request)
     {
         $params = $request->get('params');
@@ -278,6 +370,7 @@ class AdminController extends Controller
         return view('admin.manage_verification', compact('data','typeofview'));
     }
 
+    
     public function citizen_patrol($typeofview)
     {
         if($typeofview == "pending")
