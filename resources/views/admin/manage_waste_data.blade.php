@@ -71,6 +71,10 @@
                        <th hidden></th>
                        <th hidden></th>
                        <th hidden></th>
+                       <th hidden></th>
+                       <th hidden></th>
+                       <th hidden></th>
+                       <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,9 +112,13 @@
                             </a>
                         </td>
                         <td hidden>{{$row->city}}</td>
-                        <td hidden></td>
-                        <td hidden></td>
-                        <td hidden></td>
+                        <td hidden>{{$row->psa_population}}</td>
+                        <td hidden>{{$row->gen_kg_day}}</td>
+                        <td hidden>{{$row->per_capita_kg_day}}</td>
+                        <td hidden>{{$row->mrf_kg_day}}</td>
+                        <td hidden>{{$row->diversion_rate}}</td>
+                        <td hidden>{{$row->landfill}}</td>
+                        <td hidden>{{$row->disposed}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -213,13 +221,38 @@
 
                
                 <div class="form-group">
-                    <label class="form-control-label">&nbsp;Percent</label>
-                    <input id="tx_percent_e" class="form-control tx_percent_e" type="number" />
+                    <label class="form-control-label">&nbsp;Population Projection Based on PSA 2020</label>
+                    <input class="form-control tx_psa_e" type="number" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label">&nbsp;Total (kg/day)</label>
-                    <input id="tx_kgday_e" class="form-control tx_kgday_e" type="number" />
+                    <label class="form-control-label">&nbsp;Waste Generation (kg/day)</label>
+                    <input class="form-control tx_w_gen_e" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label">&nbsp;Per Capita Waste Generation (kg/day)</label>
+                    <input class="form-control tx_w_capita_e" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label">&nbsp;Diverted Waste to MRF (kg/day)</label>
+                    <input class="form-control tx_w_mrf_e" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label">&nbsp;Waste Diversion Rate (%)</label>
+                    <input class="form-control tx_w_diver_e" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label">&nbsp;Waste Disposed in Landfill (kg/day)</label>
+                    <input class="form-control tx_w_land_e" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label">&nbsp;Waste Disposed % </label>
+                    <input class="form-control tx_w_dis_e" type="number" />
                 </div>
 
             </div>
@@ -231,7 +264,6 @@
     </div>
 </div>
 <!--end::Modal-->
-
 @section('extra-js')
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
@@ -278,17 +310,26 @@
 
         id = $(this).attr('vals');
         let row = $(this).closest("tr");
-        city = $(row.find("td")[5]).text();
-        waste_type = $(row.find("td")[6]).text();
-        percentage = $(row.find("td")[7]).text();
-        total_kg = $(row.find("td")[8]).text();
+        city = $(row.find("td")[2]).text();
+        psa_population = $(row.find("td")[3]).text();
+        gen_kg_day = $(row.find("td")[4]).text();
+        per_capita_kg_day = $(row.find("td")[5]).text();
+        mrf_kg_day = $(row.find("td")[6]).text();
+        diversion_rate = $(row.find("td")[7]).text();
+        landfill = $(row.find("td")[8]).text();
+        disposed = $(row.find("td")[9]).text();
+        
 
-        $('.tx_percent_e').val(percentage)
-        $('.tx_kgday_e').val(total_kg)
-        
-        
+
+        $('.tx_psa_e').val(psa_population)
+        $('.tx_w_gen_e').val(gen_kg_day)
+        $('.tx_w_capita_e').val(per_capita_kg_day)
+        $('.tx_w_mrf_e').val(mrf_kg_day)
+        $('.tx_w_diver_e').val(diversion_rate)
+        $('.tx_w_land_e').val(landfill)
+        $('.tx_w_dis_e').val(disposed)
+       
         selectElement('sel_muni_e', city)
-        selectElement('sel_waste_e', waste_type)
 
     });
 
@@ -313,22 +354,31 @@
     $('#update_btn').click(function() {
 
         
-        city_muni = $('select[name=sel_muni_e] option:selected').val();
-        type = $('select[name=sel_waste_e] option:selected').val();
-        percent = $('.tx_percent_e').val();
-        kgday = $('.tx_kgday_e').val();
+        sel_muni_a = $('select[name=sel_muni_e] option:selected').val();
+        tx_psa = $('.tx_psa_e').val();
+        tx_w_gen = $('.tx_w_gen_e').val();
+        tx_w_capita = $('.tx_w_capita_e').val();
+        tx_w_mrf = $('.tx_w_mrf_e').val();
+        tx_w_diver = $('.tx_w_diver_e').val();
+        tx_w_land = $('.tx_w_land_e').val();
+        tx_w_dis = $('.tx_w_dis_e').val();
+        
 
-        url = "{{route('crud_waste_composition')}}";
+        url = "{{route('crud_waste_data')}}";
         status = "normal";
         modal_id = "modal-edit";
         data = {
             _token: "{{csrf_token()}}",
-            city: city_muni,
-            waste_type: type,
-            percentage: percent,
-            total_kg: kgday,
+            city: sel_muni_a,
+            gen_kg_day: tx_w_gen,
+            psa_population: tx_psa,
+            per_capita_kg_day: tx_w_capita,
+            mrf_kg_day:tx_w_mrf,
+            diversion_rate: tx_w_diver,
+            landfill: tx_w_land,
+            disposed:tx_w_dis,
             status:status,
-            id: id
+            id:id
         };
 
 

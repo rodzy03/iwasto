@@ -59,14 +59,14 @@
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left text-uppercase">
-                        <th style="min-width: 100%px" class="pl-7">
+                        <th style="min-width: 150px" class="pl-7">
                             <span class="text-dark-75">city municipality</span>
                         </th>
                         
                         <th style="min-width: 100%;">
                             <span class="text-dark-75">Biodegradable</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 100%;">
                             <span class="text-dark-75">%</span>
                         </th>
 
@@ -123,33 +123,33 @@
 
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->recyclable_p}}</span>
+                            <span class="text-dark-75" >{{$row->recyclable_p}}</span>
                         </td>
 
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->residual}}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{$row->residual}}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" >
-                            <span class="text-dark-75" style="font-weight: bold;">{{$row->residual_p}}</span>
+                            <span class="text-dark-75" >{{$row->residual_p}}</span>
                             
                         </td>
 
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->special}}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{$row->special}}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" >
-                            <span class="text-dark-75" style="font-weight: bold;">{{$row->special_p}}</span>
+                            <span class="text-dark-75" >{{$row->special_p}}</span>
                             
                         </td>
                        
 
                         <td style="text-transform:uppercase;">
 
-                            <span class="text-dark-75">{{$row->total_kg}}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{$row->total_kg}}</span>
                         </td>
                        
                         <td class="pr-0 text-left" hidden>
