@@ -108,6 +108,13 @@ class AdminController extends Controller
         }
         
     }
+    public function swm_filter(Request $request)
+    {
+        $value = $request->filter;
+        $data = db::table('v_get_all_swm')->where(strtolower('facility_type'), strtolower($value))->get();
+        return response()->json(['result' => $data]);
+    }
+
     public function crud_waste_composition(Request $request)
     {
         if ($request->get('status') == "add") {

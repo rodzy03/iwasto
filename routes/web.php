@@ -90,6 +90,7 @@ Route::post('/crud_waste_data','AdminController@crud_waste_data')->name('crud_wa
 Route::get('/waste/composition','AdminController@get_waste_composition')->name('get_waste_composition');
 Route::get('/waste/data','AdminController@get_waste_data')->name('get_waste_data');
 
+Route::post('/swm_filter','AdminController@swm_filter')->name('swm_filter');
 
 Route::group(['middleware' => ['validateBackHistory']], function () {
 

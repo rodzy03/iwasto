@@ -190,6 +190,7 @@
                                 <div class="card-body d-flex justify-content-center flex-column col-lg-6 px-8 py-20 px-lg-20 py-lg-40">
                                     <!--begin::Heading-->
                                     <h2 class="text-dark font-weight-bolder mb-8"> Waste Collection Facilities</h2>
+                                    
                                     <!--end::Heading-->
                                     <!--begin::Form-->
                                     <div class="d-flex position-relative flex-row-fluid">
@@ -292,18 +293,38 @@
 
 
                                 
-                            <div class="row" data-sticky-container="" >
+                            <div data-sticky-container="" >
 									
-									<div class="col-lg-12 col-xl-12">
+								<div class="col-lg-12 ">
 									<div class="card card-custom gutter-b example example-compact">
 										<div class="card-header">
-											<div class="card-title">
-												<h3 class="card-label">Waste Facilities Map
-												</h3>
-                                                <h3 class="value">
-												</h3>
-                                                
-											</div>
+											
+                                            <div class="form-group" style="text-align: left; margin-top:15px">
+                                                    <label>Choose Filter</label>
+                                                    <div class="checkbox-inline">
+                                                        <label class="checkbox checkbox-square checkbox-success">
+                                                        <input class="filter_checkbox" type="checkbox" value="sanitary landfills">
+                                                        <span></span>Sanitary Landfill</label>
+
+                                                        <label class="checkbox checkbox-square checkbox-success">
+                                                        <input class="filter_checkbox" type="checkbox" value="dumpsites">
+                                                        <span></span>Dumpsites</label>
+
+                                                        <label class="checkbox checkbox-square checkbox-success">
+                                                        <input class="filter_checkbox" type="checkbox" value="junkshops">
+                                                        <span></span>Junkshops</label>
+
+                                                        <label class="checkbox checkbox-square checkbox-success">
+                                                        <input class="filter_checkbox" type="checkbox" value="materials recovery facility">
+                                                        <span></span>Materials Recovery Facility</label>
+
+                                                        <div class="spinner spinner-primary spinner-left div_loading" style="display: none;">
+                                                            
+                                                        </div>
+
+                                                    </div>
+                                                    
+                                                </div>		
 											{{--<div class="card-toolbar">
 												<div class="example-tools justify-content-center">
 													<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
@@ -318,8 +339,8 @@
 										</div>
 									</div>
 								</div>
-									
-								</div>
+                                
+							</div>
                             <!--end::Section-->
                             
 
@@ -416,7 +437,230 @@
         map.addControl(new mapboxgl.NavigationControl());
         var markerElement;
         get_locations();
+        $('.filter_checkbox').change(function() {
+            
+            $('input:checkbox.filter_checkbox:checked').each(function() {
+                var filter_value = $(this).attr('value');
 
+                if (filter_value == "sanitary landfills") {
+                    get_filter(filter_value);
+                } else if (filter_value == "dumpsites") {
+                    get_filter(filter_value);
+                } else if (filter_value == "junkshops") {
+                    get_filter(filter_value);
+                } else if (filter_value == "materials recovery facility") {
+                    get_filter(filter_value);
+                }
+            });
+
+            $('input:checkbox.filter_checkbox:not(:checked)').each(function() {
+
+                $('.div_loading').show();
+                var filter_value = $(this).attr('value');
+
+                if (filter_value == "sanitary landfills") {
+                    $('.marker').remove();
+                } else if (filter_value == "dumpsites") {
+                    $('.marker').remove();
+                } else if (filter_value == "junkshops") {
+                    $('.marker').remove();
+                } else if (filter_value == "materials recovery facility") {
+                    $('.marker').remove();
+                }
+
+                setTimeout(function() {
+                    $('.div_loading').hide();
+                }, 1000)
+                
+            });
+        });
+        
+
+        function get_filter(filter) {
+
+            $('.div_loading').show();
+            KTApp.blockPage({
+                    overlayColor: '#000000',
+                    state: 'danger',
+                    message: 'Please wait...'
+                });
+
+                setTimeout(function() {
+                    KTApp.unblockPage();
+                }, 1000);
+
+                setTimeout(function() {
+                    $.ajax({
+
+                        url: "{{route('swm_filter')}}",
+                        method: "post",
+                        data: {
+                            _token: "{{csrf_token()}}",
+                            filter: filter
+                        },
+                        success: function(response) {
+
+                            var len = response['result'].length;
+                            
+                            if (len > 0) 
+                            {
+                                
+
+                                for (var j = 0; j < len; j++) 
+                                {
+                                    var unordered = response['result'][j]['working_days'].split(',');
+                                    var wd_display = "";
+                                    u_len = unordered.length;
+
+                                    var ordered = [];
+                                    for (var i = 0; i < u_len; i++) 
+                                    {
+
+                                        obj = {}; // <----- new Object
+                                        obj['day'] = unordered[i];
+                                        ordered.push(obj);
+
+                                    }
+
+                                    ordered = sort_days(ordered);
+                                    groupLength = ordered.length;
+
+                                    for (var y = 0; y < u_len; y++) {
+                                        var item = ordered[y]['day'];
+                                        ((y + 1) == (groupLength)) ? wd_display += item: wd_display += item + " , ";
+                                    }
+                                    // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
+
+                                    j_address = response['result'][j]['junkshop_address'];
+                                    j_name = response['result'][j]['junkshop_name'];
+                                    j_a_mat = response['result'][j]['acceptable_materials'];
+                                    j_hours = response['result'][j]['working_hours'];
+                                    j_type = response['result'][j]['facility_type'];
+                                    j_capacity = response['result'][j]['capacity'];
+                                    j_capacity_r = response['result'][j]['capacity_rate'];
+
+
+
+                                    markerElement = document.createElement('div')
+                                    markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
+                                    markerElement.id = response['result'][j]['swm_location_id']
+
+                                    markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
+                                    markerElement.style.backgroundSize = 'cover'
+                                    markerElement.style.width = '50px'
+                                    markerElement.style.height = '50px'
+                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                    markerElement.vals = `${j_name}`;
+                                    markerElement.profile = `${response['result'][j]['file_name']}`;
+
+                                    const content = `
+                  
+                  
+                                        <div style="text-align:left;">&nbsp;
+                                        <center>
+                                        <img  src="{{asset('uploads/junkshops/resize')}}/${response['result'][j]['file_name']}" />
+                                        </center>
+                                            <div class="card-block">
+                                            <p style="text-transform:uppercase; color:#94cc7e; font-weight: bold; font-size: 13px; text-align:center">${j_name}</p>
+                                            <hr style="height: 1px; background-color: gray;">
+                                            <p class="card-text" style="font-size:10px; text-transform:uppercase;">
+                                            <b>LOCATION : </b>${j_address}
+                                            <br><b>WORKING DAYS : </b><br>${wd_display}
+                                            <br><b>WORKING HOURS : </b>${j_hours}
+                                            <br><b>ACCEPTABLE MATERIALS : </b>${j_a_mat}
+                                            
+                                            </p>
+                                            </div>
+                                        </div>
+
+                                        `;
+
+
+
+                                    
+
+
+                                    new mapboxgl.Marker(markerElement)
+                                        .setLngLat([
+                                            response['result'][j]['longhitude'], response['result'][j]['latitude']
+                                        ])
+                                        // .setPopup(popUp)
+                                        .addTo(map);
+
+                                    markerElement.addEventListener('click', (event) => { 
+                                        var swm_id = event.target.id;
+                                        $('.modal_card_div').empty();
+                                        const modal_content = `<div class="form-group">
+                                        
+                                        <img id="valid_id" src="{{asset('uploads/junkshops/normal_size')}}/${event.target.profile}" alt="NO IMAGE FOUND" width="100%" height="auto">
+                                            </div>
+                                            
+                                            <div class="col-lg-12">
+                                                <div class="card mb-8">
+                                                    <div class="card-body">
+                                                        
+                                                            <h5 class="text-dark mb-8">SWM Information </h5>
+                                                            
+                                                            <div class="accordion accordion-light ">
+                                                                
+                                                                <div class="card ">
+                                                                        
+                                                                        
+                                                                    <div class="card-header" id="headingOne7">
+                                                                        <div class="card-title"  aria-expanded="true" role="button">
+                                                                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                                <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
+                                                                            </g>
+                                                                            </svg></span>
+
+
+                                                                            <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${event.target.vals}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+                                                                        <div class="card-body text-dark-50 font-size-md pl-2">
+                                                                            <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                                <!--end::Item-->
+
+                                                            </div>
+                                                            <!--end::Accordion-->
+                                                        
+                                                    </div>
+                                                </div>
+                                            
+
+                                            </div>
+                                                        `
+                                        // maps
+                                    
+                                        $('.modal_card_div').append(modal_content);
+                                        $('#popout-modal').modal('show');
+
+                                    });
+                                }
+
+                            } 
+
+                            $('.div_loading').hide();
+
+                        },
+                        error: function(error) {
+                            console.log(error)
+                        }
+                    });
+                }, 1000);
+        }
         $('#search_swm').keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
 
