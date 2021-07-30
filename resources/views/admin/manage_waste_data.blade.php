@@ -59,11 +59,31 @@
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left text-uppercase">
-                        <th style="min-width: 100%" class="pl-7">
+                        <th style="min-width: 100%">
                             <span class="text-dark-75">Waste Data Information</span>
                         </th>
-                       
-                       
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Waste Generation (kg/day)</span>
+                        </th>
+                        <th style="min-width: 100%" >
+                            <span class="text-dark-75">Population Projection Based on PSA 2020</span>
+                        </th>
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Per Capita Waste Generation</span>
+                        </th>
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Diverted Waste to MRF (kg/day)</span>
+                        </th>
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Waste Diversion Rate (%) </span>
+                        </th>
+                        
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Waste Disposed in Landfill (kg/day)</span>
+                        </th>
+                        <th style="min-width: 100%" class="text-dark-75">
+                            <span class="text-dark-75">Waste Disposed % </span>
+                        </th>
                         <th style="min-width: 100%" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
@@ -75,6 +95,8 @@
                        <th hidden></th>
                        <th hidden></th>
                        <th hidden></th>
+
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -83,20 +105,33 @@
                        
                         <td style="text-transform:uppercase;" >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->city}}</span>
-                            <br><span style="font-size: 11px;">Population Projection Based on PSA 2020 : {!! (!empty($row->psa_population)) ? $row->psa_population  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Waste Generation (kg/day) : {!! (!empty($row->gen_kg_day)) ? $row->gen_kg_day  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Per Capita Waste Generation (kg/day) : {!! (!empty($row->per_capita_kg_day)) ? $row->per_capita_kg_day  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Diverted Waste to MRF (kg/day) : {!! (!empty($row->mrf_kg_day)) ? $row->mrf_kg_day  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Waste Diversion Rate (%) : {!! (!empty($row->diversion_rate)) ? $row->diversion_rate  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Waste Disposed in Landfill (kg/day) : {!! (!empty($row->landfill)) ? $row->landfill  : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Waste Disposed % : {!! (!empty($row->disposed)) ? $row->disposed  : "N/A" !!}</span>
-
-
-
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->gen_kg_day}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->psa_population}}</span>
                         </td>
 
-                      
-                       
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->per_capita_kg_day}}</span>
+                        </td>
+
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->mrf_kg_day}}</span>
+                        </td>
+
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->diversion_rate}}</span>
+                        </td>
+
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->landfill}}</span>
+                        </td>
+
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75" >{{$row->disposed}}</span>
+                        </td>
                         <td class="pr-0 text-left">
                             <a id=edit vals="{{$row->waste_data_id}}" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
@@ -119,6 +154,7 @@
                         <td hidden>{{$row->diversion_rate}}</td>
                         <td hidden>{{$row->landfill}}</td>
                         <td hidden>{{$row->disposed}}</td>
+                        
                     </tr>
                     @endforeach
                 </tbody>
@@ -310,14 +346,14 @@
 
         id = $(this).attr('vals');
         let row = $(this).closest("tr");
-        city = $(row.find("td")[2]).text();
-        psa_population = $(row.find("td")[3]).text();
-        gen_kg_day = $(row.find("td")[4]).text();
-        per_capita_kg_day = $(row.find("td")[5]).text();
-        mrf_kg_day = $(row.find("td")[6]).text();
-        diversion_rate = $(row.find("td")[7]).text();
-        landfill = $(row.find("td")[8]).text();
-        disposed = $(row.find("td")[9]).text();
+        city = $(row.find("td")[9]).text();
+        psa_population = $(row.find("td")[10]).text();
+        gen_kg_day = $(row.find("td")[11]).text();
+        per_capita_kg_day = $(row.find("td")[12]).text();
+        mrf_kg_day = $(row.find("td")[13]).text();
+        diversion_rate = $(row.find("td")[14]).text();
+        landfill = $(row.find("td")[15]).text();
+        disposed = $(row.find("td")[16]).text();
         
 
 

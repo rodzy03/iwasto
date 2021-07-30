@@ -7,7 +7,7 @@
 
 
     <meta charset="utf-8" />
-    <title>IWasto | @yield('title')</title>
+    <title>IWasto | Swm Facilities</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
