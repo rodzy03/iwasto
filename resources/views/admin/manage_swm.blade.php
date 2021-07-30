@@ -303,7 +303,7 @@
                         <div class="col-lg-6 div_c_rate">
                             
                             <label class="form-control-label">Capacity Rate</label>
-                            <input type="text" class="form-control tx_c_rate" style="text-transform: uppercase;" placeholder="50/80"/>
+                            <input type="text" class="form-control tx_c_rate" style="text-transform: uppercase;" placeholder="50%"/>
                             
                         </div>
                     </div>
@@ -519,10 +519,13 @@
         if(e.target.value.toLowerCase() == "fully occupied") {
             $('.tx_c_rate').val(100);
             $( ".tx_c_rate" ).prop( "disabled", true );
+            
+            
         }
         else {
             $('.tx_c_rate').val('');
             $( ".tx_c_rate" ).prop( "disabled", false );
+            $( ".tx_c_rate" ).attr( "placeholder", "50%" );
         }
     });
 
@@ -535,6 +538,7 @@
         else {
             $('.tx_c_rate_e').val('');
             $( ".tx_c_rate_e" ).prop( "disabled", false );
+            $( ".tx_c_rate_e" ).attr( "placeholder", "50%" );
         }
     });
 
