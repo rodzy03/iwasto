@@ -30,6 +30,14 @@
             padding-left: 12px;
         }
 
+        
+        #menu {
+            position: absolute;
+            background: #fff;
+            padding: 10px;
+            
+            z-index: 1;
+        }
         /* .panel-float {
             
             
@@ -332,10 +340,45 @@
 												</div>
 											</div>--}}
 										</div>
+                                        
 										<div class="card-body">
-											
-                                        <div id='map' style='height: 700px; margin-top:-15px; '></div>
-										
+                                        
+                                        
+                                        
+                                        <div id='map' style='height: 800px; margin-top:-15px; '>
+                                        <div id="menu">
+                                                
+                                                
+														
+                                                <div class="radio-inline">
+                                                    <label class="radio radio-square radio-success">
+                                                    <input id="satellite-v9" type="radio" name="rtoggle" class="rtoggle" value="satellite" checked="checked">
+                                                    <span></span>Satellite</label>
+
+                                                    <label class="radio radio-square radio-success">
+                                                    <input id="streets-v11" type="radio" name="rtoggle" class="rtoggle" value="dark">
+                                                    <span></span>Streets</label>
+
+                                                    <label class="radio radio-square radio-success">
+                                                    <input id="outdoors-v11" type="radio" name="rtoggle" class="rtoggle" value="dark">
+                                                    <span></span>Outdoors</label>
+
+                                                    <label class="radio radio-square radio-success">
+                                                    <input id="light-v10" type="radio" name="rtoggle" class="rtoggle" value="dark">
+                                                    <span></span>Light</label>
+
+                                                    <label class="radio radio-square radio-success">
+                                                    <input id="dark-v10" type="radio" name="rtoggle" class="rtoggle" value="dark">
+                                                    <span></span>Dark</label>
+
+
+                                                   
+                                                </div>
+                                                
+													
+                                        </div>
+                                        </div>
+                                        
 										</div>
 									</div>
 								</div>
@@ -428,7 +471,7 @@
             container: 'map',
             center: default_location,
             zoom: 12,
-            style: 'mapbox://styles/rodzy03/ckqvmvj271rvu17pn63lnpqfs',
+            style: 'mapbox://styles/mapbox/satellite-v9',
             attributionControl: true
 
         });
@@ -437,6 +480,12 @@
         map.addControl(new mapboxgl.NavigationControl());
         var markerElement;
         get_locations();
+
+        $('.rtoggle').change(function(e) {
+            layerId = e.target.id;
+            map.setStyle('mapbox://styles/mapbox/' + layerId);
+        });
+        
         $('.filter_checkbox').change(function() {
             
             $('input:checkbox.filter_checkbox:checked').each(function() {
