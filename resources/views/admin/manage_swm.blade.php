@@ -303,7 +303,7 @@
                         <div class="col-lg-6 div_c_rate">
                             
                             <label class="form-control-label">Capacity Rate</label>
-                            <input type="nummber" class="form-control tx_c_rate" style="text-transform: uppercase;" placeholder="50%"/>
+                            <input type="number" class="form-control tx_c_rate" style="text-transform: uppercase;" placeholder="50%"/>
                             
                         </div>
                     </div>
