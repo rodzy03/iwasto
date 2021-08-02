@@ -39,6 +39,18 @@ class AdminController extends Controller
         return view('admin.manage_routes', compact('data', 'region'));
     }
 
+    public function pv_waste_composition()
+    {
+        // $data = db::table('r_waste_composition as wd')
+        // ->join('r_segregate_type as st','wd.waste_type','st.segregate_type_id')->get();
+        $city = db::table('r_citymun')->get();
+        $type = db::table('r_segregate_type')->get();
+        $data = db::table("v_get_waste_comp")->get();
+        $is_public = "yes";
+        
+        return view('admin.manage_waste_composition', compact('data','city','type','is_public'));
+    }
+
     public function get_waste_composition()
     {
         // $data = db::table('r_waste_composition as wd')
@@ -78,6 +90,16 @@ class AdminController extends Controller
         return view('admin.manage_waste_data', compact('data','city'));
     }
 
+    public function pv_waste_data()
+    {
+        $data = db::table('r_waste_data')->get();
+        $city = db::table('r_citymun')->get();
+        $is_public = "yes";
+
+        return view('admin.manage_waste_data', compact('data','city','is_public'));
+    }
+
+
     public function crud_waste_data(Request $request)
     {
         if ($request->get('status') == "add") {
@@ -108,6 +130,7 @@ class AdminController extends Controller
         }
         
     }
+
     public function swm_filter(Request $request)
     {
         $value = $request->filter;

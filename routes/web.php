@@ -85,10 +85,9 @@ Route::post('/search/waste/facilities','AdminController@search_waste_facility')-
 
 Route::post('/get_swm','AdminController@get_swm')->name('get_swm');
 
-Route::post('/crud_waste_composition','AdminController@crud_waste_composition')->name('crud_waste_composition');
-Route::post('/crud_waste_data','AdminController@crud_waste_data')->name('crud_waste_data');
-Route::get('/waste/composition','AdminController@get_waste_composition')->name('get_waste_composition');
-Route::get('/waste/data','AdminController@get_waste_data')->name('get_waste_data');
+
+Route::get('/waste/composition','AdminController@pv_waste_composition')->name('pv_waste_composition');
+Route::get('/waste/data','AdminController@pv_waste_data')->name('pv_waste_data');
 
 Route::post('/swm_filter','AdminController@swm_filter')->name('swm_filter');
 
@@ -97,6 +96,11 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
 	Route::group(['middleware' => ['authenticate']], function () {
 
 		Route::group(['middleware' => ['admin']], function () {
+
+                  Route::post('/crud_waste_composition','AdminController@crud_waste_composition')->name('crud_waste_composition');
+                  Route::post('/crud_waste_data','AdminController@crud_waste_data')->name('crud_waste_data');
+                  Route::get('admin/waste/composition','AdminController@get_waste_composition')->name('get_waste_composition');
+                  Route::get('admin/waste/data','AdminController@get_waste_data')->name('get_waste_data');
 
             Route::get('/admin/dashboard','AdminController@admin_dashboard')->name('admin_dashboard');
 

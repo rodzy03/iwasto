@@ -33,6 +33,7 @@
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
+            @if(empty($is_public))
             <button id=add data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -46,7 +47,7 @@
                 </span>Add
 
             </button>&nbsp;
-           
+           @endif
 
             
             <!--begin::Button-->
@@ -84,9 +85,11 @@
                         <th style="min-width: 100%" class="text-dark-75">
                             <span class="text-dark-75">Waste Disposed % </span>
                         </th>
+                        @if(empty($is_public))
                         <th style="min-width: 100%" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        @endif
                        <th hidden></th>
                        <th hidden></th>
                        <th hidden></th>
@@ -132,6 +135,7 @@
                         <td style="text-transform:uppercase;" >
                             <span class="text-dark-75" >{{$row->disposed}}</span>
                         </td>
+                        @if(empty($is_public))
                         <td class="pr-0 text-left">
                             <a id=edit vals="{{$row->waste_data_id}}" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
                                 <span class="svg-icon svg-icon-2x">
@@ -146,6 +150,7 @@
                                 </span>
                             </a>
                         </td>
+                        @endif
                         <td hidden>{{$row->city}}</td>
                         <td hidden>{{$row->psa_population}}</td>
                         <td hidden>{{$row->gen_kg_day}}</td>

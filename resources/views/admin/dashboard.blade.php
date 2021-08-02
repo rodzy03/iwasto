@@ -56,10 +56,12 @@
         <!--begin::Page-->
         <div class="d-flex flex-row flex-column-fluid page">
 
+            
 
             <!--begin::Aside-->
             <div class="aside aside-left d-flex flex-column flex-row-auto" id="kt_aside">
                 <!--begin::Aside Menu-->
+                @if(empty($is_public))
                 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
                     <!--begin::Menu Container-->
                     <div id="kt_aside_menu" class="aside-menu min-h-lg-800px" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
@@ -343,6 +345,9 @@
                     <!--end::Menu Container-->
                 </div>
                 <!--end::Aside Menu-->
+                @else
+                    @include('admin.public_sidenav')
+                @endif
             </div>
             <!--end::Aside-->
             <!--begin::Wrapper-->
