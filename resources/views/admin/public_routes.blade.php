@@ -273,7 +273,7 @@
                         <th style="min-width: 100px;" >
                             <span class="text-dark-75">waste type</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th style="min-width: 50px;">
                             <span class="text-dark-75">collection date</span>
                         </th>
 
