@@ -546,7 +546,8 @@ class AdminController extends Controller
     public function routes()
     {
         
-        $data = db::table('r_routes')->get();
+        // $data = db::table('r_routes')->get();
+        $data = db::table('v_get_schedule')->orderby(DB::raw('DATE(collection_date_full)'),'desc')->get();
         return view('admin.public_routes',compact('data'));
     }
 

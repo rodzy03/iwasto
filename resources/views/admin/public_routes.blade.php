@@ -29,6 +29,7 @@
             padding-bottom: 12px;
             padding-left: 12px;
         }
+
     @media (max-width: 991.98px)
         .header-mobile-fixed .header-mobile {
         display:none;
@@ -258,40 +259,69 @@
                                     <!--begin::Table-->
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
-                                            <thead>
-                                                <tr class="text-left text-uppercase">
-                                                    <th style="min-width: 100%" class="pl-7">
-                                                        <span class="text-dark-75">route information</span>
-                                                    </th>
-                                                    
-                                                    <th style="min-width: 100%;">
-                                                        <span class="text-dark-75">city / municipality</span>
-                                                    </th>
+                <thead>
+                    <tr class="text-left text-uppercase">
+                        <th style="min-width: 90px" class="pl-7">
+                            <span class="text-dark-75">collection information</span>
+                        </th>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">route name</span>
+                        </th>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">route details</span>
+                        </th>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">waste type</span>
+                        </th>
+                        <th style="min-width: 100px;">
+                            <span class="text-dark-75">collection date</span>
+                        </th>
 
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($data as $row)
-                                                <tr>
-                                                    <td style="text-transform:uppercase;">
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data as $row)
+                    <tr>
+                        @php
+                        $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
+                        @endphp
 
-                                                        <span class="text-dark-75" style="font-weight: bold;">{{$row->route_name}}</span>
-                                                        <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
-                                                    </td>
+                        <td style="text-transform:uppercase;">
+                            <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
+                            {{--<br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
+                            @if($row->recurring == 1)
+                                <br><span style="font-size: 11px;">collection days : {!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
+                            @else
+                            <br><span style="font-size: 11px;">collection date : {!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
+                            @endif--}}
+                        </td>
 
-                                                    <td style="text-transform:uppercase;">
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$row->route_name}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$row->route_details}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$type_name}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;">
+                            @if($row->recurring == 1)
+                                <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
+                            @else
+                                <span class="text-dark-75">{!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
+                            @endif
+                            
+                        </td>
 
-                                                        <span class="text-dark-75">{{$row->city_municipality}}</span>
-                                                    </td>
 
-
-
-
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                        
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
                                     </div>
                                     <!--end::Table-->
                                 </div>

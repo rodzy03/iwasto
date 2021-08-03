@@ -118,14 +118,20 @@
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left text-uppercase">
-                        <th style="min-width: 200px" class="pl-7">
+                        <th style="min-width: 90px" class="pl-7">
                             <span class="text-dark-75">collection information</span>
                         </th>
-                        <th style="min-width: 100px;" hidden>
-                            <span class="text-dark-75">collection date</span>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">route name</span>
+                        </th>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">route details</span>
+                        </th>
+                        <th style="min-width: 100px;" >
+                            <span class="text-dark-75">waste type</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">date added</span>
+                            <span class="text-dark-75">collection date</span>
                         </th>
 
 
@@ -147,21 +153,32 @@
                         @endphp
 
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75" style="font-weight: bold;">{{ $type_name }}</span>
-                            <br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
+                            <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
+                            {{--<br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
                             @if($row->recurring == 1)
                                 <br><span style="font-size: 11px;">collection days : {!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
                             @else
                             <br><span style="font-size: 11px;">collection date : {!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
-                            @endif
+                            @endif--}}
                         </td>
 
-                        <td style="text-transform:uppercase;" hidden>
-                            <span class="text-dark-75">{{$row->collection_date}}</span>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$row->route_name}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$row->route_details}}</span>
+                        </td>
+                        <td style="text-transform:uppercase;" >
+                            <span class="text-dark-75">{{$type_name}}</span>
                         </td>
                         <td style="text-transform:uppercase;">
-                            <span class="text-dark-75">{{$row->date_added}}</span>
+                            @if($row->recurring == 1)
+                                <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
+                            @else
+                                <span class="text-dark-75">{!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
+                            @endif
+                            
                         </td>
 
 
@@ -459,18 +476,21 @@
         }
 
 
-    var is_recurring = 0;
+    var is_recurring = 0, is_recurring_a = 0;
 
     $('.is_recurring').change(function() {
 
         if($('.is_recurring:checkbox:checked').length > 0) {
             $('.div_wd').show();
             $('.div_collection').hide();
+            is_recurring_a = 1;
+            
             
         }
         else {
             $('.div_wd').hide();
             $('.div_collection').show();
+            is_recurring_a = 0;
         }
     });
 
@@ -479,10 +499,12 @@
         if($('.is_recurring_e:checkbox:checked').length > 0) {
             $('.div_wd_e').show();
             $('.div_collection_e').hide();
+            is_recurring = 1;
         }
         else {
             $('.div_wd_e').hide();
             $('.div_collection_e').show();
+            is_recurring = 0;
         }
     });
 
@@ -507,11 +529,11 @@
 
         id = $(this).attr('vals');
         let row = $(this).closest("tr"),
-            param_1 = $(row.find("td")[4]).text(),
-            param_2 = $(row.find("td")[5]).text(),
-            param_3 = $(row.find("td")[6]).text().split(" ")
-            param_4 = $(row.find("td")[7]).text()
-            param_5 = $(row.find("td")[8]).text()
+            param_1 = $(row.find("td")[6]).text(),
+            param_2 = $(row.find("td")[7]).text(),
+            param_3 = $(row.find("td")[8]).text().split(" ")
+            param_4 = $(row.find("td")[9]).text()
+            param_5 = $(row.find("td")[10]).text()
 
         console.log(param_4)
         var splited = [];
@@ -552,8 +574,7 @@
     $('#submit_btn').click(function() {
 
         var wd = document.querySelector('input[name=tags-manual-suggestions]').value;
-        get_wdays(wd);
-        
+        (is_recurring_a == 0) ? wd_string = "" : get_wdays(wd);
         url = "{{route('crud_collection')}}";
         status = "add";
         modal_id = "add_modal";
@@ -566,7 +587,7 @@
             collection_days:wd_string
         };
 
-
+        
         update(data, url, status, modal_id);
     });
 
@@ -574,7 +595,8 @@
     {
 
         var wd = document.querySelector('input[name=tags-manual-suggestions_e]').value;
-        get_wdays(wd);
+        
+        (is_recurring == 0) ? wd_string = "" : get_wdays(wd);
         url = "{{route('crud_collection')}}";
         status = "normal";
         modal_id = "modal-edit";
