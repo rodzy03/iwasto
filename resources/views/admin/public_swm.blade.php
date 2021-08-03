@@ -793,7 +793,7 @@
 
 
 
-                                    const info = `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                    const info = `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b>${j_a_mat}<br><b>Working Days: </b>${wd_display}<br><b>Working Hours: </b>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
 
                                     const cards = `<div class="card-header" id="headingOne7">
                                                             <div class="card-title"  aria-expanded="true" role="button">
