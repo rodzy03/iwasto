@@ -261,19 +261,19 @@
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left ">
-                        <th style="min-width: 90px" class="pl-7">
+                        <th  class="pl-7">
                             <span class="text-dark-75">collection information</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th  >
                             <span class="text-dark-75">route name</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th  >
                             <span class="text-dark-75">route details</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th  >
                             <span class="text-dark-75">waste type</span>
                         </th>
-                        <th style="min-width: 100px;">
+                        <th >
                             <span class="text-dark-75">collection date</span>
                         </th>
 
