@@ -261,19 +261,19 @@
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left ">
-                        <th  class="pl-7">
+                        <th style="min-width: 100px" class="pl-7">
                             <span class="text-dark-75">collection information</span>
                         </th>
-                        <th  >
+                        <th style="min-width: 100px;" >
                             <span class="text-dark-75">route name</span>
                         </th>
-                        <th  >
+                        <th style="min-width: 200px;" >
                             <span class="text-dark-75">route details</span>
                         </th>
-                        <th  >
+                        <th style="min-width: 100px;" >
                             <span class="text-dark-75">waste type</span>
                         </th>
-                        <th >
+                        <th style="min-width: 100px;">
                             <span class="text-dark-75">collection date</span>
                         </th>
 
@@ -287,7 +287,7 @@
                         $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
                         @endphp
 
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
                             {{--<br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
@@ -298,16 +298,16 @@
                             @endif--}}
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$row->route_name}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$row->route_details}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$type_name}}</span>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             @if($row->recurring == 1)
                                 <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
                             @else
