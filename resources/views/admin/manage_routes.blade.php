@@ -101,21 +101,21 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->route_name}}</span>
-                            <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Route Details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" hidden>
 
                             
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75">{{$row->province}}</span>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75">{{$row->city_municipality}}</span>
                         </td>
@@ -220,7 +220,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label">Route Name</label>
-                    <input type="text" class="form-control tx_route_name" style="text-transform:uppercase;" />
+                    <input type="text" class="form-control tx_route_name" />
                 </div>
 
                 <div class="form-group" hidden>
@@ -252,7 +252,7 @@
                
                 <div class="form-group">
                     <label class="form-control-label">&nbsp;Route Details</label>
-                    <textarea id="tx_route_details" cols="30" rows="2" class="form-control tx_route_details" style="text-transform: uppercase;"></textarea>
+                    <textarea id="tx_route_details" cols="30" rows="2" class="form-control tx_route_details" ></textarea>
                 </div>
 
 
@@ -291,7 +291,7 @@
 
                 <div class="form-group">
                     <label class="form-control-labekt_select2_1l">Route Name</label>
-                    <input type="text" class="form-control tx_route_name_e" style="text-transform:uppercase;" />
+                    <input type="text" class="form-control tx_route_name_e"  />
                 </div>
 
                 <div class="form-group" hidden>
@@ -322,7 +322,7 @@
                
                 <div class="form-group">
                     <label class="form-control-label">&nbsp;Route Details</label>
-                    <textarea id="tx_route_details_e" cols="30" rows="2" class="form-control tx_route_details_e" style="text-transform: uppercase;"></textarea>
+                    <textarea id="tx_route_details_e" cols="30" rows="2" class="form-control tx_route_details_e" ></textarea>
                 </div>
                 <div class="form-group" hidden>
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Barangay</label><br>

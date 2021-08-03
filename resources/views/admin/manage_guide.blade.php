@@ -93,11 +93,11 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td style="text-transform:uppercase; width: 20%">
+                        <td style="width: 20%">
                             <span class="text-dark-75">{{$row->segregate_type_name}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75">{{$row->segregate_guide}}</span>
                         </td>
 
@@ -169,12 +169,12 @@
                 <form>
                     <div class="form-group">
                         <label class="form-control-label">Type</label>
-                        <input type="text" class="form-control tx_type" style="text-transform:uppercase;" />
+                        <input type="text" class="form-control tx_type"  />
                     </div>
 
                     <div class="form-group">
                         <label class="form-control-label">Guide</label>
-                        <textarea cols="30" rows="2" class="form-control guide" style="text-transform: uppercase;"></textarea>
+                        <textarea cols="30" rows="2" class="form-control guide" ></textarea>
                     </div>
 
 
@@ -203,12 +203,12 @@
                 <form>
                     <div class="form-group">
                         <label class="form-control-label">Type</label>
-                        <input type="text" class="form-control tx_type_e" style="text-transform:uppercase;" />
+                        <input type="text" class="form-control tx_type_e"  />
                     </div>
 
                     <div class="form-group">
                         <label class="form-control-label">Guide</label>
-                        <textarea cols="30" rows="15" class="form-control guide_e" style="text-transform: uppercase;"></textarea>
+                        <textarea cols="30" rows="15" class="form-control guide_e" ></textarea>
                     </div>
 
 

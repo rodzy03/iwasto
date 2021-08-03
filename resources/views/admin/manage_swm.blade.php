@@ -153,7 +153,7 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->junkshop_name}}</span>
                             <br><span style="font-size: 11px;">WORKING DAYS : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">WORKING HOURS : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>

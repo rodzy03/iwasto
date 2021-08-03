@@ -97,12 +97,12 @@
                                    
                                 </div>
                                 <div>
-                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase;">{{$row->waste_name}}</a>
+                                    <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" >{{$row->waste_name}}</a>
                                     {{--<span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>--}}
                                 </div>
                             </div>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75">{{$row->segregate_type_name}}</span>
                         </td>
@@ -181,7 +181,7 @@
 
                     <div class="form-group">
                         <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
-                        <select class="form-control" name="sel_seg_type" style="text-transform: capitalize;">
+                        <select class="form-control" name="sel_seg_type" >
                             @foreach($seg_type as $row)
                             <option value="{{$row->segregate_type_id}}">{{$row->segregate_type_name}}</option>
                             @endforeach
@@ -221,7 +221,7 @@
 
                     <div class="form-group">
                         <label class="form-control-label col-lg-24 col-sm-24">Segregation Type</label><br>
-                        <select id=sel_seg_type_e class="form-control" name="sel_seg_type_e" style="text-transform: capitalize;">
+                        <select id=sel_seg_type_e class="form-control" name="sel_seg_type_e" >
                             @foreach($seg_type as $row)
                             <option value="{{$row->segregate_type_id}}">{{$row->segregate_type_name}}</option>
                             @endforeach

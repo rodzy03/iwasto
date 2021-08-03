@@ -106,49 +106,49 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->city}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->biodegradable}}</span>
                             
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75">{{$row->biodegradable_p}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->recyclable}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75" >{{$row->recyclable_p}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->residual}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->residual_p}}</span>
                             
                         </td>
 
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->special}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->special_p}}</span>
                             
                         </td>
                        
 
-                        <td style="text-transform:uppercase;">
+                        <td >
 
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->total_kg}}</span>
                         </td>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Waste Type</label><br>
-                    <select class="form-control sel_waste_a" id="sel_waste_a" name="sel_waste_a" style="width: 100%; text-transform:uppercase">
+                    <select class="form-control sel_waste_a" id="sel_waste_a" name="sel_waste_a" style="width: 100%; ">
                         @foreach($type as $row)
                         <option value="{{$row->segregate_type_id}}">{{ strtoupper($row->segregate_type_name) }}</option>
                         @endforeach
@@ -288,7 +288,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Waste Type</label><br>
-                    <select class="form-control sel_waste_e" id="sel_waste_e" name="sel_waste_e" style="width: 100%; text-transform:uppercase">
+                    <select class="form-control sel_waste_e" id="sel_waste_e" name="sel_waste_e" style="width: 100%; ">
                         @foreach($type as $row)
                         <option value="{{$row->segregate_type_id}}">{{ strtoupper($row->segregate_type_name) }}</option>
                         @endforeach

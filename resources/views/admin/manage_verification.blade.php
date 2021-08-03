@@ -96,15 +96,15 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <a id=view data-toggle="modal" data-target="#modal-view" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase; cursor:pointer;">VIEW IMAGE</a>
+                                    <a id=view data-toggle="modal" data-target="#modal-view" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style=" cursor:pointer;">VIEW IMAGE</a>
                                     
                                 </div>
                             </div>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75">{{$row->citizen_name}}</span>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75">{{$row->created_at}}</span>
                         </td>
 
@@ -135,7 +135,7 @@
                                 </span></a>
                         </td>
                         @else
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75">{{$row->remarks}}</span>
                         </td>
                         @endif
@@ -188,7 +188,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-control-label">Remarks</label>
-                    <textarea id="remarks" cols="30" rows="2" class="form-control" style="text-transform: uppercase;"></textarea>
+                    <textarea id="remarks" cols="30" rows="2" class="form-control" ></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -211,7 +211,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-control-label">Remarks</label>
-                    <textarea id="remarks_d" cols="30" rows="2" class="form-control" style="text-transform: uppercase;"></textarea>
+                    <textarea id="remarks_d" cols="30" rows="2" class="form-control" ></textarea>
                 </div>
             </div>
             <div class="modal-footer">

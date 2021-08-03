@@ -106,33 +106,33 @@
                     @foreach($data as $row)
                     <tr>
                        
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->city}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->gen_kg_day}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->psa_population}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->per_capita_kg_day}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->mrf_kg_day}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->diversion_rate}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75" >{{$row->landfill}}</span>
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td >
                             <span class="text-dark-75" >{{$row->disposed}}</span>
                         </td>
                         @if(empty($is_public))

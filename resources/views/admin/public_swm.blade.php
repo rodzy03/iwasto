@@ -684,7 +684,7 @@
                                                                     
                                                                     <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
                                                                         <div class="card-body text-dark-50 font-size-md pl-2">
-                                                                            <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                            <p class="swm_info">${event.target.value}</p>
                                                                             
                                                                         </div>
                                                                     </div>
@@ -903,7 +903,7 @@
                                                                     
                                                                     <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
                                                                         <div class="card-body text-dark-50 font-size-md pl-2">
-                                                                            <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                            <p  class="swm_info">${event.target.value}</p>
                                                                             
                                                                         </div>
                                                                     </div>
@@ -1081,7 +1081,7 @@
                                                                 
                                                                 <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
                                                                     <div class="card-body text-dark-50 font-size-md pl-2">
-                                                                        <p style="text-transform: uppercase;" class="swm_info">${event.target.value}</p>
+                                                                        <p class="swm_info">${event.target.value}</p>
                                                                         
                                                                     </div>
                                                                 </div>

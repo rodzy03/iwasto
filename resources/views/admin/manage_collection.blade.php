@@ -152,7 +152,7 @@
                         $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
                         @endphp
 
-                        <td style="text-transform:uppercase;">
+                        <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
                             {{--<br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
@@ -163,16 +163,16 @@
                             @endif--}}
                         </td>
 
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$row->route_name}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$row->route_details}}</span>
                         </td>
-                        <td style="text-transform:uppercase;" >
+                        <td  >
                             <span class="text-dark-75">{{$type_name}}</span>
                         </td>
-                        <td style="text-transform:uppercase;">
+                        <td >
                             @if($row->recurring == 1)
                                 <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
                             @else
@@ -250,20 +250,20 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group" style="text-transform:uppercase;">
+                    <div class="form-group" >
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Route</label><br>
                         <select class="form-control" name="sel_route" id="sel_route" style=" width:100%; ">
                             @foreach($routes as $row)
 
-                            <option style="text-transform:uppercase;" value="{{$row->routes_id}}" >{{$row->route_name}}</option>
+                            <option value="{{$row->routes_id}}" >{{$row->route_name}}</option>
 
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="form-group" style="text-transform:uppercase;">
+                    <div class="form-group" >
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Waste Type</label><br>
-                        <select class="form-control" name="sel_waste_type" id="sel_waste_type" style="text-transform: capitalize; width:100%">
+                        <select class="form-control" name="sel_waste_type" id="sel_waste_type" style=" width:100%">
                             @foreach($type as $row)
                             @if($row->waste_type_name == "Both")
                             <option value="{{$row->waste_type_id}}" selected>Non Biodegradable and Biodegradable</option>
@@ -320,9 +320,9 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group" style="text-transform: uppercase;">
+                    <div class="form-group" >
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Route</label><br>
-                        <select id=sel_route_e class="form-control" name="sel_route_e" style="text-transform: capitalize; width:100%">
+                        <select id=sel_route_e class="form-control" name="sel_route_e" style=" width:100%">
                             @foreach($routes as $row)
 
                             <option value="{{$row->routes_id}}">{{$row->route_name}}</option>
@@ -331,9 +331,9 @@
                         </select>
                     </div>
 
-                    <div class="form-group" style="text-transform: uppercase;">
+                    <div class="form-group" >
                         <label class="form-control-label col-lg-24 col-sm-24">&nbsp;&nbsp;Waste Type</label><br>
-                        <select id=sel_waste_type_e class="form-control" name="sel_waste_type_e" style="text-transform: capitalize; width:100%">
+                        <select id=sel_waste_type_e class="form-control" name="sel_waste_type_e" style=" width:100%">
                             @foreach($type as $row)
                             @if($row->waste_type_name == "Both")
                             <option value="{{$row->waste_type_id}}" selected>Non Biodegradable and Biodegradable</option>
