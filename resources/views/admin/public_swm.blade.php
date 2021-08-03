@@ -262,7 +262,7 @@
                                     <div class="card mb-8">
                                         <div class="card-body">
                                             <div class="p-6">
-                                                <h2 class="text-dark mb-8">SWM Information </h2>
+                                                <h2 class="text-dark mb-8">Facility Information </h2>
                                                 <!--begin::Accordion-->
                                                 <div class="accordion accordion-light accordion-light-borderless ">
                                                     <!--begin::Item-->
