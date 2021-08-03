@@ -75,10 +75,10 @@
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">waste name</span>
+                            <span class="text-dark-75">type of waste</span>
                         </th>
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">waste type</span>
+                            <span class="text-dark-75">waste classification</span>
                         </th>
 
                         <th style="min-width: 30px" class="text-dark-75">
@@ -94,9 +94,7 @@
                         <td class="pl-0 py-0" style="width: 45%;">
                             <div class="d-flex align-items-center">
                                 <div class="symbol symbol-50 symbol-light mr-4">
-                                    <span class="symbol-label"> {{-- asset('assets/media/svg/avatars/001-boy.svg') --}}
-                                        <img src="{{asset('uploads/trashbin_logo.png')}}" class="h-75 align-self-end" alt="" />
-                                    </span>
+                                   
                                 </div>
                                 <div>
                                     <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" style="text-transform:uppercase;">{{$row->waste_name}}</a>

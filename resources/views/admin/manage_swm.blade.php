@@ -252,14 +252,14 @@
                     <div class="form-group row">
                         <div class="col-lg-6">
                             
-                            <label class="form-control-label">Junkshop Name</label>
-                            <input type="text" class="form-control tx_junkshop_name" style="text-transform: uppercase;" />
+                            <label class="form-control-label">Waste Collection Facility</label>
+                            <input type="text" class="form-control tx_junkshop_name"  />
                             
                         </div>
                         <div class="col-lg-6">
                             
-                            <label class="form-control-label">Junkshop Address</label>
-                            <input type="text" class="form-control tx_junkshop_adderess" style="text-transform: uppercase;" />
+                            <label class="form-control-label">Waste Collection Facility Address</label>
+                            <input type="text" class="form-control tx_junkshop_adderess"  />
                             
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                         <div class="col-lg-6">
                         
                             <label class="form-control-label">Acceptable Materials</label>
-                            <input type="text" class="form-control tx_acc_mat" style="text-transform: uppercase;" />
+                            <input type="text" class="form-control tx_acc_mat"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Facility Type</label><br>
@@ -369,19 +369,19 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label class="form-control-label">Junkshop Name</label>
-                        <input type="text" class="form-control tx_junkshop_name_e" style="text-transform: uppercase;" />
+                        <label class="form-control-label">Waste Collection Facility</label>
+                        <input type="text" class="form-control tx_junkshop_name_e"  />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control-label">Junkshop Address</label>
-                        <input type="text" class="form-control tx_junkshop_adderess_e" style="text-transform: uppercase;" />
+                        <label class="form-control-label">Waste Collection Facility Address</label>
+                        <input type="text" class="form-control tx_junkshop_adderess_e"  />
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
                         
                             <label class="form-control-label">Acceptable Materials</label>
-                            <input type="text" class="form-control tx_acc_mat_e" style="text-transform: uppercase;" />
+                            <input type="text" class="form-control tx_acc_mat_e"  />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Facility Type</label><br>

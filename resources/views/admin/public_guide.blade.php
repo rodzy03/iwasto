@@ -492,7 +492,7 @@
                                 <div class="card mb-8">
                                     <div class="card-body">
                                         <div class="p-6">
-                                            <h2 class="text-dark mb-8">SWM Information</h2>
+                                            <h2 class="text-dark mb-8">Faciity Information</h2>
                                             <!--begin::Accordion-->
                                             <div class="accordion accordion-light accordion-light-borderless ">
                                                 <!--begin::Item-->
@@ -836,7 +836,7 @@
                                                         
                                                         <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
                                                             <div class="card-body text-dark-50 font-size-lg pl-12">
-                                                                <p style="text-transform: lowercase;" class="swm_info">${info}</p>
+                                                                <p  class="swm_info">${info}</p>
                                                                 
                                                             </div>
                                                         </div>

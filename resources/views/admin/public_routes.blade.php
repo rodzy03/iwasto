@@ -261,20 +261,23 @@
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
                     <tr class="text-left ">
-                        <th style="min-width: 100px" class="pl-7">
-                            <span class="text-dark-75">collection information</span>
+                        <th  style="min-width: 200px" class="pl-7">
+                            <span class="text-dark-75">city</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th  style="min-width: 200px" >
                             <span class="text-dark-75">route name</span>
                         </th>
-                        <th style="min-width: 200px;" >
+                        <th  hidden>
                             <span class="text-dark-75">route details</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th  style="min-width: 200px" >
                             <span class="text-dark-75">waste type</span>
                         </th>
-                        <th style="min-width: 50px;">
+                        <th hidden>
                             <span class="text-dark-75">collection date</span>
+                        </th>
+                        <th  style="min-width: 100px" >
+                            <span class="text-dark-75">action</span>
                         </th>
 
 
@@ -301,13 +304,13 @@
                         <td  >
                             <span class="text-dark-75">{{$row->route_name}}</span>
                         </td>
-                        <td  >
+                        <td  hidden>
                             <span class="text-dark-75">{{$row->route_details}}</span>
                         </td>
                         <td  >
                             <span class="text-dark-75">{{$type_name}}</span>
                         </td>
-                        <td >
+                        <td hidden>
                             @if($row->recurring == 1)
                                 <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
                             @else
@@ -315,7 +318,22 @@
                             @endif
                             
                         </td>
+                        <td>
+                        <!--begin::Dropdown-->
+                            <button data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder add_modal" aria-haspopup="true" aria-expanded="false">
+                                <span class="svg-icon svg-icon-2x">
+                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                            <path d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>View
 
+                            </button>
+                        </td>
 
                         
                     </tr>
