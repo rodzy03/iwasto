@@ -260,7 +260,7 @@
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
-                    <tr class="text-left text-uppercase">
+                    <tr class="text-left ">
                         <th style="min-width: 90px" class="pl-7">
                             <span class="text-dark-75">collection information</span>
                         </th>
