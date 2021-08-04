@@ -16,7 +16,10 @@ Auth::routes();
 Route::get('/', function() {
       return redirect()->intended(route('login'));
   });
+
+  Route::post('/charts','AdminController@charts')->name('charts');
 // Mobile routes
+
 Route::get('/mobile/routes/{city}','AdminController@mobile_routes')->name('mobile_routes');
 
 Route::post('/get-zipcodes','MobileController@get_zipcodes')->name('get-zipcodes');
@@ -90,7 +93,8 @@ Route::get('/waste/composition','AdminController@pv_waste_composition')->name('p
 Route::get('/waste/data','AdminController@pv_waste_data')->name('pv_waste_data');
 
 Route::post('/swm_filter','AdminController@swm_filter')->name('swm_filter');
-
+Route::get('/dashboard','AdminController@get_analytics')
+->defaults('typeofview', 'public')->name('dashboard');
 Route::group(['middleware' => ['validateBackHistory']], function () {
 
 	Route::group(['middleware' => ['authenticate']], function () {
@@ -103,10 +107,11 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
                   Route::get('admin/waste/data','AdminController@get_waste_data')->name('get_waste_data');
 
             Route::get('/admin/dashboard','AdminController@admin_dashboard')->name('admin_dashboard');
-
+            Route::get('/home','AdminController@get_analytics')
+            ->defaults('typeofview', 'admin')->name('get_analytics');
             Route::get('/waste','AdminController@get_waste')->name('get_waste');
             Route::get('/routes','AdminController@get_routes')->name('get_routes');
-            Route::get('/home','AdminController@get_analytics')->name('get_analytics');
+            
             // crud waste
             
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');

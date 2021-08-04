@@ -13,6 +13,111 @@
 @endsection
 
 <!--begin::Card-->
+
+
+<input type="text" value="{{route('charts')}}" id="bio" hidden>
+<input type="text" value="{{csrf_token()}}" id="_token" hidden>
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
+                <span class="svg-icon svg-icon-md svg-icon-primary">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Chart-bar1.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5" />
+                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5" />
+                            <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero" />
+                            <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5" />
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+            </span>
+            <h3 class="card-label">Waste Composition Charts</h3>
+        </div>
+
+    </div>
+
+</div>
+<br><br>
+<div class="row">
+    
+    <div class="col-lg-6">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Biodegradable</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--begin::Chart-->
+                <div id="bio_chart" class="d-flex justify-content-center"></div>
+                <!--end::Chart-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+
+    <div class="col-lg-6">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Recyclable</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--begin::Chart-->
+                <div id="recyc_chart" class="d-flex justify-content-center"></div>
+                <!--end::Chart-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+    
+</div>
+
+<div class="row">
+    
+    <div class="col-lg-6">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Residual</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--begin::Chart-->
+                <div id="resid_chart" class="d-flex justify-content-center"></div>
+                <!--end::Chart-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+
+    <div class="col-lg-6">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Special</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <!--begin::Chart-->
+                <div id="special_chart" class="d-flex justify-content-center"></div>
+                <!--end::Chart-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+    
+</div>
+
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
@@ -37,12 +142,11 @@
     </div>
 
 </div>
-<br>
-<br>
 
-<div id='map' style='height: 700px; margin-top:-15px; '>
+<div id='map' style='height: 700px; margin-top:20px;' >
 </div>
-    
+            
+
  <!-- Modal-->
  <div class="modal fade popout-modal" id="popout-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered " role="document">
@@ -72,8 +176,8 @@
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
 <!--end::Page Vendors-->
+<script src="{{asset('assets/js/pages/features/charts/apexcharts.js')}}"></script>
 
-{{--<script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>--}}
 
 <script>
 

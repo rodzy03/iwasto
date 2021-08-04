@@ -340,10 +340,24 @@
                         </div>
                     </div>
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inMainDocument">
-                        <label class="custom-file-label" for="inMainDocument">Choose file</label>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Date Given</label>
+                                <input type="date" class="form-control tx_given" />
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Upload Image</label>
+                            <div class="custom-file ">
+                            
+                                <input type="file" class="custom-file-input" id="inMainDocument">
+                                <label class="custom-file-label" for="inMainDocument">Choose file</label>
+                            </div>
+                        </div>
                     </div>
+
+                    
                     
 
                 </form>
@@ -681,7 +695,8 @@
         data.append("facility_type", $('select[name=sel_type] option:selected').val());
         data.append("capacity", $('input[name="rd_capacity"]:checked').val());
         data.append("capacity_rate", $('.tx_c_rate').val());
-
+        data.append("last_update", $('.tx_given').val());
+        
         
         crud_file(data, url, status, modal_id);
     });
