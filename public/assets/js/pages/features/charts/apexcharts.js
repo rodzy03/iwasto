@@ -932,29 +932,136 @@ var KTApexChartsDemo = function () {
 	}
 
 	var _demo11 = function () {
-		const apexChart = "#chart_11";
-		var options = {
-			series: [44, 55, 41, 17, 15],
-			chart: {
-				width: 380,
-				type: 'donut',
-			},
-			responsive: [{
-				breakpoint: 480,
-				options: {
-					chart: {
-						width: 200
-					},
-					legend: {
-						position: 'bottom'
-					}
+		var url = $('#bio').val();
+		var _token = $('#_token').val();
+		$.ajax({
+			url: url
+			, method: "post"
+			, data: {_token:_token}
+			, success:function(data) {
+				
+				const bio_series = [], resid = [], recyc = [], special = [], city = [];
+				for (var i=0; i<data['result'].length; i++) {
+					city.push(data['result'][i]['city']);
+					bio_series.push( (data['result'][i]['biodegradable_chart'] != null) ? data['result'][i]['biodegradable_chart'] : 0  );
+					recyc.push( (data['result'][i]['recyclable_chart'] != null) ? data['result'][i]['recyclable_chart'] : 0 );
+					resid.push( (data['result'][i]['residual_chart'] != null) ? data['result'][i]['residual_chart'] : 0);
+					special.push( (data['result'][i]['special_chart'] != null) ? data['result'][i]['special_chart'] : 0 );
 				}
-			}],
-			colors: [primary, success, warning, danger, info]
-		};
+				
+				var apexChart = "#bio_chart";
+				var options = {
+					series: bio_series,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
 
-		var chart = new ApexCharts(document.querySelector(apexChart), options);
-		chart.render();
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+				apexChart = "#recyc_chart";
+				var options = {
+					series: recyc,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+
+				apexChart = "#resid_chart";
+				var options = {
+					series: resid,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+				apexChart = "#special_chart";
+				var options = {
+					series: special,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+			}
+		});
+
+		
 	}
 
 	var _demo12 = function () {

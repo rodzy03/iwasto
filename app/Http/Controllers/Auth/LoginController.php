@@ -153,7 +153,7 @@ class LoginController extends Controller
         // }
 
         //return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
-        return '/home';
+        return '/admin/dashboard';
     }
     protected function clearLoginAttempts(Request $request)
     {

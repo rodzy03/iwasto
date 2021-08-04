@@ -51,6 +51,12 @@ class AdminController extends Controller
         return view('admin.manage_waste_composition', compact('data','city','type','is_public'));
     }
 
+    public function charts()
+    {
+        $data = db::table("v_get_waste_comp")->get();
+        return response()->json(['result' => $data]);
+    }
+
     public function get_waste_composition()
     {
         // $data = db::table('r_waste_composition as wd')
@@ -210,6 +216,7 @@ class AdminController extends Controller
                     , 'facility_type' => $request->get('facility_type')
                     , 'capacity' => $request->get('capacity')
                     , 'capacity_rate' => $request->get('capacity_rate')
+                    , 'last_update' => $request->get('last_update')
                 ]);
 
                 if ($request->hasFile('file')) 
@@ -294,17 +301,18 @@ class AdminController extends Controller
                 , 'facility_type' => $request->get('facility_type')
                 , 'capacity' => $request->get('capacity')
                 , 'capacity_rate' => $request->get('capacity_rate')
+                , 'updated_date' => db::raw("CURRENT_DATE")
             ]);
 
         }
 
         else if ($request->get('status') == "deact") {
             db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
-                ->update([ 'active_flag' => 0 ]);
+                ->update([ 'active_flag' => 0, 'updated_date' => db::raw("CURRENT_DATE") ]);
         }
         else if ($request->get('status') == "act") {
             db::table('t_swm_location')->where('swm_location_id',$request->get('id'))
-                ->update([ 'active_flag' => 1 ]);
+                ->update([ 'active_flag' => 1, 'updated_date' => db::raw("CURRENT_DATE") ]);
         }
 
         return response()->json(['response' => "success"]);
@@ -363,10 +371,10 @@ class AdminController extends Controller
             return response()->json(['data' => "not"]);
     }
 
-    public function get_analytics()
+    public function get_analytics($typeofview)
     {
-
-        return view('admin.analytics');
+        $is_public = ($typeofview == "public") ? "public" : "abobakar";
+        return view('admin.analytics',compact('is_public'));
     }
 
     public function get_swm()
