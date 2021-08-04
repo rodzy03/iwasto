@@ -84,6 +84,23 @@
                                 </a>
                             </li>
 
+                            <li class="menu-item {{ (Route::currentRouteName() == 'guides') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{route('guides')}}" class="menu-link">
+                                    
+
+                                <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Communication\Chat-error.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24"/>
+                                            <path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000"/>
+                                            <path d="M6,14 C6.55228475,14 7,14.4477153 7,15 L7,17 C7,17.5522847 6.55228475,18 6,18 C5.44771525,18 5,17.5522847 5,17 L5,15 C5,14.4477153 5.44771525,14 6,14 Z M6,21 C5.44771525,21 5,20.5522847 5,20 C5,19.4477153 5.44771525,19 6,19 C6.55228475,19 7,19.4477153 7,20 C7,20.5522847 6.55228475,21 6,21 Z" fill="#000000" opacity="0.3"/>
+                                        </g>
+                                    </svg><!--end::Svg Icon-->
+                                </span>
+
+                                    <span class="menu-text">Segregation Guide</span>
+                                </a>
+                            </li>
+
                             <li class="menu-item {{ (Route::currentRouteName() == 'get_waste') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="{{route('get_waste')}}" class="menu-link">
                                   
@@ -129,21 +146,6 @@
                                 </a>
                             </li>
                             
-                            <li class="menu-item {{ (Route::currentRouteName() == 'get_routes') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="{{route('get_routes')}}" class="menu-link">
-                                    
-
-                                    <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Direction2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"/>
-                                                <path d="M14,13.381038 L14,3.47213595 L7.99460483,15.4829263 L14,13.381038 Z M4.88230018,17.2353996 L13.2844582,0.431083506 C13.4820496,0.0359007077 13.9625881,-0.12427877 14.3577709,0.0733126292 C14.5125928,0.15072359 14.6381308,0.276261584 14.7155418,0.431083506 L23.1176998,17.2353996 C23.3152912,17.6305824 23.1551117,18.1111209 22.7599289,18.3087123 C22.5664522,18.4054506 22.3420471,18.4197165 22.1378777,18.3482572 L14,15.5 L5.86212227,18.3482572 C5.44509941,18.4942152 4.98871325,18.2744737 4.84275525,17.8574509 C4.77129597,17.6532815 4.78556182,17.4288764 4.88230018,17.2353996 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.000087, 9.191034) rotate(-315.000000) translate(-14.000087, -9.191034) "/>
-                                            </g>
-                                        </svg><!--end::Svg Icon-->
-                                    </span>
-
-                                    <span class="menu-text">Routes</span>
-                                </a>
-                            </li>
 
                             <li class="menu-item {{ (Route::currentRouteName() == 'swm') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="{{route('swm')}}" class="menu-link">
@@ -161,22 +163,22 @@
                                 </a>
                             </li>
 
-                            <li class="menu-item {{ (Route::currentRouteName() == 'guides') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="{{route('guides')}}" class="menu-link">
+                            <li class="menu-item {{ (Route::currentRouteName() == 'get_routes') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{route('get_routes')}}" class="menu-link">
                                     
 
-                                <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Communication\Chat-error.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000"/>
-                                            <path d="M6,14 C6.55228475,14 7,14.4477153 7,15 L7,17 C7,17.5522847 6.55228475,18 6,18 C5.44771525,18 5,17.5522847 5,17 L5,15 C5,14.4477153 5.44771525,14 6,14 Z M6,21 C5.44771525,21 5,20.5522847 5,20 C5,19.4477153 5.44771525,19 6,19 C6.55228475,19 7,19.4477153 7,20 C7,20.5522847 6.55228475,21 6,21 Z" fill="#000000" opacity="0.3"/>
-                                        </g>
-                                    </svg><!--end::Svg Icon-->
-                                </span>
+                                    <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Direction2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M14,13.381038 L14,3.47213595 L7.99460483,15.4829263 L14,13.381038 Z M4.88230018,17.2353996 L13.2844582,0.431083506 C13.4820496,0.0359007077 13.9625881,-0.12427877 14.3577709,0.0733126292 C14.5125928,0.15072359 14.6381308,0.276261584 14.7155418,0.431083506 L23.1176998,17.2353996 C23.3152912,17.6305824 23.1551117,18.1111209 22.7599289,18.3087123 C22.5664522,18.4054506 22.3420471,18.4197165 22.1378777,18.3482572 L14,15.5 L5.86212227,18.3482572 C5.44509941,18.4942152 4.98871325,18.2744737 4.84275525,17.8574509 C4.77129597,17.6532815 4.78556182,17.4288764 4.88230018,17.2353996 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.000087, 9.191034) rotate(-315.000000) translate(-14.000087, -9.191034) "/>
+                                            </g>
+                                        </svg><!--end::Svg Icon-->
+                                    </span>
 
-                                    <span class="menu-text">Segregation Guide</span>
+                                    <span class="menu-text">Routes</span>
                                 </a>
                             </li>
+
 
                             <li class="menu-item {{ (Route::currentRouteName() == 'collection_calendar') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="{{route('collection_calendar')}}" class="menu-link">
@@ -318,7 +320,7 @@
 
 
                             <li class="menu-item " aria-haspopup="true">
-                                <a href="{{route('swm_facilities')}}" class="menu-link">
+                                <a href="{{route('swm_facilities')}}" class="menu-link" target="_blank">
                                     
 
                                 <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\General\Search.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -334,11 +336,22 @@
                                     <span class="menu-text">Public View</span>
                                 </a>
                             </li>
+ <li class="menu-item " aria-haspopup="true">
+                                <a href="https://iwasto.ph/" class="menu-link" target="_blank">
 
 
+<span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Home.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="24" height="24"/>
+        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 C21,20.1046337 20.1045695,21.0000642 19,21.0000642 L4.99998155,21.0000673 C3.89541205,21.0000673 2.99998155,20.1046368 2.99998155,19.0000673 L2.99999828,10.1216672 C2.99999935,9.42493561 3.36258984,8.77841732 3.95709826,8.41510662 Z M10,13 C9.44771525,13 9,13.4477153 9,14 L9,17 C9,17.5522847 9.44771525,18 10,18 L14,18 C14.5522847,18 15,17.5522847 15,17 L15,14 C15,13.4477153 14.5522847,13 14,13 L10,13 Z" fill="#000000"/>
+    </g>
+</svg><!--end::Svg Icon--></span>
 
 
-                          
+                                    <span class="menu-text">HOME</span>
+                                </a>
+                            </li>
+
                         </ul>
                         <!--end::Menu Nav-->
                     </div>

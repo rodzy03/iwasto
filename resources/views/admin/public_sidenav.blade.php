@@ -111,6 +111,19 @@
                 </a>
             </li>
 
+ <li class="menu-item " aria-haspopup="true">
+                                <a href="https://iwasto.ph/" class="menu-link" target="_blank">
+
+
+<span class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Home\Home.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlin>    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="24" height="24"/>
+        <path d="M3.95709826,8.41510662 L11.47855,3.81866389 C11.7986624,3.62303967 12.2013376,3.62303967 12.52145,3.81866389 L20.0429,8.41510557 C20.6374094,8.77841684 21,9.42493654 21,10.1216692 L21,19.0000642 >    </g>
+</svg><!--end::Svg Icon--></span>
+
+
+                                    <span class="menu-text">HOME</span>
+                                </a>
+                            </li>
         </ul>
         <!--end::Menu Nav-->
     </div>
