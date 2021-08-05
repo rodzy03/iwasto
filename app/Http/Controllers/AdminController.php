@@ -594,7 +594,12 @@ class AdminController extends Controller
     public function mobile_routes($city)
     {
         
-        $data = db::table('r_routes')->where('city_municipality', 'like', '%' . $city . '%')->get();
+        //$data = db::table('r_routes')->where('city_municipality', 'like', '%' . $city . '%')->get();
+
+        $c_date = collect(db::table('v_get_current_date')->where('city_municipality', 'like', '%' . $city . '%')->get());
+        $c_date_2 = collect(db::table('v_get_current_date_2')->where('city_municipality', 'like', '%' . $city . '%')->get());
+
+        $data = $c_date->merge($c_date_2);
         $mobile = "true";
         return view('admin.public_routes',compact('data','mobile'));
     }
