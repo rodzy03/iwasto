@@ -706,6 +706,7 @@
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
                                     markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>
+                                    Contact Number: </b>${j_number}<br><b>
                                     Acceptable Materials: </b><br>${j_a_mat}<br><b>
                                     Working Days: </b><br>${wd_display}<br><b>
                                     Working Hours: </b>${j_hours}<br><b>
@@ -713,7 +714,7 @@
                                     Capacity: </b>${j_capacity}<br><b>
                                     Capacity Rate: </b>${j_capacity_r}%<br><b>
                                     Last Update (Date Provided): </b>${j_last_update}
-                                    <br><b>Contact Number: </b>${j_number}`;
+                                    `;
                                     
                                     markerElement.vals = `${j_name}`;
                                     markerElement.profile = `${response['result'][j]['file_name']}`;
@@ -897,6 +898,7 @@
                             markerElement.style.width = '50px'
                             markerElement.style.height = '50px'
                             markerElement.value = `<b>Address: </b><br>${j_address}<br><b>
+                                    Contact Number: </b>${j_number}<br><b>
                                     Acceptable Materials: </b><br>${j_a_mat}<br><b>
                                     Working Days: </b><br>${wd_display}<br><b>
                                     Working Hours: </b>${j_hours}<br><b>
@@ -904,7 +906,7 @@
                                     Capacity: </b>${j_capacity}<br><b>
                                     Capacity Rate: </b>${j_capacity_r}%<br><b>
                                     Last Update (Date Provided): </b>${j_last_update}
-                                    <br><b>Contact Number: </b>${j_number}`;
+                                    `;
                             markerElement.vals = `${j_name}`;
                             markerElement.profile = `${response['data'][i]['file_name']}`;
                             const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}`;
