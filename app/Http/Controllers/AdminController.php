@@ -54,8 +54,33 @@ class AdminController extends Controller
     public function charts()
     {
         $data = db::table("v_get_waste_comp")->get();
-        return response()->json(['result' => $data]);
+        $waste = db::table("v_get_waste_data")->get();
+        return response()->json(['result' => $data, 'waste' => $waste ]);
     }
+
+    public function filter_charts(Request $request)
+    {
+        $value = $request->filter;
+        if($value == "kg_day")
+            $waste = db::table("v_get_waste_data")->get(['city','gen_kg_day as value']);
+        else if($value == "psa")
+            $waste = db::table("v_get_waste_data")->get(['city','psa_population as value']);
+        else if($value == "capita")
+            $waste = db::table("v_get_waste_data")->get(['city','per_capita_kg_day as value']);
+        else if($value == "mrf")
+            $waste = db::table("v_get_waste_data")->get(['city','mrf_kg_day as value']);
+        else if($value == "diversion")
+            $waste = db::table("v_get_waste_data")->get(['city','diversion_rate as value']);
+        else if($value == "landfill")
+            $waste = db::table("v_get_waste_data")->get(['city','landfill as value']);
+        else if($value == "disposed")
+            $waste = db::table("v_get_waste_data")->get(['city','disposed as value']);
+        
+
+        return response()->json(['waste' => $waste ]);
+
+    }
+    
 
     public function get_waste_composition()
     {

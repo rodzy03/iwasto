@@ -343,7 +343,7 @@
                     <div class="form-group row">
                         <div class="col-lg-6">
                             
-                                <label class="form-control-label">Date Given</label>
+                                <label class="form-control-label">Date Provided</label>
                                 <input type="date" class="form-control tx_given" />
                             
                         </div>

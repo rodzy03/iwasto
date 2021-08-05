@@ -117,7 +117,63 @@
     </div>
     
 </div>
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
+                <span class="svg-icon svg-icon-md svg-icon-primary">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Chart-bar1.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="13" rx="1.5" />
+                            <rect fill="#000000" opacity="0.3" x="7" y="9" width="3" height="8" rx="1.5" />
+                            <path d="M5,19 L20,19 C20.5522847,19 21,19.4477153 21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 C4.55228475,3 5,3.44771525 5,4 L5,19 Z" fill="#000000" fill-rule="nonzero" />
+                            <rect fill="#000000" opacity="0.3" x="17" y="11" width="3" height="6" rx="1.5" />
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+            </span>
+            <h3 class="card-label">Charts Data Control</h3>
+        </div>
 
+    </div>
+
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-12">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header">
+                <div class="card-title ">
+                
+                    <h3 class="card-label">Waste Data</h3>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="col-lg-4" >
+                    
+                    <select id="sel_type_e" class="form-control sel_type_e" name="sel_type_e" style="width: 100%;">
+                        <option value="kg_day">Waste Generation (KG/DAY)</option>
+                        <option value="psa">Population Projection Based on PSA 2020</option>
+                        <option value="capita">Per Capita Waste Generation</option>
+                        <option value="mrf">Diverted Waste to MRF (KG/DAY)</option>
+                        <option value="diversion">Waste Diversion Rate (%)</option>
+                        <option value="landfill">Waste Disposed in Landfill (KG/DAY)</option>
+                        <option value="disposed">Waste Disposed (%)</option>
+                    </select>
+                </div>
+                <!--begin::Chart-->
+                <div id="waste_chart" class="d-flex justify-content-center"></div>
+                <!--end::Chart-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
@@ -143,32 +199,32 @@
 
 </div>
 
-<div id='map' style='height: 700px; margin-top:20px;' >
+<div id='map' style='height: 700px; margin-top:20px;' hidden>
 </div>
             
 
  <!-- Modal-->
  <div class="modal fade popout-modal" id="popout-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered " role="document">
-                        <div class="modal-content">
-                            
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Waste Collection Facility</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i aria-hidden="true" class="ki ki-close"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body modal_card_div">
+    <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Waste Collection Facility</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body modal_card_div">
+                
                                 
-                                                
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section('extra-js')
@@ -176,12 +232,238 @@
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
 <!--end::Page Vendors-->
+<script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
 <script src="{{asset('assets/js/pages/features/charts/apexcharts.js')}}"></script>
 
 
 <script>
+    var chart_pie = '';
+    var apexChart;
+    $(document).ready(function() {
 
-    
+        var url = $('#bio').val();
+		var _token = $('#_token').val();
+		$.ajax({
+			url: url
+			, method: "post"
+			, data: {_token:_token}
+			, success:function(data) {
+				
+				const bio_series = [], resid = [], recyc = [], special = [], city = [];
+				const waste_city = [], gen_kg_day = [], psa_population = []
+				, per_capita_kg_day = [], mrf_kg_day = [], diversion_rate = [], landfill = [], disposed = [];
+				for (var i=0; i<data['result'].length; i++) {
+					city.push(data['result'][i]['city']);
+					bio_series.push( (data['result'][i]['biodegradable_chart'] != null) ? data['result'][i]['biodegradable_chart'] : 0  );
+					recyc.push( (data['result'][i]['recyclable_chart'] != null) ? data['result'][i]['recyclable_chart'] : 0 );
+					resid.push( (data['result'][i]['residual_chart'] != null) ? data['result'][i]['residual_chart'] : 0);
+					special.push( (data['result'][i]['special_chart'] != null) ? data['result'][i]['special_chart'] : 0 );
+				}
+				
+				for (var i=0; i<data['waste'].length; i++) {
+					waste_city.push(data['waste'][i]['city']);
+                    gen_kg_day.push( (data['waste'][i]['gen_kg_day'] != null) ? data['waste'][i]['gen_kg_day'] : 0 );
+					
+				}
+				
+				apexChart = "#bio_chart";
+				var options = {
+					series: bio_series,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+				apexChart = "#recyc_chart";
+				var options = {
+					series: recyc,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+
+				apexChart = "#resid_chart";
+				var options = {
+					series: resid,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+				apexChart = "#special_chart";
+				var options = {
+					series: special,
+					labels: city,
+					chart: {
+						width: 500,
+						type: 'donut',
+
+						
+					},
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 200
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				var chart = new ApexCharts(document.querySelector(apexChart), options);
+				chart.render();
+
+				apexChart = "#waste_chart";
+				var options = {
+					series: gen_kg_day,
+					labels: waste_city,
+					chart: {
+						width: 600,
+						type: 'pie',
+					},
+					
+					responsive: [{
+						breakpoint: 480,
+						options: {
+							chart: {
+								width: 300
+							},
+							legend: {
+								position: 'bottom'
+							}
+						}
+					}],
+					colors: [primary, success, warning, danger, info]
+				};
+
+				chart_pie = new ApexCharts(document.querySelector(apexChart), options);
+				chart_pie.render();
+			}
+		});
+
+        $('.sel_type_e').on('change',function(e){
+            
+            KTApp.blockPage({
+                    overlayColor: '#000000',
+                    state: 'danger',
+                    message: 'Please wait...'
+                });
+
+                setTimeout(function() {
+                    KTApp.unblockPage();
+                }, 2000);
+
+            var filter = e.target.value;
+            $.ajax({
+                url: "{{route('filter_charts')}}"
+                , method : "post"
+                , data: {_token:"{{csrf_token()}}", filter:filter }
+                , success:function(data) {
+                    const city = [], value = [];
+                    var len = data['waste'].length;
+                    
+
+                    for(var i=0; i<len; i++) {
+                        city.push(data['waste'][i]['city'])
+                        value.push( (data['waste'][i]['value'] != null) ? data['waste'][i]['value'] : 0 );
+                    }
+
+                    chart_pie.destroy();
+                    apexChart = "#waste_chart";
+                    var options = {
+                    	series: value,
+                    	labels: city,
+                    	chart: {
+                    		width: 600,
+                    		type: 'pie',
+                    	},
+                        
+                    	responsive: [{
+                    		breakpoint: 480,
+                    		options: {
+                    			chart: {
+                    				width: 300
+                    			},
+                    			legend: {
+                    				position: 'bottom'
+                    			}
+                    		}
+                    	}],
+                    	colors: [primary, success, warning, danger, info]
+                    };
+                    
+                    chart_pie = new ApexCharts(document.querySelector(apexChart), options);
+                    chart_pie.render();
+                }
+            });
+                
+        });
+    });
+    $('.sel_type_e').select2({
+         placeholder: "Select Type"
+    });
 
     
     mapboxgl.accessToken = "{{env('MAPBOX_KEY')}}";
@@ -402,138 +684,8 @@
     get_locations();
 
     $('#kt_datatable').DataTable();
-    $('#import_btn').click(function() {
-
-        var data = new FormData();
-        data.append("file", document.getElementById('inMainDocument').files[0]);
-        data.append("_token", "{{csrf_token()}}");
-        status = "file";
-        modal_id = "import_modal";
-        var url = "{{route('import_waste')}}";
-        update(data, url, status, modal_id);
-    });
-
-    $('#add_btn').click(function() {
-
-        region = $('select[name=sel_region_a] option:selected').val();
-        province = $('select[name=sel_province_a] option:selected').val();
-        city_muni = $('select[name=sel_muni_a] option:selected').val();
-        barangay = $('select[name=sel_barangay_a] option:selected').val();
-
-        url = "{{route('crud_routes')}}";
-        status = "add";
-        modal_id = "add_modal";
-        data = {
-            _token: "{{csrf_token()}}",
-            status: status,
-            region: region,
-            province: province,
-            city_muni: city_muni,
-            barangay: barangay,
-            route_name: $('.tx_route_name').val()
-
-        };
-
-        update(data, url, status, modal_id);
-    });
-
-
-    $(document).ready(function() {
-
-        get_provinces($('#sel_region_a option:selected').val());
-
-        $('#sel_region_a').on('change', function() {
-
-            get_provinces($('#sel_region_a option:selected').val());
-        });
-
-        $('.sel_province_a').on('change', function() {
-
-            get_municipality($('.sel_province_a option:selected').val());
-        });
-
-        $('.sel_muni_a').on('change', function() {
-
-            get_barangay($('.sel_muni_a option:selected').val());
-        });
-
-    });
-
-    function get_provinces(region) {
-
-        $.ajax({
-            url: "{{route('provinces')}}",
-            method: "post",
-            data: {
-                _token: "{{csrf_token()}}",
-                params: region
-            },
-            success: function(data) {
-
-                $('.sel_province_a').empty();
-                $('.sel_province_a').each(function(index, row) {
-                    for (var i = 0; i < data['response'].length; i++) {
-                        $(this).append($("<option>").text(data['response'][i]['province_desc']).val(data['response'][i]['province_desc']));
-                    }
-                });
-
-                get_municipality($('#sel_province_a option:selected').val());
-
-            },
-            error: function() {
-                console.log(data)
-            }
-        });
-    }
-
-    function get_municipality(region) {
-
-        $.ajax({
-            url: "{{route('municipality')}}",
-            method: "post",
-            data: {
-                _token: "{{csrf_token()}}",
-                params: region
-            },
-            success: function(data) {
-
-                $('.sel_muni_a').empty();
-                $('.sel_muni_a').each(function(index, row) {
-                    for (var i = 0; i < data['response'].length; i++) {
-                        $(this).append($("<option>").text(data['response'][i]['citymun_desc']).val(data['response'][i]['citymun_desc']));
-                    }
-                });
-                get_barangay($('select[name=sel_muni_a] option:selected').val());
-            },
-            error: function() {
-                console.log(data)
-            }
-        });
-    }
-
-    function get_barangay(region) {
-        $.ajax({
-            url: "{{route('barangay')}}",
-            method: "post",
-            data: {
-                _token: "{{csrf_token()}}",
-                params: region
-            },
-            success: function(data) {
-
-                $('.sel_barangay_a').empty();
-                $('.sel_barangay_a').each(function(index, row) {
-                    for (var i = 0; i < data['response'].length; i++) {
-                        $(this).append($("<option>").text(data['response'][i]['barangay_desc']).val(data['response'][i]['barangay_desc']));
-                    }
-                });
-
-            },
-            error: function() {
-                console.log(data)
-            }
-        });
-    }
+    
+    
 </script>
 @endsection
 @endsection

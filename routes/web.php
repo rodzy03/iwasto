@@ -18,6 +18,9 @@ Route::get('/', function() {
   });
 
   Route::post('/charts','AdminController@charts')->name('charts');
+  Route::post('/filter_charts','AdminController@filter_charts')->name('filter_charts');
+  
+  
 // Mobile routes
 
 Route::get('/mobile/routes/{city}','AdminController@mobile_routes')->name('mobile_routes');
