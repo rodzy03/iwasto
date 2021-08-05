@@ -848,7 +848,8 @@
                                     Facility Type: </b>${j_type}<br><b>
                                     Capacity: </b>${j_capacity}<br><b>
                                     Capacity Rate: </b>${j_capacity_r}%<br><b>
-                                    Last Update (Date Provided): </b>${j_last_update}`;
+                                    Last Update (Date Provided): </b>${j_last_update}
+                                    <br><b>Contact Number: </b>${j_number}`;
 
                                     markerElement.vals = `${j_name}`
                                     markerElement.profile = `${response['result'][j]['file_name']}`;
