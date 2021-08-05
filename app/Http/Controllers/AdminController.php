@@ -242,6 +242,7 @@ class AdminController extends Controller
                     , 'capacity' => $request->get('capacity')
                     , 'capacity_rate' => $request->get('capacity_rate')
                     , 'last_update' => $request->get('last_update')
+                    , 'contact_number' => $request->get('contact_number')
                 ]);
 
                 if ($request->hasFile('file')) 
@@ -328,6 +329,7 @@ class AdminController extends Controller
                 , 'capacity_rate' => $request->get('capacity_rate')
                 , 'updated_date' => db::raw("CURRENT_DATE")
                 , 'last_update' => $request->get('last_update')
+                , 'contact_number' => $request->get('contact_number')
             ]);
 
         }

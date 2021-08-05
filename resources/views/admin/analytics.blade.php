@@ -695,7 +695,7 @@
                                     j_capacity = response['result'][j]['capacity'];
                                     j_capacity_r = response['result'][j]['capacity_rate'];
                                     j_last_update = response['result'][j]['last_update'];
-
+                                    j_number = response['result'][j]['contact_number'];
 
                                     markerElement = document.createElement('div')
                                     markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
@@ -712,7 +712,8 @@
                                     Facility Type: </b>${j_type}<br><b>
                                     Capacity: </b>${j_capacity}<br><b>
                                     Capacity Rate: </b>${j_capacity_r}%<br><b>
-                                    Last Update (Date Provided): </b>${j_last_update}`;
+                                    Last Update (Date Provided): </b>${j_last_update}
+                                    <br><b>Contact Number: </b>${j_number}`;
                                     
                                     markerElement.vals = `${j_name}`;
                                     markerElement.profile = `${response['result'][j]['file_name']}`;
@@ -885,6 +886,7 @@
                             j_capacity = response['data'][i]['capacity'];
                             j_capacity_r = response['data'][i]['capacity_rate'];
                             j_last_update = response['data'][i]['last_update'];
+                            j_number = response['data'][i]['contact_number'];
 
                             markerElement = document.createElement('div')
                             markerElement.className = 'marker ' + response['data'][i]['swm_location_id']
@@ -901,7 +903,8 @@
                                     Facility Type: </b>${j_type}<br><b>
                                     Capacity: </b>${j_capacity}<br><b>
                                     Capacity Rate: </b>${j_capacity_r}%<br><b>
-                                    Last Update (Date Provided): </b>${j_last_update}`;
+                                    Last Update (Date Provided): </b>${j_last_update}
+                                    <br><b>Contact Number: </b>${j_number}`;
                             markerElement.vals = `${j_name}`;
                             markerElement.profile = `${response['data'][i]['file_name']}`;
                             const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}`;
