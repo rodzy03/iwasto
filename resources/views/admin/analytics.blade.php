@@ -199,7 +199,7 @@
 
 </div>
 
-<div id='map' style='height: 700px; margin-top:20px;' hidden>
+<div id='map' style='height: 700px; margin-top:20px;' >
 </div>
             
 
