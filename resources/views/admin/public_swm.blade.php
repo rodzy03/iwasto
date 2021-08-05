@@ -490,6 +490,7 @@
 
         map.addControl(new mapboxgl.FullscreenControl());
         map.addControl(new mapboxgl.NavigationControl());
+
         var markerElement;
         get_locations();
 
@@ -896,7 +897,7 @@
                                                 <div class="card mb-8">
                                                     <div class="card-body">
                                                         
-                                                            <h5 class="text-dark mb-8">SWM Information </h5>
+                                                            <h5 class="text-dark mb-8">Waste Collection Facility Information </h5>
                                                             
                                                             <div class="accordion accordion-light ">
                                                                 
@@ -1097,7 +1098,7 @@
                                             <div class="card mb-8">
                                                 <div class="card-body">
                                                     
-                                                        <h5 class="text-dark mb-8">SWM Information </h5>
+                                                        <h5 class="text-dark mb-8">Waste Collection Facility Information </h5>
                                                         
                                                         <div class="accordion accordion-light ">
                                                             
