@@ -527,7 +527,7 @@
                         value = [];
                     var len = data['waste'].length;
 
-                    console.log(data['waste'])
+                    
                     for (var i = 0; i < len; i++) {
                         city.push(data['waste'][i]['city'])
                         value.push((data['waste'][i]['value'] != null) ? data['waste'][i]['value'] : 0);
