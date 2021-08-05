@@ -164,6 +164,7 @@
                             <br><span style="font-size: 11px;">Capacity : {!! (!empty($row->capacity)) ? $row->capacity : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Capacity Rate: {!! (!empty($row->capacity_rate)) ? $row->capacity_rate."%" : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Last Update (Date Provided): {!! (!empty($row->last_update)) ? $row->last_update : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Contact Number: {!! (!empty($row->contact_number)) ? $row->contact_number : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" hidden>
@@ -360,6 +361,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Contact Number</label>
+                                <input type="text" class="form-control tx_contact" />
+                            
+                        </div>
+                        
+                    </div>
+
                     
                     
 
@@ -481,7 +492,15 @@
                         </div>
                     </div>
                     
-
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Contact Number</label>
+                                <input type="text" class="form-control tx_contact_e" />
+                            
+                        </div>
+                        
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -713,6 +732,8 @@
         data.append("capacity", $('input[name="rd_capacity"]:checked').val());
         data.append("capacity_rate", $('.tx_c_rate').val());
         data.append("last_update", $('.tx_given').val());
+        data.append("contact_number", $('.tx_contact').val());
+        
         
         
         crud_file(data, url, status, modal_id);
@@ -756,6 +777,7 @@
         data.append("capacity", $('input[name="rd_capacity_e"]:checked').val());
         data.append("capacity_rate", $('.tx_c_rate_e').val());
         data.append("last_update", $('.tx_given_e').val());
+        data.append("contact_number", $('.tx_contact_e').val());
         data.append("id", id);
 
         
