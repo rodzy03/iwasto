@@ -148,6 +148,7 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,13 +156,14 @@
                     <tr>
                         <td >
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->junkshop_name}}</span>
-                            <br><span style="font-size: 11px;">WORKING DAYS : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">WORKING HOURS : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">ADDRESS : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">ACCEPTABLE MATERIALS : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">FACILITY TYPE : {!! (!empty($row->facility_type)) ? $row->facility_type : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">CAPACITY : {!! (!empty($row->capacity)) ? $row->capacity : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">CAPACITY RATE: {!! (!empty($row->capacity_rate)) ? $row->capacity_rate."%" : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Working Days : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Working Hours : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Address : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Acceptable Materials : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Facility Type : {!! (!empty($row->facility_type)) ? $row->facility_type : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Capacity : {!! (!empty($row->capacity)) ? $row->capacity : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Capacity Rate: {!! (!empty($row->capacity_rate)) ? $row->capacity_rate."%" : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Last Update (Date Provided): {!! (!empty($row->last_update)) ? $row->last_update : "N/A" !!}</span>
                         </td>
 
                         <td style="text-transform:uppercase;" hidden>
@@ -228,6 +230,7 @@
                         <td hidden>{{$row->facility_type}}</td>
                         <td hidden>{{$row->capacity}}</td>
                         <td hidden>{{$row->capacity_rate}}</td>
+                        <td hidden>{{$row->date_provided}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -461,11 +464,23 @@
                         <label class="form-control-label">Latitude</label>
                         <input type="text" class="form-control tx_latitude_e" />
                     </div>
-
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inMainDocument_e">
-                        <label class="custom-file-label" for="inMainDocument_e">Choose file</label>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Date Provided</label>
+                                <input type="date" class="form-control tx_given_e" />
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Upload Image</label>
+                            <div class="custom-file ">
+                            
+                                <input type="file" class="custom-file-input" id="inMainDocument_e">
+                                <label class="custom-file-label" for="inMainDocument_e">Choose file</label>
+                            </div>
+                        </div>
                     </div>
+                    
 
                 </form>
             </div>
@@ -639,8 +654,9 @@
             param_7 = $(row.find("td")[11]).text(),
             param_8 = $(row.find("td")[12]).text(),
             param_9 = $(row.find("td")[13]).text(),
-            param_10 = $(row.find("td")[14]).text();
-            param_11 = $(row.find("td")[15]).text();
+            param_10 = $(row.find("td")[14]).text(),
+            param_11 = $(row.find("td")[15]).text(),
+            param_12 = $(row.find("td")[16]).text();
             
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).prop( "disabled", false ) : $( ".tx_c_rate_e" ).prop( "disabled", true );
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val(param_11) : $( ".tx_c_rate_e" ).val(100);
@@ -655,6 +671,7 @@
         $('.tx_acc_mat_e').val(param_6);
         $('.tx_start_e').val(param_7);
         $('.tx_end_e').val(param_8);
+        $('.tx_given_e').val(param_12);
         selectElement('sel_type_e', param_9)
 
         
@@ -738,6 +755,7 @@
         data.append("facility_type", $('select[name=sel_type_e] option:selected').val());
         data.append("capacity", $('input[name="rd_capacity_e"]:checked').val());
         data.append("capacity_rate", $('.tx_c_rate_e').val());
+        data.append("last_update", $('.tx_given_e').val());
         data.append("id", id);
 
         

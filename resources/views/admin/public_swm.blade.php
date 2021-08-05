@@ -599,7 +599,7 @@
                                     j_type = response['result'][j]['facility_type'];
                                     j_capacity = response['result'][j]['capacity'];
                                     j_capacity_r = response['result'][j]['capacity_rate'];
-
+                                    j_last_update = response['result'][j]['last_update'];
 
 
                                     markerElement = document.createElement('div')
@@ -610,7 +610,15 @@
                                     markerElement.style.backgroundSize = 'cover'
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
-                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>
+                                    Acceptable Materials: </b><br>${j_a_mat}<br><b>
+                                    Working Days: </b><br>${wd_display}<br><b>
+                                    Working Hours: </b>${j_hours}<br><b>
+                                    Facility Type: </b>${j_type}<br><b>
+                                    Capacity: </b>${j_capacity}<br><b>
+                                    Capacity Rate: </b>${j_capacity_r}%<br><b>
+                                    Last Update (Date Provided): </b>${j_last_update}`;
+                                    
                                     markerElement.vals = `${j_name}`;
                                     markerElement.profile = `${response['result'][j]['file_name']}`;
 
@@ -790,10 +798,11 @@
                                     j_type = response['result'][j]['facility_type'];
                                     j_capacity = response['result'][j]['capacity'];
                                     j_capacity_r = response['result'][j]['capacity_rate'];
+                                    j_last_update = response['result'][j]['last_update'];
 
 
-
-                                    const info = `<b>Address: </b>${j_address}<br><b>Acceptable Materials: </b>${j_a_mat}<br><b>Working Days: </b>${wd_display}<br><b>Working Hours: </b>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                    const info = `<b>Address: </b>${j_address}<br><b>Acceptable Materials: </b>${j_a_mat}<br><b>Working Days: </b>${wd_display}<br><b>Working Hours: </b>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%
+                                    <br><b>Last Update (Date Provided): </b>${j_last_update}`
 
                                     const cards = `<div class="card-header" id="headingOne7">
                                                             <div class="card-title"  aria-expanded="true" role="button">
@@ -829,8 +838,16 @@
                                     markerElement.style.backgroundSize = 'cover'
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
-                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
-                                    markerElement.vals = `${j_name}`;
+                                    markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>
+                                    Acceptable Materials: </b><br>${j_a_mat}<br><b>
+                                    Working Days: </b><br>${wd_display}<br><b>
+                                    Working Hours: </b>${j_hours}<br><b>
+                                    Facility Type: </b>${j_type}<br><b>
+                                    Capacity: </b>${j_capacity}<br><b>
+                                    Capacity Rate: </b>${j_capacity_r}%<br><b>
+                                    Last Update (Date Provided): </b>${j_last_update}`;
+
+                                    markerElement.vals = `${j_name}`
                                     markerElement.profile = `${response['result'][j]['file_name']}`;
 
                                     const content = `
@@ -992,6 +1009,7 @@
                                 j_type = response['data'][i]['facility_type'];
                                 j_capacity = response['data'][i]['capacity'];
                                 j_capacity_r = response['data'][i]['capacity_rate'];
+                                j_last_update = response['data'][i]['last_update'];
 
                                 markerElement = document.createElement('div')
                                 markerElement.className = 'marker ' + response['data'][i]['swm_location_id']
@@ -1001,7 +1019,15 @@
                                 markerElement.style.backgroundSize = 'cover'
                                 markerElement.style.width = '50px'
                                 markerElement.style.height = '50px'
-                                markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
+                                
+                                markerElement.value =  `<b>Address: </b><br>${j_address}<br><b>
+                                    Acceptable Materials: </b><br>${j_a_mat}<br><b>
+                                    Working Days: </b><br>${wd_display}<br><b>
+                                    Working Hours: </b>${j_hours}<br><b>
+                                    Facility Type: </b>${j_type}<br><b>
+                                    Capacity: </b>${j_capacity}<br><b>
+                                    Capacity Rate: </b>${j_capacity_r}%<br><b>
+                                    Last Update (Date Provided): </b>${j_last_update}`;
                                 markerElement.vals = `${j_name}`;
                                 markerElement.profile = `${response['data'][i]['file_name']}`;
                                 const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}`;

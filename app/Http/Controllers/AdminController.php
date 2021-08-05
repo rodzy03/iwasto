@@ -327,6 +327,7 @@ class AdminController extends Controller
                 , 'capacity' => $request->get('capacity')
                 , 'capacity_rate' => $request->get('capacity_rate')
                 , 'updated_date' => db::raw("CURRENT_DATE")
+                , 'last_update' => $request->get('last_update')
             ]);
 
         }

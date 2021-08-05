@@ -46,13 +46,13 @@
     
     <div class="col-lg-6">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
+        <div class="card card-custom gutter-b" style="background: #80cbc4;">
             <div class="card-header">
-                <div class="card-title">
+                <div class="card-title" >
                     <h3 class="card-label">Biodegradable</h3>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
                 <div id="bio_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
@@ -63,13 +63,13 @@
 
     <div class="col-lg-6">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
+        <div class="card card-custom gutter-b" style="background: #80cbc4;">
             <div class="card-header">
-                <div class="card-title">
+                <div class="card-title" >
                     <h3 class="card-label">Recyclable</h3>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
                 <div id="recyc_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
@@ -84,13 +84,13 @@
     
     <div class="col-lg-6">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
+        <div class="card card-custom gutter-b" style="background: #80cbc4;">
             <div class="card-header">
                 <div class="card-title">
                     <h3 class="card-label">Residual</h3>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
                 <div id="resid_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
@@ -101,13 +101,13 @@
 
     <div class="col-lg-6">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
+        <div class="card card-custom gutter-b" style="background: #80cbc4;">
             <div class="card-header">
                 <div class="card-title">
                     <h3 class="card-label">Special</h3>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
                 <div id="special_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
@@ -145,7 +145,7 @@
 <div class="row">
     <div class="col-lg-12">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
+        <div class="card card-custom gutter-b" style="background: #80cbc4;"> 
             <div class="card-header">
                 <div class="card-title ">
                 
@@ -153,7 +153,7 @@
                 </div>
             </div>
             
-            <div class="card-body">
+            <div class="card-body"  style="background: #e0f2f1;">
                 <div class="col-lg-4" >
                     
                     <select id="sel_type_e" class="form-control sel_type_e" name="sel_type_e" style="width: 100%;">
