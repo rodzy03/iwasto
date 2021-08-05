@@ -30,10 +30,10 @@
             padding-left: 12px;
         }
 
-        /* @media (max-width: 991.98px)
+        @media (max-width: 991.98px)
         .header-mobile-fixed .header-mobile {
             display:none;
-        } */
+        } 
 
 
         /* .panel-float {
