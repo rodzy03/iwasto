@@ -79,7 +79,7 @@
 <body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed aside-enabled aside-static page-loading">
     <!--begin::Main-->
     <!--begin::Header Mobile-->
-    <div id="kt_header_mobile" class="header-mobile header-mobile-fixed" style="display:none;">
+    <div id="kt_header_mobile" class="header-mobile header-mobile-fixed" >
         <!--begin::Logo-->
         <a href="index.html">
             <img alt="Logo" src="{{asset('uploads/logo_green.png')}}" class="logo-default max-h-30px" />
@@ -159,7 +159,7 @@
                             
 
                             <div class="topbar-item mr-24">
-                                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_user_toggle">
+                                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_user_toggle" >
                                     <img alt="Logo" src="{{asset('uploads/other.png')}}" class="logo-sticky max-h-35px" />
                                 </div>
                             </div>
