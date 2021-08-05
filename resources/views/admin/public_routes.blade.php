@@ -30,10 +30,10 @@
             padding-left: 12px;
         }
 
-    @media (max-width: 991.98px)
+        /* @media (max-width: 991.98px)
         .header-mobile-fixed .header-mobile {
-        display:none;
-        }
+            display:none;
+        } */
 
 
         /* .panel-float {
@@ -107,16 +107,16 @@
         <!--end::Toolbar-->
     </div>
     <!--end::Header Mobile-->
-    
+
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
         <div class="d-flex flex-row flex-column-fluid page">
             <!--begin::Aside-->
             <div class="aside aside-left d-flex flex-column flex-row-auto" id="kt_aside">
                 <!--begin::Aside Menu-->
-                
-                    @include('admin.public_sidenav')
-                
+
+                @include('admin.public_sidenav')
+
                 <!--end::Aside Menu-->
             </div>
             <!--end::Aside-->
@@ -253,93 +253,83 @@
                                         </span>
                                         <h3 class="card-label">Collection Routes</h3>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="card-body" style="min-width: 100px;">
                                     <!--begin::Table-->
                                     <div class="table-responsive">
                                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
-                <thead>
-                    <tr class="text-left ">
-                        <th  style="min-width: 200px" class="pl-7">
-                            <span class="text-dark-75">city</span>
-                        </th>
-                        <th  style="min-width: 200px" >
-                            <span class="text-dark-75">route name</span>
-                        </th>
-                        <th  hidden>
-                            <span class="text-dark-75">route details</span>
-                        </th>
-                        <th  style="min-width: 200px" >
-                            <span class="text-dark-75">waste type</span>
-                        </th>
-                        <th hidden>
-                            <span class="text-dark-75">collection date</span>
-                        </th>
-                        <th  style="min-width: 100px" >
-                            <span class="text-dark-75">action</span>
-                        </th>
+                                            <thead>
+                                                <tr class="text-left ">
+                                                    <th style="min-width: 200px" class="pl-7">
+                                                        <span class="text-dark-75">city</span>
+                                                    </th>
+                                                    <th style="min-width: 200px">
+                                                        <span class="text-dark-75">route name</span>
+                                                    </th>
+                                                   
+                                                    <th style="min-width: 200px">
+                                                        <span class="text-dark-75">waste type</span>
+                                                    </th>
 
+                                                    <th style="min-width: 200px">
+                                                        <span class="text-dark-75">&nbsp;</span>
+                                                    </th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($data as $row)
-                    <tr>
-                        @php
-                        $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
-                        @endphp
+                                                    <th hidden></th>
+                                                    <th hidden></th>
+                                                    <th hidden></th>
+                                                    <th hidden></th>
+                                                    <th hidden></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($data as $row)
+                                                <tr>
+                                                    @php
+                                                    $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
+                                                    @endphp
 
-                        <td >
-                            <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
-                            {{--<br><span style="font-size: 11px;">route name : {!! (!empty($row->route_name)) ? $row->route_name : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">route details : {!! (!empty($row->route_details)) ? $row->route_details : "N/A" !!}</span>
-                            @if($row->recurring == 1)
-                                <br><span style="font-size: 11px;">collection days : {!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
-                            @else
-                            <br><span style="font-size: 11px;">collection date : {!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
-                            @endif--}}
-                        </td>
+                                                    <td>
+                                                        <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
+                                                    </td>
 
-                        <td  >
-                            <span class="text-dark-75">{{$row->route_name}}</span>
-                        </td>
-                        <td  hidden>
-                            <span class="text-dark-75">{{$row->route_details}}</span>
-                        </td>
-                        <td  >
-                            <span class="text-dark-75">{{$type_name}}</span>
-                        </td>
-                        <td hidden>
-                            @if($row->recurring == 1)
-                                <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
-                            @else
-                                <span class="text-dark-75">{!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
-                            @endif
-                            
-                        </td>
-                        <td>
-                        <!--begin::Dropdown-->
-                            <button data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder add_modal" aria-haspopup="true" aria-expanded="false">
-                                <span class="svg-icon svg-icon-2x">
-                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24" />
-                                            <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                            <path d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z" fill="#000000" />
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span>View
+                                                    <td>
+                                                        <span class="text-dark-75">{{$row->route_name}}</span>
+                                                    </td>
 
-                            </button>
-                        </td>
+                                                    <td>
+                                                        <span class="text-dark-75">{{$type_name}}</span>
+                                                    </td>
+                                                   
+                                                    <td>
+                                                        <!--begin::Dropdown-->
+                                                        <button id=view data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder add_modal" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="svg-icon svg-icon-2x">
+                                                                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <rect x="0" y="0" width="24" height="24" />
+                                                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                                                        <path d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z" fill="#000000" />
+                                                                    </g>
+                                                                </svg>
+                                                                <!--end::Svg Icon-->
+                                                            </span>View Route Details
 
-                        
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                                        </button>
+                                                    </td>
+                                                    @php $collection = ($row->recurring == 1) ? $row->collection_days : $row->collection_date @endphp
+                                                    <td hidden>{{$row->route_details}}</td>
+                                                    <td hidden>{{$collection}}</td>
+                                                    <td hidden>{{$row->city_municipality}}</td>
+                                                    <td hidden>{{$row->route_name}}</td>
+                                                    <td hidden>{{$type_name}}</td>
+                                                    
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!--end::Table-->
                                 </div>
@@ -387,7 +377,7 @@
         <!--end::Page-->
     </div>
     <!--end::Main-->
-    
+
     <!--begin::Body-->
 
     <!--begin::Scrolltop-->
@@ -405,6 +395,73 @@
         </span>
     </div>
     <!--end::Scrolltop-->
+    <div class="modal fade " id="add_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">&nbsp;</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body modal_card_div">
+                    <div class="col-lg-12">
+                        <div class="card mb-8">
+                            <div class="card-body">
+
+
+
+                                <div class="accordion accordion-light ">
+
+                                    <div class="card ">
+
+
+                                        <div class="card-header" id="headingOne7">
+                                            <div class="card-title" aria-expanded="true" role="button">
+                                                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24" />
+                                                            <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000" />
+                                                        </g>
+                                                    </svg>
+                                                </span>
+
+
+                                                <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">Route Information</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+                                            <div class="card-body text-dark-50 font-size-md pl-2">
+                                                <p class="route_info"></p>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <!--end::Item-->
+
+                                </div>
+                                <!--end::Accordion-->
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     @include('layouts.includes.base-js')
@@ -412,12 +469,32 @@
     <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
-    <script src="{{asset('assets/js/pages/features/miscellaneous/sticky-panels.js')}}"></script>
+    
     <!--end::Page Scripts-->
 
 
     <script>
         $('#kt_datatable').DataTable();
+        $(document).ready(function(){
+            $('#kt_datatable').on('click','#view',function(){
+                let row = $(this).closest("tr"),
+                
+                details = $(row.find("td")[4]).text(),
+                collection = $(row.find("td")[5]).text(),
+                city = $(row.find("td")[6]).text(),
+                route_name = $(row.find("td")[7]).text(),
+                typenae = $(row.find("td")[8]).text();
+
+                const info = `City: ${city}<br>
+                Route Name: ${route_name}<br>
+                Waste Classification: ${typenae}<br>
+                Route Details: <br>${details}<br>
+                Collection Date: ${collection}`;
+                $('.route_info').html(info);
+                
+            });
+        })
+        
         $('#search_swm').keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
 
