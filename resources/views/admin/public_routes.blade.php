@@ -474,7 +474,9 @@
 
 
     <script>
+
         $('#kt_datatable').DataTable();
+
         $(document).ready(function(){
             $('#kt_datatable').on('click','#view',function(){
                 let row = $(this).closest("tr"),
@@ -485,11 +487,11 @@
                 route_name = $(row.find("td")[7]).text(),
                 typenae = $(row.find("td")[8]).text();
 
-                const info = `City: ${city}<br>
-                Route Name: ${route_name}<br>
-                Waste Classification: ${typenae}<br>
-                Route Details: <br>${details}<br>
-                Collection Date: ${collection}`;
+                const info = `<b>City : </b>${city}<br>
+                <b>Route Name : </b>${route_name}<br>
+                <b>Waste Classification : </b>${typenae}<br>
+                <b>Route Details : </b><br>${details}<br>
+                <b>Collection Date : </b>${collection}`;
                 $('.route_info').html(info);
                 
             });

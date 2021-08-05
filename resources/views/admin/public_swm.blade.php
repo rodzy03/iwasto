@@ -139,9 +139,9 @@
                     <!--begin::Container-->
                     <div class="container d-flex align-items-stretch justify-content-between">
                         <!--begin::Left-->
-                        <div class="d-none d-lg-flex align-items-center mr-3">
+                        <div class="d-none d-lg-flex align-items-center ">
                             <!--begin::Aside Toggle-->
-                            <button class="btn btn-icon aside-toggle ml-n3 mr-10" id="kt_aside_desktop_toggle">
+                            <button class="btn btn-icon aside-toggle ml-n3 mr-10" id="kt_aside_desktop_toggle" >
                                 <span class="svg-icon svg-icon-xxl svg-icon-dark-75">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Align-left.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -605,8 +605,8 @@
                                     markerElement = document.createElement('div')
                                     markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
                                     markerElement.id = response['result'][j]['swm_location_id']
-
-                                    markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
+                                    var url = get_icons(j_type);
+                                    markerElement.style.backgroundImage = `url(${url})`
                                     markerElement.style.backgroundSize = 'cover'
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
@@ -833,8 +833,8 @@
                                     markerElement = document.createElement('div')
                                     markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
                                     markerElement.id = response['result'][j]['swm_location_id']
-
-                                    markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
+                                    var url = get_icons(j_type);
+                                    markerElement.style.backgroundImage = `url(${url})`
                                     markerElement.style.backgroundSize = 'cover'
                                     markerElement.style.width = '50px'
                                     markerElement.style.height = '50px'
@@ -964,9 +964,23 @@
 
             }
         });
+        
+        function get_icons(type) {
+            var icon = '';
+            if(type.toLowerCase() == "sanitary landfills")
+                icon = "{{asset('')}}uploads/landfills.png";
+            else if(type.toLowerCase() == "dumpsites")
+                icon = "{{asset('')}}uploads/dumpsite.png";
+            else if(type.toLowerCase() == "junkshops")
+                icon = "{{asset('')}}uploads/junkshop.png";
+            else if(type.toLowerCase() == "materials recovery facility")
+                icon = "{{asset('')}}uploads/waste_facility.png";
+
+            return icon;
+        }
 
         function get_locations() {
-
+            
             setTimeout(function() {
                 $.ajax({
                     url: "{{route('get_swm')}}",
@@ -1000,13 +1014,13 @@
                                     var item = ordered[y]['day'];
                                     ((y + 1) == (groupLength)) ? wd_display += item: wd_display += item + " , ";
                                 }
-                                // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
-                                //wd_display = response['data'][i]['working_days'];
+                                
                                 j_address = response['data'][i]['junkshop_address'];
                                 j_name = response['data'][i]['junkshop_name'];
                                 j_a_mat = response['data'][i]['acceptable_materials'];
                                 j_hours = response['data'][i]['working_hours'];
                                 j_type = response['data'][i]['facility_type'];
+                                var url = get_icons(j_type);
                                 j_capacity = response['data'][i]['capacity'];
                                 j_capacity_r = response['data'][i]['capacity_rate'];
                                 j_last_update = response['data'][i]['last_update'];
@@ -1014,8 +1028,8 @@
                                 markerElement = document.createElement('div')
                                 markerElement.className = 'marker ' + response['data'][i]['swm_location_id']
                                 markerElement.id = response['data'][i]['swm_location_id']
-
-                                markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
+                                // https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif
+                                markerElement.style.backgroundImage = `url(${url})`
                                 markerElement.style.backgroundSize = 'cover'
                                 markerElement.style.width = '50px'
                                 markerElement.style.height = '50px'
