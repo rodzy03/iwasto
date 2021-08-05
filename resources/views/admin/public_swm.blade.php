@@ -167,10 +167,14 @@
                         <!--end::Left-->
                         <!--begin::Topbar-->
                         <div class="topbar">
+                            
 
-
-
-
+                            <div class="topbar-item mr-24">
+                                <div class="btn btn-icon btn-sm btn-clean btn-text-dark-75" id="kt_quick_user_toggle">
+                                    <img alt="Logo" src="{{asset('uploads/other.png')}}" class="logo-sticky max-h-35px" />
+                                </div>
+                            </div>
+                            
                         </div>
                         <!--end::Topbar-->
                     </div>
