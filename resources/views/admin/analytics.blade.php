@@ -405,15 +405,15 @@
 
         $('.sel_type_e').on('change',function(e){
             
-            KTApp.blockPage({
-                    overlayColor: '#000000',
-                    state: 'danger',
-                    message: 'Please wait...'
-                });
+            // KTApp.blockPage({
+            //         overlayColor: '#000000',
+            //         state: 'danger',
+            //         message: 'Please wait...'
+            //     });
 
-                setTimeout(function() {
-                    KTApp.unblockPage();
-                }, 2000);
+            //     setTimeout(function() {
+            //         KTApp.unblockPage();
+            //     }, 2000);
 
             var filter = e.target.value;
             $.ajax({
