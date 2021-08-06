@@ -321,7 +321,7 @@
 <!--end::Page Vendors-->
 <script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
 <script src="{{asset('assets/js/pages/features/charts/apexcharts.js')}}"></script>
-
+<script async defer data-website-id="273608d3-3d8f-402c-9ed1-76ed781a047e" src="https://analytics.iwasto.ph/umami.js"></script>
 
 <script>
     var chart_pie = '';

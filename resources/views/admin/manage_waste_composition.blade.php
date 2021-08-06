@@ -320,6 +320,7 @@
 <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
 <script src="{{asset('assets/js/pages/crud/forms/widgets/input-mask.js')}}"></script>
+<script async defer data-website-id="273608d3-3d8f-402c-9ed1-76ed781a047e" src="https://analytics.iwasto.ph/umami.js"></script>
 <!--end::Page Vendors-->
 
 
