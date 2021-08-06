@@ -30,10 +30,12 @@
             padding-left: 12px;
         }
 
+        /*
         @media (max-width: 991.98px)
         .header-mobile-fixed .header-mobile {
             display:none;
         } 
+        */
 
 
         /* .panel-float {
@@ -416,7 +418,7 @@
     <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
-    
+    <script async defer data-website-id="273608d3-3d8f-402c-9ed1-76ed781a047e" src="https://analytics.iwasto.ph/umami.js"></script>
     <!--end::Page Scripts-->
 
 
