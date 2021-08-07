@@ -6,8 +6,6 @@
 <!--begin::Page Vendors Styles(used by this page)-->
 <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Page Vendors Styles-->
-
-
 @endsection
 
 <!--begin::Card-->
@@ -93,10 +91,11 @@
                         <th style="min-width: 100%;">
                             <span class="text-dark-75">total (kg/day)</span>
                         </th>
-                       
-                        <th style="min-width: 100px" class="text-dark-75" hidden>
+                        @if(empty($is_public))
+                        <th style="min-width: 100px" class="text-dark-75" >
                             <span class="text-dark-75">action</span>
                         </th>
+                        @endif
                        <th hidden></th>
                        <th hidden></th>
                        <th hidden></th>
@@ -152,21 +151,21 @@
 
                             <span class="text-dark-75" style="font-weight: bold;">{{$row->total_kg}}</span>
                         </td>
-                       
-                        <td class="pr-0 text-left" hidden>
-                            <a id=edit vals="" data-toggle="modal" data-target="#modal-edit" class="btn btn-light-info font-weight-bolder font-size-sm">
-                                <span class="svg-icon svg-icon-2x">
-                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Design\Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24" />
-                                            <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) " />
-                                            <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1" />
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span>
+                        @if(empty($is_public))
+                        <td class="pr-0 text-left" >
+                            <a id=delete vals="{{$row->city}}" data-toggle="popover" data-placement="right" data-content="Delete Data" class="btn btn-dark font-weight-bolder font-size-sm">
+                            <span class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\General\Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"/>
+                                        <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+
                             </a>
                         </td>
+                        @endif
                         <td hidden>{{$row->city}}</td>
                         <td hidden></td>
                         <td hidden></td>
@@ -266,49 +265,35 @@
 <!--end::Modal-->
 
 <!--begin::Modal-->
-<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Waste Data</h5>
+                <h5 class="modal-title">NOTE!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-
-                <div class="form-group">
-                    <label class="form-control-label col-lg-24 col-sm-24">&nbsp;City / Municipality</label><br>
-                    <select class="form-control sel_muni_e" id="sel_muni_e" name="sel_muni_e" style="width: 100%;">
-                        @foreach($city as $row)
-                        <option value="{{$row->citymun_desc}}">{{$row->citymun_desc}}</option>
-                        @endforeach
-                    </select>
+            <div class="alert alert-custom alert-notice alert-light-dark fade show mb-5" role="alert" >
+                    <div class="alert-icon">
+                        <i class="flaticon-warning"></i>
+                    </div>
+                    <div class="alert-text">ARE YOU SURE YOU WANT TO DELETE THIS DATA? </div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">
+                                <i class="ki ki-close"></i>
+                            </span>
+                        </button>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label col-lg-24 col-sm-24">&nbsp;Waste Type</label><br>
-                    <select class="form-control sel_waste_e" id="sel_waste_e" name="sel_waste_e" style="width: 100%; ">
-                        @foreach($type as $row)
-                        <option value="{{$row->segregate_type_id}}">{{ strtoupper($row->segregate_type_name) }}</option>
-                        @endforeach
-                    </select>
-                </div>
-               
-                <div class="form-group">
-                    <label class="form-control-label">&nbsp;Percent</label>
-                    <input id="tx_percent_e" class="form-control tx_percent_e" type="number" />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label">&nbsp;Total (kg/day)</label>
-                    <input id="tx_kgday_e" class="form-control tx_kgday_e" type="number" />
-                </div>
+                
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="update_btn">Submit</button>
+                <button type="button" class="btn btn-primary" id="delete_btn">Submit</button>
             </div>
         </div>
     </div>
@@ -436,6 +421,12 @@
 
     });
 
+    $('#kt_datatable').on('click', '#delete', function() {
+
+        id = $(this).attr('vals');
+        $('#delete_modal').modal('show');
+    });
+
     $('#add').click(function() {
         is_edit = false;
     });
@@ -452,6 +443,21 @@
         id = $(this).attr('vals');
         stats = "deact"
         $('.header_txt').text('This will deactivate the data. Continue?');
+    });
+
+    $('#delete_btn').click(function(){
+        
+        
+        url = "{{route('crud_waste_composition')}}";
+        status = "delete";
+        modal_id = "delete_modal";
+        data = {
+            _token: "{{csrf_token()}}",
+            id: id,
+            status:status
+        };
+        
+        update(data, url, status, modal_id);
     });
 
     $('#update_btn').click(function() {
