@@ -40,18 +40,18 @@ License: You must have a valid license purchased only from themeforest(the above
 			<div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url('assets/media/bg/bg-3.jpg');">
 				<div class="login-form text-center p-7 position-relative overflow-hidden">
 					<!--begin::Login Header-->
-					<div class="d-flex flex-center mb-15">
+					<div class="d-flex flex-center mb-10">
 						<a href="#">
-							<img src="{{asset('uploads/logo_green.png')}}" class="max-h-75px" alt="" />
+							<img src="{{asset('uploads/logo_green.png')}}" class="max-h-60px" alt="" />
 						</a>
 					</div>
 					<!--end::Login Header-->
 					<!--begin::Login Sign in form-->
 					<div class="login-signin">
-						<div class="mb-20">
+						{{--<div class="mb-20">
 							<h3>IWasto Web App</h3>
 							<div class="text-muted font-weight-bold">Enter your details to login to your account:</div>
-						</div>
+						</div>--}}
 
 						<form method="POST" action="{{ route('login') }}" id="login_form">
 							@csrf
