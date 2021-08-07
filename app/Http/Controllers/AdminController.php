@@ -90,7 +90,7 @@ class AdminController extends Controller
         $type = db::table('r_segregate_type')->get();
 
         $data = db::table("v_get_waste_comp")->get();
-
+        
         
         return view('admin.manage_waste_composition', compact('data','city','type'));
     }
@@ -188,6 +188,9 @@ class AdminController extends Controller
                 , 'percentage' => $request->percentage
                 , 'total_kg' => $request->total_kg
             ]);
+        }
+        else if($request->get('status') == "delete") {
+            db::delete('delete from r_waste_composition where city = ?',[$request->id]);
         }
         
     }
