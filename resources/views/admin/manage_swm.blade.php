@@ -468,7 +468,7 @@
                     </div>
                     <div class="form-group row">
                     <div class="col-lg-6">
-                        <label class="form-control-label">Lonhitude</label>
+                        <label class="form-control-label">Longitude</label>
                         <input type="text" class="form-control tx_longhitude_e" />
                     </div>
 
