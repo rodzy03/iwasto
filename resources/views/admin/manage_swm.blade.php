@@ -127,7 +127,7 @@
                         </th>
 
                         <th style="min-width: 100px;">
-                            <span class="text-dark-75">longhitude</span>
+                            <span class="text-dark-75">longitude</span>
                         </th>
 
                         <th style="min-width: 100px;">
@@ -332,7 +332,7 @@
                     <div class="form-group row">
                         <div class="col-lg-6">
                             
-                                <label class="form-control-label">Longhitude</label>
+                                <label class="form-control-label">Longitude</label>
                                 <input type="text" class="form-control tx_longhitude" />
                             
                         </div>
@@ -466,14 +466,16 @@
                         </div>
                         
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Longhitude</label>
+                    <div class="form-group row">
+                    <div class="col-lg-6">
+                        <label class="form-control-label">Lonhitude</label>
                         <input type="text" class="form-control tx_longhitude_e" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-lg-6">
                         <label class="form-control-label">Latitude</label>
                         <input type="text" class="form-control tx_latitude_e" />
+                    </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">

@@ -159,6 +159,9 @@ class AdminController extends Controller
                 , 'disposed' => $request->disposed
             ]);
         }
+        else if($request->get('status') == "delete") {
+            db::delete('delete from r_waste_data where waste_data_id = ?',[$request->id]);
+        }
         
     }
 
