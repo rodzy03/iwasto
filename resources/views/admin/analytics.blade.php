@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-@section('title','Routes')
+@section('title','Dashboard')
 @section('content')
 
 @section('extra-css')
