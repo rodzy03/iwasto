@@ -149,6 +149,7 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -159,12 +160,13 @@
                             <br><span style="font-size: 11px;">Working Days : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Working Hours : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Address : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">Contact Number: {!! (!empty($row->contact_number)) ? $row->contact_number : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Acceptable Materials : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Facility Type : {!! (!empty($row->facility_type)) ? $row->facility_type : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Capacity : {!! (!empty($row->capacity)) ? $row->capacity : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Capacity Rate: {!! (!empty($row->capacity_rate)) ? $row->capacity_rate."%" : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Last Update (Date Provided): {!! (!empty($row->last_update)) ? $row->last_update : "N/A" !!}</span>
-                            <br><span style="font-size: 11px;">Contact Number: {!! (!empty($row->contact_number)) ? $row->contact_number : "N/A" !!}</span>
+                            
                         </td>
 
                         <td style="text-transform:uppercase;" hidden>
@@ -232,6 +234,7 @@
                         <td hidden>{{$row->capacity}}</td>
                         <td hidden>{{$row->capacity_rate}}</td>
                         <td hidden>{{$row->date_provided}}</td>
+                        <td hidden>{{$row->contact_number}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -254,18 +257,28 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             
                             <label class="form-control-label">Waste Collection Facility</label>
                             <input type="text" class="form-control tx_junkshop_name"  />
                             
                         </div>
+                        
+                    </div>
+                    <div class="form-group row">
                         <div class="col-lg-6">
                             
                             <label class="form-control-label">Waste Collection Facility Address</label>
-                            <input type="text" class="form-control tx_junkshop_adderess"  />
+                            <textarea type="text" class="form-control tx_junkshop_adderess"  ></textarea>
                             
                         </div>
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Contact Number</label>
+                                <input type="number" class="form-control tx_contact" />
+                            
+                        </div>
+                        
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
@@ -361,15 +374,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-lg-6">
-                            
-                                <label class="form-control-label">Contact Number</label>
-                                <input type="text" class="form-control tx_contact" />
-                            
-                        </div>
-                        
-                    </div>
+                    
 
                     
                     
@@ -396,15 +401,31 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
-                        <label class="form-control-label">Waste Collection Facility</label>
-                        <input type="text" class="form-control tx_junkshop_name_e"  />
+                <div class="form-group row">
+                        <div class="col-lg-12">
+                            
+                            <label class="form-control-label">Waste Collection Facility</label>
+                            <input type="text" class="form-control tx_junkshop_name_e"  />
+                            
+                        </div>
+                        
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-control-label">Waste Collection Facility Address</label>
-                        <input type="text" class="form-control tx_junkshop_adderess_e"  />
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            
+                            <label class="form-control-label">Waste Collection Facility Address</label>
+                            <textarea type="text" class="form-control tx_junkshop_adderess_e"  ></textarea>
+                            
+                        </div>
+                        <div class="col-lg-6">
+                            
+                                <label class="form-control-label">Contact Number</label>
+                                <input type="number" class="form-control tx_contact_e" />
+                            
+                        </div>
+                        
                     </div>
+                   
                     <div class="form-group row">
                         <div class="col-lg-6">
                         
@@ -494,15 +515,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-group row">
-                        <div class="col-lg-6">
-                            
-                                <label class="form-control-label">Contact Number</label>
-                                <input type="text" class="form-control tx_contact_e" />
-                            
-                        </div>
-                        
-                    </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
@@ -679,6 +692,7 @@
             param_10 = $(row.find("td")[14]).text(),
             param_11 = $(row.find("td")[15]).text(),
             param_12 = $(row.find("td")[16]).text();
+            param_13 = $(row.find("td")[17]).text();
             
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).prop( "disabled", false ) : $( ".tx_c_rate_e" ).prop( "disabled", true );
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val(param_11) : $( ".tx_c_rate_e" ).val(100);
@@ -694,6 +708,7 @@
         $('.tx_start_e').val(param_7);
         $('.tx_end_e').val(param_8);
         $('.tx_given_e').val(param_12);
+        $('.tx_contact_e').val(param_13);
         selectElement('sel_type_e', param_9)
 
         

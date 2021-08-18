@@ -526,6 +526,8 @@ class AdminController extends Controller
                     , 'routes_id' => $request->get('routes_id')
                     , 'recurring' => $recurring
                     , 'collection_days' => $request->get('collection_days') 
+                    , 'collection_start' => $request->get('collection_start') 
+                    , 'collection_end' => $request->get('collection_end') 
                 ]);
         }
         else if ($request->get('status') == "normal") {
@@ -538,6 +540,8 @@ class AdminController extends Controller
                     , 'routes_id' => $request->get('routes_id')
                     , 'recurring' => $recurring
                     , 'collection_days' => $request->get('collection_days') 
+                    , 'collection_start' => $request->get('collection_start') 
+                    , 'collection_end' => $request->get('collection_end') 
                 ]);
         }
         else if ($request->get('status') == "deact") {
