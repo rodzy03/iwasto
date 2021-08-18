@@ -124,20 +124,22 @@
                         <th style="min-width: 100px;" >
                             <span class="text-dark-75">route name</span>
                         </th>
-                        <th style="min-width: 100px;" >
+                        <th style="min-width: 200px;" >
                             <span class="text-dark-75">route details</span>
                         </th>
                         <th style="min-width: 100px;" >
                             <span class="text-dark-75">waste type</span>
                         </th>
-                        <th style="min-width: 100px;">
-                            <span class="text-dark-75">collection date</span>
+                        <th >
+                            <span class="text-dark-75">collection date / working hours</span>
                         </th>
 
 
                         <th style="min-width: 30px" class="text-dark-75">
                             <span class="text-dark-75">action</span>
                         </th>
+                        <th hidden></th>
+                        <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
@@ -175,8 +177,10 @@
                         <td >
                             @if($row->recurring == 1)
                                 <span class="text-dark-75">{!! (!empty($row->collection_days)) ? $row->collection_days : "N/A" !!}</span>
+                                <br><span style="font-size: 11px;">{!! (!empty($row->collection_start)) ? $row->collection_start." to ".$row->collection_end : "N/A" !!}</span>
                             @else
                                 <span class="text-dark-75">{!! (!empty($row->collection_date)) ? $row->collection_date : "N/A" !!}</span>
+                                <br><span style="font-size: 11px;">{!! (!empty($row->collection_start)) ? $row->collection_start." to ".$row->collection_end : "N/A" !!}</span>
                             @endif
                             
                         </td>
@@ -229,6 +233,8 @@
                         <td hidden>{{$row->collection_date_full}}</td>
                         <td hidden>{{$row->recurring}}</td>
                         <td hidden>{{$row->collection_days}}</td>
+                        <td hidden>{{$row->collection_start_full}}</td>
+                        <td hidden>{{$row->collection_end_full}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -295,6 +301,18 @@
                     <div class="form-group div_collection">
                         <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
                         <input type="date" class="form-control tx_col_date" />
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Collection Start Time</label>
+                            <input type="time" class="form-control tx_start" style="text-transform: uppercase;" />
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Collection End Time</label>
+                            <input type="time" class="form-control tx_end" style="text-transform: uppercase;" />
+                        </div>
+                        
                     </div>
 
                 </form>
@@ -364,6 +382,19 @@
                     <div class="form-group div_collection_e">
                         <label class="form-control-label">&nbsp;&nbsp;Date Collection</label>
                         <input type="date" class="form-control tx_col_date_e" />
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Collection Start Time</label>
+                            <input type="time" class="form-control tx_start_e" style="text-transform: uppercase;" />
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-control-label">Collection End Time</label>
+                            <input type="time" class="form-control tx_end_e" style="text-transform: uppercase;" />
+                        </div>
+                        
                     </div>
 
                 </form>
@@ -532,11 +563,14 @@
         let row = $(this).closest("tr"),
             param_1 = $(row.find("td")[6]).text(),
             param_2 = $(row.find("td")[7]).text(),
-            param_3 = $(row.find("td")[8]).text().split(" ")
-            param_4 = $(row.find("td")[9]).text()
-            param_5 = $(row.find("td")[10]).text()
+            param_3 = $(row.find("td")[8]).text().split(" "),
+            param_4 = $(row.find("td")[9]).text(),
+            param_5 = $(row.find("td")[10]).text(),
+            param_6 = $(row.find("td")[11]).text(),
+            param_7 = $(row.find("td")[12]).text()
 
-        console.log(param_4)
+            
+        
         var splited = [];
         var tags = [];
         if(param_4 == 1) {
@@ -552,6 +586,9 @@
         else {
             $('.tx_col_date_e').val(param_3[0]);
         }
+
+        $('.tx_start_e').val(param_6);
+        $('.tx_end_e').val(param_7);
         
         selectElement('sel_waste_type_e', param_1)
         selectElement('sel_route_e', param_2)
@@ -585,8 +622,13 @@
             waste_type_id: $('select[name=sel_waste_type] option:selected').val(),
             routes_id: $('select[name=sel_route] option:selected').val(),
             status: status,
-            collection_days:wd_string
+            collection_days:wd_string,
+            collection_start:$(".tx_start").val(),
+            collection_end:$(".tx_end").val()
         };
+
+        
+
 
         
         update(data, url, status, modal_id);
@@ -609,7 +651,9 @@
             routes_id: $('select[name=sel_route_e] option:selected').val(),
             status: status,
             collection_days:wd_string,
-            id: id
+            id: id,
+            collection_start:$('.tx_start_e').val(),
+            collection_end:$('.tx_end_e').val()
         };
 
         update(data, url, status, modal_id);
