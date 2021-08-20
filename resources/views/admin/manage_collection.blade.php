@@ -643,6 +643,7 @@
         var wd = document.querySelector('input[name=tags-manual-suggestions_e]').value;
         
         (is_recurring == 0) ? wd_string = "" : get_wdays(wd);
+        
         url = "{{route('crud_collection')}}";
         status = "normal";
         modal_id = "modal-edit";
