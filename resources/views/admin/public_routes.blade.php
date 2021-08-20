@@ -230,6 +230,8 @@
                                                     <th hidden></th>
                                                     <th hidden></th>
                                                     <th hidden></th>
+                                                    <th hidden></th>
+                                                    <th hidden></th>
                                                     
                                                 </tr>
                                             </thead>
@@ -274,7 +276,8 @@
                                                     <td hidden>{{$row->city_municipality}}</td>
                                                     <td hidden>{{$row->route_name}}</td>
                                                     <td hidden>{{$type_name}}</td>
-                                                    
+                                                    <td hidden>{{$row->collection_start}}</td>
+                                                    <td hidden>{{$row->collection_end}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -434,13 +437,16 @@
                 collection = $(row.find("td")[5]).text(),
                 city = $(row.find("td")[6]).text(),
                 route_name = $(row.find("td")[7]).text(),
-                typenae = $(row.find("td")[8]).text();
-
+                typenae = $(row.find("td")[8]).text(),
+                start = $(row.find("td")[9]).text(),
+                end = $(row.find("td")[10]).text();
+                wk_h = (start == "") ? "N/A" : start + ' to ' + end;
                 const info = `<b>City : </b>${city}<br>
                 <b>Route Name : </b>${route_name}<br>
                 <b>Waste Classification : </b>${typenae}<br>
                 <b>Route Details : </b><br>${details}<br>
-                <b>Collection Date : </b>${collection}`;
+                <b>Collection Date : </b>${collection}<br>
+                <b>Working Hours : </b>${wk_h}`;
                 $('.route_info').html(info);
                 
             });
