@@ -582,9 +582,12 @@
             $('.div_wd_e').show();
             $('.div_collection_e').hide();
             $('.is_recurring_e').attr('checked','checked');
+            is_recurring = 1;
         }
         else {
             $('.tx_col_date_e').val(param_3[0]);
+
+            is_recurring = 0;
         }
 
         $('.tx_start_e').val(param_6);
