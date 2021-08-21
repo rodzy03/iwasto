@@ -29,7 +29,7 @@ class SwmImport implements ToModel,WithStartRow
                     , 'working_hours_start' => preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/" ,$row[5], $matches) == true ? $row[5] :
                     \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[7])->format('h:i')
                     , 'working_hours_end' => preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/" ,$row[5], $matches) == true ? $row[5] :
-                    \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[8])->format('h:i')
+                    \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[8])->format('H:i')
                     , 'longhitude' => trim($row[9])
                     , 'latitude' => trim($row[10])
                     , 'last_update' => preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/" ,$row[5], $matches) == true ? $row[5] :
