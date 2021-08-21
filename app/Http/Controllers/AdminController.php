@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SwmImport;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -400,6 +401,16 @@ class AdminController extends Controller
         $extension = File::extension($request->file->getClientOriginalName());
         if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
             Excel::import(new WasteImport, $request->file('file'));
+            return response()->json(['data' => "okay"]);
+        } else
+            return response()->json(['data' => "not"]);
+    }
+
+    public function import_swm(Request $request)
+    {
+        $extension = File::extension($request->file->getClientOriginalName());
+        if ($extension == "xlsx" || $extension == "xls" || $extension == "csv") {
+            Excel::import(new SwmImport, $request->file('file'));
             return response()->json(['data' => "okay"]);
         } else
             return response()->json(['data' => "not"]);

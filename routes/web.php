@@ -119,6 +119,8 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
             Route::post('/import/waste','AdminController@import_waste')->name('import_waste');
+            Route::post('/import/swm','AdminController@import_swm')->name('import_swm');
+            
             Route::post('/provinces','AdminController@provinces')->name('provinces');
             
             Route::post('/municipality','AdminController@municipality')->name('municipality');

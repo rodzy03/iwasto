@@ -91,7 +91,7 @@
                 </span>Add
 
             </button>&nbsp;
-            {{--<button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+            <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -105,7 +105,7 @@
                 </span>
                 Import
 
-            </button>--}}
+            </button>
 
 
             <!--end::Dropdown-->
@@ -267,16 +267,12 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
-                            
                             <label class="form-control-label">Waste Collection Facility Address</label>
-                            <textarea type="text" class="form-control tx_junkshop_adderess"  ></textarea>
-                            
+                            <textarea type="text" class="form-control tx_junkshop_adderess"></textarea>
                         </div>
                         <div class="col-lg-6">
-                            
                                 <label class="form-control-label">Contact Number</label>
                                 <input type="number" class="form-control tx_contact" />
-                            
                         </div>
                         
                     </div>
@@ -529,7 +525,7 @@
 
 <!--begin::Modal-->
 <div class="modal fade" id="import_modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Import data</h5>
@@ -539,7 +535,7 @@
             </div>
             <div class="modal-body">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" >
+                    <input type="file" class="custom-file-input" id="swm_file">
                     <label class="custom-file-label" >Choose file</label>
                 </div>
             </div>
@@ -650,11 +646,11 @@
     $('#import_btn').click(function() {
 
         var data = new FormData();
-        data.append("file", document.getElementById('inMainDocument').files[0]);
+        data.append("file", document.getElementById('swm_file').files[0]);
         data.append("_token", "{{csrf_token()}}");
         status = "file";
         modal_id = "import_modal";
-        var url = "{{route('import_waste')}}";
+        var url = "{{route('import_swm')}}";
         update(data, url, status, modal_id);
     });
     
@@ -711,6 +707,7 @@
         $('.tx_contact_e').val(param_13);
         selectElement('sel_type_e', param_9)
 
+        
         
         var splited = [];
         var tags = [];
