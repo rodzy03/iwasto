@@ -114,10 +114,13 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
             ->defaults('typeofview', 'admin')->name('get_analytics');
             Route::get('/waste','AdminController@get_waste')->name('get_waste');
             Route::get('/routes','AdminController@get_routes')->name('get_routes');
-            
+            Route::get('/users','AdminController@get_users')->name('get_users');
+
             // crud waste
             
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
+            Route::post('/crud/users','AdminController@crud_users')->name('crud_users');
+            
             Route::post('/import/waste','AdminController@import_waste')->name('import_waste');
             Route::post('/import/swm','AdminController@import_swm')->name('import_swm');
             
