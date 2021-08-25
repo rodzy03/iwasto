@@ -32,6 +32,13 @@ class AdminController extends Controller
         return view('admin.manage_waste', compact('data', 'seg_type'));
     }
 
+    public function get_users()
+    {
+        
+        $data = db::table('users')->where('role','admin')->get();
+        return view('admin.manage_users', compact('data'));
+    }
+
     public function get_routes()
     {
         $data = db::table('r_routes')->get();
@@ -491,6 +498,44 @@ class AdminController extends Controller
         }
         else if ($request->get('status') == "act") {
             db::table('r_waste')->where('waste_id',$request->get('waste_id'))
+                ->update([ 'active_flag' => 1 ]);
+        }
+    }
+
+    public function crud_users(Request $request)
+    {
+        if ($request->get('status') == "add") {
+            db::table('users')
+                ->insert([
+                    'firstname' => $request->get('firstname')
+                    , 'middlename' => $request->get('middlename')
+                    , 'lastname' => $request->get('lastname')
+                    , 'email' => $request->get('email')
+                    , 'password' => bcrypt($request->get('password'))
+                    , 'role' => 'admin'
+                    , 'active_flag' => 1
+                ]);
+        }
+        else if ($request->get('status') == "normal") {
+            db::table('users')->where('id',$request->get('id'))
+                ->update([
+                    'firstname' => $request->get('firstname')
+                    , 'middlename' => $request->get('middlename')
+                    , 'lastname' => $request->get('lastname')
+                    , 'email' => $request->get('email')
+                ]);
+        }
+        else if ($request->get('status') == "reset") {
+            db::table('users')->where('id',$request->get('id'))
+                ->update([ 'password' => bcrypt($request->get('password'))
+                , 'updated_at' => db::raw("CURRENT_TIMESTAMP") ]);
+        }
+        else if ($request->get('status') == "deact") {
+            db::table('users')->where('id',$request->get('id'))
+                ->update([ 'active_flag' => 0 ]);
+        }
+        else if ($request->get('status') == "act") {
+            db::table('users')->where('id',$request->get('id'))
                 ->update([ 'active_flag' => 1 ]);
         }
     }
