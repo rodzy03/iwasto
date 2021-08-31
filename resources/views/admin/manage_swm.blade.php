@@ -91,6 +91,7 @@
                 </span>Add
 
             </button>&nbsp;
+            
             <button data-toggle="modal" data-target="#import_modal" type="button" class="btn btn-light-primary font-weight-bolder " aria-haspopup="true" aria-expanded="false">
                 <span class="svg-icon svg-icon-2x">
                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -105,7 +106,27 @@
                 </span>
                 Import
 
+            </button>&nbsp;
+            
+            
+            <form method="POST" action="{{ route('download_excel') }}" class="margin-bottom-0">
+            <button type="submit" class="btn btn-dark font-weight-bolder " aria-haspopup="true" aria-expanded="false">
+                <span class="svg-icon svg-icon-2x">
+                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Files\Import.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24" />
+                            <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) " x="11" y="1" width="2" height="12" rx="1" />
+                            <path d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <path d="M14.2928932,10.2928932 C14.6834175,9.90236893 15.3165825,9.90236893 15.7071068,10.2928932 C16.0976311,10.6834175 16.0976311,11.3165825 15.7071068,11.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L8.29289322,11.7071068 C7.90236893,11.3165825 7.90236893,10.6834175 8.29289322,10.2928932 C8.68341751,9.90236893 9.31658249,9.90236893 9.70710678,10.2928932 L12,12.5857864 L14.2928932,10.2928932 Z" fill="#000000" fill-rule="nonzero" />
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+                Download Excel Format
+
             </button>
+            @csrf
+            </form>
 
 
             <!--end::Dropdown-->
@@ -118,6 +139,56 @@
         <div class="table-responsive">
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                 <thead>
+                    <div class="dropdown dropdown-inline font-weight-bolder">
+                        <button type="button" class="btn btn-secondary btn-sm font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="la la-download"></i>Tools
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                            <ul class="navi flex-column navi-hover py-2">
+                                <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Export Tools</li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_print">
+                                        <span class="navi-icon">
+                                            <i class="la la-print"></i>
+                                        </span>
+                                        <span class="navi-text">Print</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_copy">
+                                        <span class="navi-icon">
+                                            <i class="la la-copy"></i>
+                                        </span>
+                                        <span class="navi-text">Copy</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_excel">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-excel-o"></i>
+                                        </span>
+                                        <span class="navi-text">Excel</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_csv">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-text-o"></i>
+                                        </span>
+                                        <span class="navi-text">CSV</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_pdf">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-pdf-o"></i>
+                                        </span>
+                                        <span class="navi-text">PDF</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><br><br>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100px" class="pl-7">
                             <span class="text-dark-75">Waste Collection Facility Information</span>
@@ -559,7 +630,44 @@
 <script async defer data-website-id="273608d3-3d8f-402c-9ed1-76ed781a047e" src="https://analytics.iwasto.ph/umami.js"></script>
 
 <script>
-    $('#kt_datatable').DataTable();
+    $(document).ready(function () {
+        var table = $('#kt_datatable').DataTable({
+            buttons: [
+                'print',
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5',
+            ],
+            processing: true,
+            responsive: true,
+            "order": [[1, "asc"]]
+        });
+        $('#export_print').on('click', function (e) {
+            e.preventDefault();
+            table.button(0).trigger();
+        });
+
+        $('#export_copy').on('click', function (e) {
+            e.preventDefault();
+            table.button(1).trigger();
+        });
+
+        $('#export_excel').on('click', function (e) {
+            e.preventDefault();
+            table.button(2).trigger();
+        });
+
+        $('#export_csv').on('click', function (e) {
+            e.preventDefault();
+            table.button(3).trigger();
+        });
+
+        $('#export_pdf').on('click', function (e) {
+            e.preventDefault();
+            table.button(4).trigger();
+        });
+    });
     
     $(document).ready(function(){
         init_tagify('input[name=tags-manual-suggestions]');

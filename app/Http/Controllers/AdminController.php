@@ -741,4 +741,16 @@ class AdminController extends Controller
         return response()->json(['result' => $result]);
         
     }
+
+    public function download_excel()
+    {
+        $dir = public_path('uploads/');
+        $filename = $dir."SWM Master.xlsx";
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
+        header('Content-Length: ' . filesize($filename));
+
+        flush();
+        readfile($filename);
+    }
 }

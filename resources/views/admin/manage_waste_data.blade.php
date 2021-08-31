@@ -58,6 +58,56 @@
         <!--begin::Table-->
         <div class="table-responsive">
             <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
+                    <div class="dropdown dropdown-inline font-weight-bolder">
+                        <button type="button" class="btn btn-secondary btn-sm font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="la la-download"></i>Tools
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                            <ul class="navi flex-column navi-hover py-2">
+                                <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Export Tools</li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_print">
+                                        <span class="navi-icon">
+                                            <i class="la la-print"></i>
+                                        </span>
+                                        <span class="navi-text">Print</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_copy">
+                                        <span class="navi-icon">
+                                            <i class="la la-copy"></i>
+                                        </span>
+                                        <span class="navi-text">Copy</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_excel">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-excel-o"></i>
+                                        </span>
+                                        <span class="navi-text">Excel</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_csv">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-text-o"></i>
+                                        </span>
+                                        <span class="navi-text">CSV</span>
+                                    </a>
+                                </li>
+                                <li class="navi-item">
+                                    <a href="#" class="navi-link" id="export_pdf">
+                                        <span class="navi-icon">
+                                            <i class="la la-file-pdf-o"></i>
+                                        </span>
+                                        <span class="navi-text">PDF</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><br><br>
                 <thead>
                     <tr class="text-left text-uppercase">
                         <th style="min-width: 100%">
@@ -361,7 +411,44 @@
 
 
 <script>
-    $('#kt_datatable').DataTable();
+    $(document).ready(function () {
+        var table = $('#kt_datatable').DataTable({
+            buttons: [
+                'print',
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5',
+            ],
+            processing: true,
+            responsive: true,
+            "order": [[1, "asc"]]
+        });
+        $('#export_print').on('click', function (e) {
+            e.preventDefault();
+            table.button(0).trigger();
+        });
+
+        $('#export_copy').on('click', function (e) {
+            e.preventDefault();
+            table.button(1).trigger();
+        });
+
+        $('#export_excel').on('click', function (e) {
+            e.preventDefault();
+            table.button(2).trigger();
+        });
+
+        $('#export_csv').on('click', function (e) {
+            e.preventDefault();
+            table.button(3).trigger();
+        });
+
+        $('#export_pdf').on('click', function (e) {
+            e.preventDefault();
+            table.button(4).trigger();
+        });
+    });
     $('#import_btn').click(function() {
 
         var data = new FormData();
