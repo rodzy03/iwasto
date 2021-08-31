@@ -118,6 +118,7 @@ Route::group(['middleware' => ['validateBackHistory']], function () {
 
             // crud waste
             
+            Route::post('/download_excel','AdminController@download_excel')->name('download_excel');
             Route::post('/crud/waste','AdminController@crud_waste')->name('crud_waste');
             Route::post('/crud/users','AdminController@crud_users')->name('crud_users');
             

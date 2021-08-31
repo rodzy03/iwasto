@@ -50,7 +50,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
 
-        
+        // db::table('users')->where('email','admin@admin.com')->update(['password' => bcrypt('password')]);
         return view('auth.login');
     }
 
