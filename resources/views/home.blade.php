@@ -107,14 +107,26 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-chevron-down"></i></span></div>
-                                    <select style="background-color: white;" name="selType" class="form-control">
-										<option class="form-control" value="Missing Collection">Missing Collection</option>
-                                        <option class="form-control" value="Illegal Waste Piles On Street">Illegal Waste Piles On Street</option>
-                                        <option class="form-control" value="Illegal Waste Piles On Drainage">Illegal Waste Piles On Drainage</option>
+                                    <select style="background-color: white;" name="selType" class="form-control selType">
+										<option class="form-control" value="Missing Collection/Uncollecte Waste (Hindi na-nakolektang basura sa nakatakdang araw)">Missing Collection/Uncollecte Waste (Hindi na-nakolektang basura sa nakatakdang araw)</option>
+                                        <option class="form-control" value="Piled and Scattered garbage on the road (Nakatambak at nagkalat na basura na daan)">Piled and Scattered garbage on the road (Nakatambak at nagkalat na basura na daan)</option>
+                                        <option class="form-control" value="Clogged Waterways (Nakabarang basura sa daluyan ng tubig/ilog)">Clogged Waterways (Nakabarang basura sa daluyan ng tubig/ilog)</option>
+                                        <option class="form-control" value="Other (Iba pa)">Other (Iba pa)</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <div class="row form-group m-b-10 other_div" style="display:none">
+                            <label class="col-md-3 col-form-label">Other Concern</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-list"></i></span></div>
+                                    <input name="other_val" type="text" class="form-control" style="background-color:white; " value=""/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row form-group m-b-10">
                             <label class="col-md-3 col-form-label">Location</label>
                             <div class="col-md-6">
@@ -227,6 +239,16 @@
             //getWebcam();    
 		});
 
+
+        $('.selType').change(function(e){
+            if(e.target.value.toLowerCase() == "other (iba pa)") {  
+                $('.other_div').show();
+                
+            }
+            else {
+                $('.other_div').hide();
+            }
+        });
         // async function getWebcam() {
         //     try {
         //         const video_src = await navigator.mediaDevices.getUserMedia({video:true});    

@@ -273,19 +273,25 @@ class MobileController extends Controller
     
     public function submit_patrol(Request $request)
     {
-        $selType = $request->get('selType');
+        $file_name = "";
+        $selType = (strtolower($request->get('selType')) == "other (iba pa)") ? $request->get('other_val') : $request->get('selType');
+
         $location = $request->get('location');
         $description = $request->get('description');
        
         $contact_number = $request->get('contact_number');
-        $main_document = $request->file('photo');
+        
         $pubkey = Crypt::decrypt(session('session_public_key'));
         $user_id = db::table('users')->where('public_token',$pubkey)->value('id');
-        $main_document->move(public_path('uploads/')
-                , $main_document->getClientOriginalName()); 
-        
 
-        $file_name = $main_document->getClientOriginalName();
+        if ($request->hasFile('photo')) {
+            $main_document = $request->file('photo');
+            $main_document->move(public_path('uploads/')
+                    , $main_document->getClientOriginalName()); 
+            
+            $file_name = $main_document->getClientOriginalName();    
+        }
+        
         db::table('t_citizen_patrol')
         ->insert([
             'type' => $selType
