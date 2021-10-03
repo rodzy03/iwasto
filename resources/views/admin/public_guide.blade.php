@@ -653,12 +653,11 @@
                                     s_type = response['waste_guide'][j]['segregate_type_name'];
                                     s_guide = response['waste_guide'][j]['segregate_guide'];
                                     
-                                    if(s_type.toLowerCase() == "compostable / nabubulok")
+                                    if(s_type.toLowerCase() == "compostable / nabubulok" )
                                         src_type = "{{asset('image_types/organic')}}";
-                                    else if (s_type.toLowerCase() == "recyclable / nareresiklo (plastic)")
+                                    else if (s_type.toLowerCase() == "recyclable / nareresiklo (plastic)" || s_type.toLowerCase() == "residual / panapon" || s_type.toLowerCase() == "special waste (household medical waste)")
                                         src_type = "{{asset('image_types/plastic')}}";
-                                    else if (s_type.toLowerCase() == "residual / panapon")
-                                        src_type = "{{asset('image_types/organic')}}";
+                                    
                                     else if (s_type.toLowerCase() == "recyclable / nareresiklo (paper and cardboard)")
                                         src_type = "{{asset('image_types/paper')}}";
                                     else if (s_type.toLowerCase() == "recyclable / nareresiklo (steel)")
