@@ -263,7 +263,7 @@ class AdminController extends Controller
                 {
                 
                     $dir_normal = public_path('uploads/junkshops/normal_size');
-                    $dir_resize = public_path('uploads/junkshops/resize');
+                    $dir_resicrud_swme = public_path('uploads/junkshops/resize');
     
                     $image = $request->file('file');
                     $img = Image::make($image->path());
