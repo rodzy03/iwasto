@@ -122,6 +122,9 @@
                             <span class="text-dark-75">date reported</span>
                         </th>
                         <th style="min-width: 100px;">
+                            <span class="text-dark-75">concern</span>
+                        </th>
+                        <th style="min-width: 100px;">
                             <span class="text-dark-75">description</span>
                         </th>
                         @if($typeofview == "pending")
@@ -160,6 +163,9 @@
                         </td>
                         <td >
                             <span class="text-dark-75">{{$row->date_reported}}</span>
+                        </td>
+                        <td >
+                            <span class="text-dark-75">{{$row->type}}</span>
                         </td>
                         <td >
                             <span class="text-dark-75">{{$row->description}}</span>
@@ -343,7 +349,7 @@
     var id, status;
     $('#kt_datatable').on('click','#view', function(){
         let row = $(this).closest("tr"),
-            file_path = $(row.find("td")[5]).text()
+            file_path = $(row.find("td")[6]).text()
 
             console.log(file_path)
             $("#valid_id").attr("src",file_path);
