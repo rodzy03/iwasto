@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>IWasto | Citizen Patrol</title>
+    <title>IWASTO | Citizen Patrol</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -58,7 +58,7 @@
             <div class="navbar-header">
                 <a href="#"><img id="logo" src="{{asset('uploads/logowhite.png')}}"></a>
 
-                <b style="font-size: 16px; margin-right: 0px; padding-right: 10xp">Iwasto</b>
+                <b style="font-size: 16px; margin-right: 0px; padding-right: 10xp">IWASTO</b>
 
             </div>
             <!-- end navbar-header -->
@@ -89,7 +89,7 @@
                         <div class="note-icon"><i class="fas fa-exclamation-circle"></i></div>
                         <div class="note-content">
                             <h4><b>CITIZEN PATROL VERIFICATION</b></h4>
-                            <p>To be approved the iwasto team will check you're uploaded ID. </p>
+                            <p>To be approved the IWASTO team will check you're uploaded ID. </p>
                         </div>
                     </div>
                     @if (session('message'))

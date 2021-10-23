@@ -257,6 +257,7 @@ class AdminController extends Controller
                     , 'capacity_rate' => $request->get('capacity_rate')
                     , 'last_update' => $request->get('last_update')
                     , 'contact_number' => $request->get('contact_number')
+                    , 'city' => $request->get('city')
                 ]);
 
                 if ($request->hasFile('file')) 
@@ -438,7 +439,9 @@ class AdminController extends Controller
     public function swm()
     {
         $data = db::table('v_get_all_swm')->get();
-        return view('admin.manage_swm', compact('data'));
+        $city = db::table('r_citymun')->get(['id','citymun_desc']);
+        
+        return view('admin.manage_swm', compact('data','city'));
     }
 
     public function guides()

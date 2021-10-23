@@ -6,7 +6,7 @@
 <head>
     <base href="">
     <meta charset="utf-8" />
-    <title>IWasto | @yield('title')</title>
+    <title>IWASTO | @yield('title')</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -483,7 +483,7 @@
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
                             <span class="text-muted font-weight-bold mr-2">2021©</span>
-                            <a href="https://iwasto.ph" target="_blank" class="text-dark-75 text-hover-primary">IWasto</a>
+                            <a href="https://iwasto.ph" target="_blank" class="text-dark-75 text-hover-primary">IWASTO</a>
                         </div>
                         <!--end::Copyright-->
 

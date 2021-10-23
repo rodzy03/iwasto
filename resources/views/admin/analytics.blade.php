@@ -181,9 +181,13 @@
         </div>
         <!--end::Card-->
     </div>
-</div><br>
-<iframe width="760px" height="500px" src="https://sway.office.com/s/5hdN8bNybDIWmCep/embed" frameborder="0" marginheight="0" marginwidth="0" max-width="100%" sandbox="allow-forms allow-modals allow-orientation-lock allow-popups allow-same-origin allow-scripts" scrolling="no" style="border: none; width: 100%; max-height: 100vh" allowfullscreen mozallowfullscreen msallowfullscreen webkitallowfullscreen></iframe>
-<div class="card card-custom">
+</div><br><br>
+<!-- <iframe width="100%" height="100%" src="https://sway.office.com/s/5hdN8bNybDIWmCep/embed" frameborder="0" marginheight="1000" marginwidth="0" max-width="100%" sandbox="allow-forms allow-modals allow-orientation-lock allow-popups allow-same-origin allow-scripts" scrolling="no" style="border: none; width: 100%; max-height: 100vh" allowfullscreen mozallowfullscreen msallowfullscreen webkitallowfullscreen></iframe>
+     -->
+     <iframe width="100%" height="62%" src="https://sway.office.com/s/5hdN8bNybDIWmCep/embed" style="overflow:hidden; ; display:block;  ;  background-color: #f2f0ea; border: none;" scrolling="no"></iframe>
+    
+    
+    <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
             <span class="card-icon">

@@ -221,6 +221,7 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -231,6 +232,7 @@
                             <br><span style="font-size: 11px;">Working Days : {!! (!empty($row->working_days)) ? $row->working_days : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Working Hours : {!! (!empty($row->working_hours)) ? $row->working_hours : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Address : {!! (!empty($row->junkshop_address)) ? $row->junkshop_address : "N/A" !!}</span>
+                            <br><span style="font-size: 11px;">City : {!! (!empty($row->city)) ? $row->city : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Contact Number: {!! (!empty($row->contact_number)) ? $row->contact_number : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Acceptable Materials : {!! (!empty($row->acceptable_materials)) ? $row->acceptable_materials : "N/A" !!}</span>
                             <br><span style="font-size: 11px;">Facility Type : {!! (!empty($row->facility_type)) ? $row->facility_type : "N/A" !!}</span>
@@ -306,6 +308,7 @@
                         <td hidden>{{$row->capacity_rate}}</td>
                         <td hidden>{{$row->date_provided}}</td>
                         <td hidden>{{$row->contact_number}}</td>
+                        <td hidden>{{$row->city}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -335,6 +338,18 @@
                             
                         </div>
                         
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            
+                            <label class="form-control-label">City</label>
+                            <select id="sel_city" class="form-control sel_city" name="sel_city" style="width: 100%;">
+                                    @foreach($city as $ci)
+                                    <option value="{{$ci->id}}">{{$ci->citymun_desc}}</option>
+                                    @endforeach
+                            </select>
+                            
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
@@ -468,7 +483,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                <div class="form-group row">
+                    <div class="form-group row">
                         <div class="col-lg-12">
                             
                             <label class="form-control-label">Waste Collection Facility</label>
@@ -476,7 +491,21 @@
                             
                         </div>
                         
+                        
                     </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            
+                            <label class="form-control-label">City</label>
+                            <select id="sel_city_e" class="form-control sel_city_e" name="sel_city_e" style="width: 100%;">
+                                    @foreach($city as $ci)
+                                    <option value="{{$ci->citymun_desc}}">{{$ci->citymun_desc}}</option>
+                                    @endforeach
+                            </select>
+                            
+                        </div>
+                    </div>
+                        
                     <div class="form-group row">
                         <div class="col-lg-6">
                             
@@ -682,6 +711,15 @@
          placeholder: "Select Type"
     });
 
+    $('.sel_city').select2({
+         placeholder: "Select Type"
+    });
+
+    $('.sel_city_e').select2({
+         placeholder: "Select Type"
+    });
+    
+
     $('input[name=rd_capacity]').change(function(e){
 
         if(e.target.value.toLowerCase() == "fully occupied") {
@@ -797,6 +835,7 @@
             param_11 = $(row.find("td")[15]).text(),
             param_12 = $(row.find("td")[16]).text();
             param_13 = $(row.find("td")[17]).text();
+            param_14 = $(row.find("td")[18]).text();
             
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).prop( "disabled", false ) : $( ".tx_c_rate_e" ).prop( "disabled", true );
         (param_10.toLowerCase() == "free") ? $( ".tx_c_rate_e" ).val(param_11) : $( ".tx_c_rate_e" ).val(100);
@@ -813,8 +852,8 @@
         $('.tx_end_e').val(param_8);
         $('.tx_given_e').val(param_12);
         $('.tx_contact_e').val(param_13);
-        selectElement('sel_type_e', param_9)
-
+        selectElement('sel_type_e', param_9);
+        selectElement('sel_city_e', param_14);
         
         
         var splited = [];
@@ -852,6 +891,7 @@
         data.append("working_hours_end", $('.tx_end').val());
         data.append("working_days", wd_string);
         data.append("facility_type", $('select[name=sel_type] option:selected').val());
+        data.append("city", $('select[name=sel_city] option:selected').val());
         data.append("capacity", $('input[name="rd_capacity"]:checked').val());
         data.append("capacity_rate", $('.tx_c_rate').val());
         data.append("last_update", $('.tx_given').val());
