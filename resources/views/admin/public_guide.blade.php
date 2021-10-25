@@ -293,6 +293,7 @@
                             <div class="d-flex align-items-stretch text-center flex-column py-40">
                                 <!--begin::Heading-->
                                 <h1 class="text-dark font-weight-bolder mb-12">Search Waste</h1>
+                                <h4 class="text-dark mb-12">[Subtext]</h4>
                                 <!--end::Heading-->
                                <!--begin::Form-->
                                 <form class="d-flex position-relative w-2 m-auto">
