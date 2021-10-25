@@ -117,7 +117,11 @@
                         <th style="min-width: 100px;">
                             <span class="text-dark-75">reported by</span>
                         </th>
-
+                        
+                        <th style="min-width: 100px;">
+                            <span class="text-dark-75">location</span>
+                        </th>
+                        
                         <th style="min-width: 100px;">
                             <span class="text-dark-75">date reported</span>
                         </th>
@@ -145,7 +149,7 @@
                 <tbody>
                     @foreach($data as $row)
                     <tr>
-                    <td class="pl-0 py-2" style="width: 25%;">
+                    <td class="pl-0 py-2" >
                             <div class="d-flex align-items-center">
                                 <div class="symbol symbol-50 symbol-light mr-4">
                                     <span class="symbol-label"> 
@@ -161,6 +165,10 @@
                         <td >
                             <span class="text-dark-75">{{$row->reported_by}}</span>
                         </td>
+                        <td >
+                            <span class="text-dark-75">{{$row->location}}</span>
+                        </td>
+                        
                         <td >
                             <span class="text-dark-75">{{$row->date_reported}}</span>
                         </td>
