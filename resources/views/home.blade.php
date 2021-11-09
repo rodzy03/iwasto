@@ -108,7 +108,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-chevron-down"></i></span></div>
                                     <select style="background-color: white;" name="selType" class="form-control selType">
-										<option class="form-control" value="Missing Collection/Uncollecte Waste (Hindi na-nakolektang basura sa nakatakdang araw)">Missing Collection/Uncollecte Waste (Hindi na-nakolektang basura sa nakatakdang araw)</option>
+										<option class="form-control" value="Missing Collection/Uncollecte Waste (Hindi na-nakolektang basura sa nakatakdang araw)">Missing Collection/Uncollected Waste (Hindi nakolektang mga basura sa nakatakdang araw)</option>
                                         <option class="form-control" value="Piled and Scattered garbage on the road (Nakatambak at nagkalat na basura na daan)">Piled and Scattered garbage on the road (Nakatambak at nagkalat na basura na daan)</option>
                                         <option class="form-control" value="Clogged Waterways (Nakabarang basura sa daluyan ng tubig/ilog)">Clogged Waterways (Nakabarang basura sa daluyan ng tubig/ilog)</option>
                                         <option class="form-control" value="Other (Iba pa)">Other (Iba pa)</option>

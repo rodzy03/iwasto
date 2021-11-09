@@ -568,28 +568,28 @@
     </script>
     <script>
         var search_val = "";
-
+        var base_url = "{{asset('')}}" + 'waste/return';
         $(document).ready(function() {
 
-            $('#search_swm').keyup(function() {
-                search_val = $('#search_swm').val();
+            
+            $("#search_swm").bind("change paste keyup", function() {
+                
+                search_val = $(this).val();
             });
-
+            
             $('#search_swm').typeahead({
                     hint: true,
                     highlight: true,
                     minLength: 3
-                },
-
-                {
+                }
+                ,{
                     limit: 5,
-
                     source: function(query, processSync, processAsync) {
-                        console.log(search_val)
+                        
                         // processSync(['This suggestion appears immediately', 'This one too']);
                         return $.ajax({
                             url: base_url,
-                            type: 'GET',
+                            type: 'get',
                             data: {
                                 query: query,
                                 search_val: search_val
@@ -597,7 +597,6 @@
                             dataType: 'json',
                             success: function(json) {
                                 // in this example, json is simply an array of strings
-
                                 return processAsync(json);
                             }
                         });
@@ -608,16 +607,12 @@
 
 
 
-        var base_url = "{{asset('')}}" + 'waste/return';
+        
         $('#search_swm').keypress(function(event) {
-
-
-
 
             var keycode = (event.keyCode ? event.keyCode : event.which);
 
             if (keycode == '13') {
-
 
                 KTApp.blockPage({
                     overlayColor: '#000000',
@@ -630,7 +625,7 @@
                 }, 1000);
 
                 setTimeout(function() {
-                    var search_val = $('#search_swm').val();
+                    
                     $.ajax({
 
                         url: "{{route('search_waste_facility')}}",
@@ -639,16 +634,15 @@
                             _token: "{{csrf_token()}}",
                             search_swm: search_val
                         },
-                        success: function(response) {
-
+                        success: function(response) 
+                        {
                             var len = response['waste_guide'].length;
-                            console.log(len)
                             if (len > 0) {
                                 $('.card_div').empty();
                                 $('.no_data').hide();
 
-                                for (var j = 0; j < len; j++) {
-
+                                for (var j = 0; j < len; j++) 
+                                {
 
                                     w_name = response['waste_guide'][j]['waste_name'];
                                     s_type = response['waste_guide'][j]['segregate_type_name'];
@@ -658,7 +652,6 @@
                                         src_type = "{{asset('image_types/organic')}}";
                                     else if (s_type.toLowerCase() == "recyclable / nareresiklo (plastic)" || s_type.toLowerCase() == "residual / panapon" || s_type.toLowerCase() == "special waste (household medical waste)")
                                         src_type = "{{asset('image_types/plastic')}}";
-                                    
                                     else if (s_type.toLowerCase() == "recyclable / nareresiklo (paper and cardboard)")
                                         src_type = "{{asset('image_types/paper')}}";
                                     else if (s_type.toLowerCase() == "recyclable / nareresiklo (steel)")
@@ -667,9 +660,7 @@
                                         src_type = "{{asset('image_types/glass')}}";
 
                                         
-                                    
                                     const info = `Segregation Type: ${s_type}<br>Segregation Guide: ${s_guide} `
-
                                     const cards = `<div class="card-header" id="headingOne7">
                                                             <div class="card-title"  aria-expanded="true" role="button">
                                                             <img src="${src_type}" height="150" width="150"/>
@@ -690,11 +681,8 @@
                                                         `
                                     $('.card_div').append(cards);
                                     $('.has_data_guide').show();
-
                                 }
-
                                 $('.count_waste').text(len)
-
                                 swm_facility(search_val)
 
                             } else {
@@ -709,14 +697,7 @@
                             console.log(error)
                         }
                     });
-
-
-
-
                 }, 1000);
-
-
-
             }
         });
 
@@ -725,13 +706,12 @@
             $.ajax({
                 url: "{{route('search_waste_facility')}}",
                 method: "post",
-
                 data: {
                     _token: "{{csrf_token()}}",
                     search_swm: searchval
                 },
                 success: function(response) {
-
+                    console.log(search_val);
                     var count_faci = response['facility'].length;
                     if (count_faci > 0) {
 
@@ -765,11 +745,11 @@
                             j_name = response['facility'][i]['junkshop_name'];
                             j_a_mat = response['facility'][i]['acceptable_materials'];
                             j_hours = response['facility'][i]['working_hours'];
+                            j_city = response['facility'][i]['city'];
 
 
 
-
-                            const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}`
+                            const info = `Junkhop Address: ${j_address}<br>Acceptable Materials: ${j_a_mat}<br>Working Days: ${wd_display} ${j_hours}<br>City: ${j_city}`
 
                             const cards = `<div class="card-header" id="headingOne7">
                                                             <div class="card-title"  aria-expanded="true" role="button">
