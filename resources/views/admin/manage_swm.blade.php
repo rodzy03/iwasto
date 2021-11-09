@@ -941,6 +941,7 @@
         data.append("capacity_rate", $('.tx_c_rate_e').val());
         data.append("last_update", $('.tx_given_e').val());
         data.append("contact_number", $('.tx_contact_e').val());
+        data.append("city", $('select[name=sel_city_e] option:selected').val());
         data.append("id", id);
 
         

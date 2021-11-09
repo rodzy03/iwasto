@@ -102,8 +102,7 @@
             </div>
             <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
-                <canvas id="cresid" width="400" height="400"></canvas>
-                {{--<div id="resid_chart" class="d-flex justify-content-center"></div>--}}
+                <div id="resid_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
             </div>
         </div>
@@ -120,8 +119,7 @@
             </div>
             <div class="card-body" style="background: #e0f2f1;">
                 <!--begin::Chart-->
-                <canvas id="cspecial" width="400" height="400"></canvas>
-                {{--<div id="special_chart" class="d-flex justify-content-center"></div>--}}
+                <div id="special_chart" class="d-flex justify-content-center"></div>
                 <!--end::Chart-->
             </div>
         </div>
@@ -180,26 +178,6 @@
                 </div>
                 <!--begin::Chart-->
                 <div id="waste_chart" class="d-flex justify-content-center"></div>
-                <!--end::Chart-->
-            </div>
-        </div>
-        <!--end::Card-->
-    </div>
-</div><br><br>
-<div class="row">
-    <div class="col-lg-12">
-        <!--begin::Card-->
-        <div class="card card-custom gutter-b" style="background: #80cbc4;">
-            <div class="card-header">
-                <div class="card-title ">
-
-                    <h3 class="card-label">Waste Data</h3>
-                </div>
-            </div>
-
-            <div class="card-body" style="background: #e0f2f1;">
-                <!--begin::Chart-->
-                <canvas id="cwaste_chart" width="400" height="120"></canvas>
                 <!--end::Chart-->
             </div>
         </div>
@@ -359,16 +337,12 @@
 </script>
 
 <script>
-
-    
+    const bio = document.getElementById('cbio');
+    const recyc = document.getElementById('crecyc');
     var chart_pie = '';
-     
+    var apexChart;
     $(document).ready(function() {
-        const cbio = document.getElementById('cbio');
-        const crecyc = document.getElementById('crecyc');
-        const cresid = document.getElementById('cresid');
-        const cspecial = document.getElementById('cspecial');
-        const cwaste_chart = document.getElementById('cwaste_chart');
+
         var url = $('#bio').val();
         var _token = $('#_token').val();
         $.ajax({
@@ -405,30 +379,68 @@
                     gen_kg_day.push((data['waste'][i]['gen_kg_day'] != null) ? data['waste'][i]['gen_kg_day'] : 0);
 
                 }
-                bgColor = [
+                const myChart = new Chart(bio, {
+                type: 'bar',
+                    data: {
+                        labels: city,
+                        datasets: [{
+                            data: bio_series,
+                            backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 206, 86, 0.2)',
                                 'rgba(75, 192, 192, 0.2)',
                                 'rgba(153, 102, 255, 0.2)',
                                 'rgba(255, 159, 64, 0.2)'
-                            ];
-                bdColor = [
+                            ],
+                            borderColor: [
                                 'rgba(255, 99, 132, 1)',
                                 'rgba(54, 162, 235, 1)',
                                 'rgba(255, 206, 86, 1)',
                                 'rgba(75, 192, 192, 1)',
                                 'rgba(153, 102, 255, 1)',
                                 'rgba(255, 159, 64, 1)'
-                            ];
-                new Chart(cbio, {
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                            display: false
+                            }
+                        }
+                        
+                    }
+                });
+
+                const myChart = new Chart(recyc, {
                 type: 'bar',
                     data: {
                         labels: city,
                         datasets: [{
                             data: bio_series,
-                            backgroundColor: bgColor,
-                            borderColor: bdColor,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
                             borderWidth: 1
                         }]
                     },
@@ -447,84 +459,114 @@
                     }
                 });
 
-                new Chart(crecyc, {
-                type: 'bar',
-                    data: {
-                        labels: city,
-                        datasets: [{
-                            data: recyc,
-                            backgroundColor: bgColor,
-                            borderColor: bdColor,
-                            borderWidth: 1
-                        }]
+                apexChart = "#bio_chart";
+                var options = {
+                    series: bio_series,
+                    labels: city,
+                    chart: {
+                        width: 500,
+                        type: 'donut',
+
+
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 300
+                            },
                             legend: {
-                            display: false
+                                position: 'bottom'
                             }
                         }
-                        
-                    }
-                });
+                    }],
+                    colors: [primary, success, warning, danger, info]
+                };
 
-                new Chart(cresid, {
-                type: 'bar',
-                    data: {
-                        labels: city,
-                        datasets: [{
-                            data: resid,
-                            backgroundColor: bgColor,
-                            borderColor: bdColor,
-                            borderWidth: 1
-                        }]
+                var chart = new ApexCharts(document.querySelector(apexChart), options);
+                chart.render();
+
+                apexChart = "#recyc_chart";
+                var options = {
+                    series: recyc,
+                    labels: city,
+                    chart: {
+                        width: 500,
+                        type: 'donut',
+
+
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 300
+                            },
                             legend: {
-                            display: false
+                                position: 'bottom'
                             }
                         }
-                        
-                    }
-                });
+                    }],
+                    colors: [primary, success, warning, danger, info]
+                };
 
-                new Chart(cspecial, {
-                type: 'bar',
-                    data: {
-                        labels: city,
-                        datasets: [{
-                            data: special,
-                            backgroundColor: bgColor,
-                            borderColor: bdColor,
-                            borderWidth: 1
-                        }]
+                var chart = new ApexCharts(document.querySelector(apexChart), options);
+                chart.render();
+
+
+                apexChart = "#resid_chart";
+                var options = {
+                    series: resid,
+                    labels: city,
+                    chart: {
+                        width: 500,
+                        type: 'donut',
+
+
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 300
+                            },
                             legend: {
-                            display: false
+                                position: 'bottom'
                             }
                         }
-                        
-                    }
-                });
+                    }],
+                    colors: [primary, success, warning, danger, info]
+                };
 
+                var chart = new ApexCharts(document.querySelector(apexChart), options);
+                chart.render();
+
+                apexChart = "#special_chart";
+                var options = {
+                    series: special,
+                    labels: city,
+                    chart: {
+                        width: 500,
+                        type: 'donut',
+
+
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                width: 200
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }],
+                    colors: [primary, success, warning, danger, info]
+                };
+
+                var chart = new ApexCharts(document.querySelector(apexChart), options);
+                chart.render();
 
                 apexChart = "#waste_chart";
                 var options = {
@@ -551,32 +593,6 @@
 
                 chart_pie = new ApexCharts(document.querySelector(apexChart), options);
                 chart_pie.render();
-
-                new Chart(cwaste_chart, {
-                type: 'bar',
-                    data: {
-                        labels: waste_city,
-                        datasets: [{
-                            data: gen_kg_day.sort(),
-                            backgroundColor: bgColor,
-                            borderColor: bdColor,
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                            display: false
-                            }
-                        }
-                        
-                    }
-                });
             }
         });
 

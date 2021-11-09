@@ -257,8 +257,8 @@ class MobileController extends Controller
     public function citizen_patrol($pubkey)
     {   
         
-        $user = db::table('users')->where('public_token',$pubkey)->get();
         
+        $user = db::table('users')->where('public_token',$pubkey)->get();
         if($user->isEmpty()) {
             return redirect()->intended('https://iwasto.ph/');
         }
@@ -266,8 +266,6 @@ class MobileController extends Controller
             session(['session_public_key' => Crypt::encrypt($pubkey)]);
             return view('home',compact('user'));
         }
-        
-        
     }
 
     
@@ -533,11 +531,18 @@ class MobileController extends Controller
         echo $output;
         
     }
-
+    // revise
     public function get_citizen_patrol()
     {   
+        
+        
         $pstatus = $_POST['pstatus'];
+        $pfullname = $_POST['pfullname'];
         $data = db::table('v_get_citizen_patrol')->where('status',$pstatus)->get();
+        // $data = db::table('v_get_citizen_patrol')
+        // ->where('status','pending')->where('status',$pstatus)
+        // ->orwhere('reported_by','like','%'.$pfullname.'%')->get();
+
         $output = json_encode(array('Results' => $data));
         echo $output;
     }

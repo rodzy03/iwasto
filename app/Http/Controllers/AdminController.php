@@ -345,6 +345,7 @@ class AdminController extends Controller
                 , 'updated_date' => db::raw("CURRENT_DATE")
                 , 'last_update' => $request->get('last_update')
                 , 'contact_number' => $request->get('contact_number')
+                , 'city' => $request->get('city')
             ]);
 
         }
@@ -472,9 +473,9 @@ class AdminController extends Controller
             $data = db::table('v_get_citizen_patrol')->where('status','approved')->get();
         else
             $data = db::table('v_get_citizen_patrol')->where('status','declined')->get();
-
         
-            
+
+            // $output = json_encode(array('Results' => $data));
         return view('admin.manage_citizen_patrol', compact('data','typeofview'));
     }
 
@@ -683,9 +684,11 @@ class AdminController extends Controller
     public function return_waste()
     {
         $search_val = $_GET['search_val'];
-        $data = db::select("call sp_typehead_waste(?)", array(
-            $search_val,
-        ));
+        // $data = db::select("call sp_typehead_waste(?)", array(
+        //     $search_val,
+        // ));
+
+        $data = db::table('r_waste')->where('waste_name', 'like', $search_val . '%')->get();
         $wastes = [];
         
         for($i=0; $i<count($data); $i++) {
