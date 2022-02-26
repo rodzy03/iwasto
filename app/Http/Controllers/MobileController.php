@@ -62,25 +62,6 @@ class MobileController extends Controller
             $province
         ));
         
-        if($pubkey[0]->pubkey != 'account exists') {
-
-            $data = [
-            'subject' => 'IWasto Verification',
-            'to_email' => $_POST['email'],
-            'from' => 'iwasto2021@gmail.com','IWasto'
-            ];
-            
-            $url = asset('');
-            Mail::send('verify_email', 
-            [ 'url' => $url."verify_email/".Crypt::encrypt($email) ] ,
-            function($message) use ($data) {
-                        
-                $message->from($data['from'])
-                ->to($data['to_email'],$data['to_email'])
-                ->subject($data['subject']);
-              });
-        }
-        
 
         $output = json_encode(array('Results' => $pubkey));
         echo $output;
@@ -134,6 +115,19 @@ class MobileController extends Controller
     {
         return User::all();
     }
+
+public function changepass(){
+ $result = db::select("call sp_changepassword(?,?,?)",array(
+            $_POST['email'] ,
+            $_POST['current_password'],
+	    $_POST['new_password']
+        ));
+
+        $output = json_encode(array('Results' => $result));
+echo $output;
+}
+
+
 
     public function forgot_pass()
     {
@@ -202,7 +196,7 @@ class MobileController extends Controller
 
     public function get_region()
     {
-        $result = db::select("select * from r_region");
+        $result = db::select("select * from r_region order by region_desc asc");
         $output = json_encode(array('Results' => $result));
         echo $output;
     }
@@ -537,8 +531,8 @@ class MobileController extends Controller
         
         
         $pstatus = $_POST['pstatus'];
-        $pfullname = $_POST['pfullname'];
-        $data = db::table('v_get_citizen_patrol')->where('status',$pstatus)->get();
+        $email = trim($_POST['email']);
+        $data = db::table('v_get_citizen_patrol')->where('email',$email)->get();
         // $data = db::table('v_get_citizen_patrol')
         // ->where('status','pending')->where('status',$pstatus)
         // ->orwhere('reported_by','like','%'.$pfullname.'%')->get();

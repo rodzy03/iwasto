@@ -647,7 +647,7 @@
     });
 
 
-    mapboxgl.accessToken = "{{env('MAPBOX_KEY')}}";
+    mapboxgl.accessToken = "pk.eyJ1IjoiemhldXN3YWxrZXIiLCJhIjoiY2t4Z2RxY3JzMDIwYTJ3dWJiZDN0cW40byJ9.VfyOGm2ygdjQGoGPnOpLuA";
 
     const default_location = [120.98471247769781, 14.605716595091552];
 

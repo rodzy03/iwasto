@@ -125,7 +125,6 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                @if(empty($mobile))
                 <div id="kt_header" class="header header-fixed">
                     <!--begin::Container-->
                     <div class="container d-flex align-items-stretch justify-content-between">
@@ -172,7 +171,7 @@
                     <!--end::Container-->
                 </div>
                 <!--end::Header-->
-                @endif
+                endif
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <!--begin::Entry-->
@@ -207,7 +206,7 @@
                                 <div class="card-body" style="min-width: 100px;">
                                     <!--begin::Table-->
                                     <div class="table-responsive">
-                                        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
+ <table class="table table-head-custom table-head-bg table-borderless table-vertical-center" id="kt_datatable">
                                             <thead>
                                                 <tr class="text-left ">
                                                     <th style="min-width: 200px" class="pl-7">
@@ -225,13 +224,12 @@
                                                         <span class="text-dark-75">&nbsp;</span>
                                                     </th>
 
-                                                    <th hidden></th>
-                                                    <th hidden></th>
-                                                    <th hidden></th>
-                                                    <th hidden></th>
-                                                    <th hidden></th>
-                                                    <th hidden></th>
-                                                    <th hidden></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
+                                                    <th ></th>
                                                     
                                                 </tr>
                                             </thead>
@@ -242,7 +240,7 @@
                                                     $type_name = ($row->waste_type_name == "Both") ? "Non-biodegradable and Biodegradable" : $row->waste_type_name
                                                     @endphp
 
-                                                    <td>
+                                                    <td class="testclass">
                                                         <span class="text-dark-75" style="font-weight: bold;">{{ $row->city_municipality }}</span>
                                                     </td>
 
@@ -253,31 +251,14 @@
                                                     <td>
                                                         <span class="text-dark-75">{{$type_name}}</span>
                                                     </td>
-                                                   
-                                                    <td>
-                                                        <!--begin::Dropdown-->
-                                                        <button id=view data-toggle="modal" data-target="#add_modal" type="button" class="btn btn-light-success font-weight-bolder add_modal" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="svg-icon svg-icon-2x">
-                                                                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                        <rect x="0" y="0" width="24" height="24" />
-                                                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                                                        <path d="M11,11 L11,7 C11,6.44771525 11.4477153,6 12,6 C12.5522847,6 13,6.44771525 13,7 L13,11 L17,11 C17.5522847,11 18,11.4477153 18,12 C18,12.5522847 17.5522847,13 17,13 L13,13 L13,17 C13,17.5522847 12.5522847,18 12,18 C11.4477153,18 11,17.5522847 11,17 L11,13 L7,13 C6.44771525,13 6,12.5522847 6,12 C6,11.4477153 6.44771525,11 7,11 L11,11 Z" fill="#000000" />
-                                                                    </g>
-                                                                </svg>
-                                                                <!--end::Svg Icon-->
-                                                            </span>View Route Details
-
-                                                        </button>
-                                                    </td>
                                                     @php $collection = ($row->recurring == 1) ? $row->collection_days : $row->collection_date @endphp
-                                                    <td hidden>{{$row->route_details}}</td>
-                                                    <td hidden>{{$collection}}</td>
-                                                    <td hidden>{{$row->city_municipality}}</td>
-                                                    <td hidden>{{$row->route_name}}</td>
-                                                    <td hidden>{{$type_name}}</td>
-                                                    <td hidden>{{$row->collection_start}}</td>
-                                                    <td hidden>{{$row->collection_end}}</td>
+                                                    <td >{{$row->route_details}}</td>
+                                                    <td >{{$collection}}</td>
+                                                    <td >{{$row->city_municipality}}</td>
+                                                    <td >{{$row->route_name}}</td>
+                                                    <td >{{$type_name}}</td>
+                                                    <td >{{$row->collection_start}}</td>
+                                                    <td >{{$row->collection_end}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -421,25 +402,60 @@
     <script src="{{asset('assets/js/pages/widgets.js')}}"></script>
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{asset('assets/js/pages/features/miscellaneous/blockui.js')}}"></script>
-    <script async defer data-website-id="273608d3-3d8f-402c-9ed1-76ed781a047e" src="https://analytics.iwasto.ph/umami.js"></script>
     <!--end::Page Scripts-->
 
 
     <script>
+ $(document).ready(function () {
+        var table = $('#kt_datatable').DataTable({
+            buttons: [
+                'print',
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5',
+            ],
+            processing: true,
+            responsive: true,
+            "order": [[1, "asc"]]
+        });
+        $('#export_print').on('click', function (e) {
+            e.preventDefault();
+            table.button(0).trigger();
+        });
 
-        $('#kt_datatable').DataTable();
+        $('#export_copy').on('click', function (e) {
+            e.preventDefault();
+            table.button(1).trigger();
+        });
 
+        $('#export_excel').on('click', function (e) {
+            e.preventDefault();
+            table.button(2).trigger();
+        });
+
+        $('#export_csv').on('click', function (e) {
+            e.preventDefault();
+            table.button(3).trigger();
+        });
+
+        $('#export_pdf').on('click', function (e) {
+            e.preventDefault();
+ table.button(4).trigger();
+        });
+    });
         $(document).ready(function(){
-            $('#kt_datatable').on('click','#view',function(){
-                let row = $(this).closest("tr"),
-                
-                details = $(row.find("td")[4]).text(),
+
+	$('#kt_datatable').on('click','#view',function(){
+                let row = $(this).parents("tr"),
+                details = $(row.find("td:hidden")[4]).text(),
                 collection = $(row.find("td")[5]).text(),
                 city = $(row.find("td")[6]).text(),
                 route_name = $(row.find("td")[7]).text(),
                 typenae = $(row.find("td")[8]).text(),
                 start = $(row.find("td")[9]).text(),
                 end = $(row.find("td")[10]).text();
+		console.log($(this).closest("tr").find(".testclass").text());
                 wk_h = (start == "") ? "N/A" : start + ' to ' + end;
                 const info = `<b>City : </b>${city}<br>
                 <b>Route Name : </b>${route_name}<br>
@@ -450,229 +466,7 @@
                 $('.route_info').html(info);
                 
             });
-        })
-        
-        $('#search_swm').keypress(function(event) {
-            var keycode = (event.keyCode ? event.keyCode : event.which);
 
-            if (keycode == '13') {
-
-
-                KTApp.blockPage({
-                    overlayColor: '#000000',
-                    state: 'danger',
-                    message: 'Please wait...'
-                });
-
-                setTimeout(function() {
-                    KTApp.unblockPage();
-                }, 1000);
-
-                setTimeout(function() {
-                    $.ajax({
-
-                        url: "{{route('search_facilities')}}",
-                        method: "post",
-                        data: {
-                            _token: "{{csrf_token()}}",
-                            search_swm: $('#search_swm').val()
-                        },
-                        success: function(response) {
-
-                            var len = response['result'].length;
-
-                            if (len > 0) {
-                                $('.card_div').empty();
-                                $('.marker').remove();
-                                $('.has_data').show();
-                                $('.no_data').hide();
-
-                                for (var j = 0; j < len; j++) {
-                                    var unordered = response['result'][j]['working_days'].split(',');
-                                    var wd_display = "";
-                                    u_len = unordered.length;
-
-                                    var ordered = [];
-                                    for (var i = 0; i < u_len; i++) {
-
-                                        obj = {}; // <----- new Object
-                                        obj['day'] = unordered[i];
-                                        ordered.push(obj);
-
-                                    }
-
-                                    ordered = sort_days(ordered);
-                                    groupLength = ordered.length;
-
-                                    for (var y = 0; y < u_len; y++) {
-                                        var item = ordered[y]['day'];
-                                        ((y + 1) == (groupLength)) ? wd_display += item: wd_display += item + " , ";
-                                    }
-                                    // wd_display = (ordered.length > 1) ? ordered[0]['day'] + " To " + ordered[ordered.length-1]['day'] : ordered[0]['day'];
-
-                                    j_address = response['result'][j]['junkshop_address'];
-                                    j_name = response['result'][j]['junkshop_name'];
-                                    j_a_mat = response['result'][j]['acceptable_materials'];
-                                    j_hours = response['result'][j]['working_hours'];
-                                    j_type = response['result'][j]['facility_type'];
-                                    j_capacity = response['result'][j]['capacity'];
-                                    j_capacity_r = response['result'][j]['capacity_rate'];
-
-
-
-                                    const info = `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
-
-                                    const cards = `<div class="card-header" id="headingOne7">
-                                                            <div class="card-title"  aria-expanded="true" role="button">
-                                                            <span class="svg-icon svg-icon-primary svg-icon-2x"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                        <rect x="0" y="0" width="24" height="24"/>
-                                                                        <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
-                                                                    </g>
-                                                                </svg></span>
-
-
-                                                                <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${j_name}</div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
-                                                            <div class="card-body text-dark-50 font-size-lg pl-12">
-                                                                <p  class="swm_info">${info}</p>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        `
-                                    // maps
-
-                                    $('.card_div').append(cards);
-
-                                    markerElement = document.createElement('div')
-                                    markerElement.className = 'marker ' + response['result'][j]['swm_location_id']
-                                    markerElement.id = response['result'][j]['swm_location_id']
-
-                                    markerElement.style.backgroundImage = "url(https://media.giphy.com/media/AxJaiJ65agT7sVZ8tf/giphy.gif)"
-                                    markerElement.style.backgroundSize = 'cover'
-                                    markerElement.style.width = '50px'
-                                    markerElement.style.height = '50px'
-                                    markerElement.value = `<b>Address: </b><br>${j_address}<br><b>Acceptable Materials: </b><br>${j_a_mat}<br><b>Working Days: </b><br>${wd_display}<br><b>Working Hours: </b><br>${j_hours}<br><b>Facility Type: </b>${j_type}<br><b>Capacity: </b>${j_capacity}<br><b>Capacity Rate: </b>${j_capacity_r}%`
-                                    markerElement.vals = `${j_name}`;
-                                    markerElement.profile = `${response['result'][j]['file_name']}`;
-
-                                    const content = `
-                  
-                  
-                                        <div style="text-align:left;">&nbsp;
-                                        <center>
-                                        <img  src="{{asset('uploads/junkshops/resize')}}/${response['result'][j]['file_name']}" />
-                                        </center>
-                                            <div class="card-block">
-                                            <p style="text-transform:uppercase; color:#94cc7e; font-weight: bold; font-size: 13px; text-align:center">${j_name}</p>
-                                            <hr style="height: 1px; background-color: gray;">
-                                            <p class="card-text" style="font-size:10px; text-transform:uppercase;">
-                                            <b>LOCATION : </b>${j_address}
-                                            <br><b>WORKING DAYS : </b><br>${wd_display}
-                                            <br><b>WORKING HOURS : </b>${j_hours}
-                                            <br><b>ACCEPTABLE MATERIALS : </b>${j_a_mat}
-                                            
-                                            </p>
-                                            </div>
-                                        </div>
-
-                                        `;
-
-
-
-
-
-
-                                    new mapboxgl.Marker(markerElement)
-                                        .setLngLat([
-                                            response['result'][j]['longhitude'], response['result'][j]['latitude']
-                                        ])
-                                        // .setPopup(popUp)
-                                        .addTo(map);
-
-                                    markerElement.addEventListener('click', (event) => {
-                                        var swm_id = event.target.id;
-                                        $('.modal_card_div').empty();
-                                        const modal_content = `<div class="form-group">
-                                        
-                                        <img id="valid_id" src="{{asset('uploads/junkshops/normal_size')}}/${event.target.profile}" alt="NO IMAGE FOUND" width="100%" height="auto">
-                                            </div>
-                                            
-                                            <div class="col-lg-12">
-                                                <div class="card mb-8">
-                                                    <div class="card-body">
-                                                        
-                                                            <h5 class="text-dark mb-8">SWM Information </h5>
-                                                            
-                                                            <div class="accordion accordion-light ">
-                                                                
-                                                                <div class="card ">
-                                                                        
-                                                                        
-                                                                    <div class="card-header" id="headingOne7">
-                                                                        <div class="card-title"  aria-expanded="true" role="button">
-                                                                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Map\Marker2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                                <rect x="0" y="0" width="24" height="24"/>
-                                                                                <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"/>
-                                                                            </g>
-                                                                            </svg></span>
-
-
-                                                                            <div class="card-label text-dark pl-4 j_name" style="text-transform: uppercase;">${event.target.vals}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    
-                                                                    <div id="collapseOne7" class="collapse show" aria-labelledby="headingOne7" data-parent="#accordionExample7">
-                                                                        <div class="card-body text-dark-50 font-size-md pl-2">
-                                                                            <p  class="swm_info">${event.target.value}</p>
-                                                                            
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <!--end::Item-->
-
-                                                            </div>
-                                                            <!--end::Accordion-->
-                                                        
-                                                    </div>
-                                                </div>
-                                            
-
-                                            </div>
-                                                        `
-                                        // maps
-
-                                        $('.modal_card_div').append(modal_content);
-                                        $('#popout-modal').modal('show');
-
-                                    });
-                                }
-
-                            } else {
-                                $('.has_data').hide();
-                                $('.no_data').show();
-                                get_locations();
-                            }
-
-                        },
-                        error: function(error) {
-                            console.log(error)
-                        }
-                    });
-                }, 1000);
-
-
-
-            }
         });
     </script>
 

@@ -236,7 +236,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <!-- <label class="form-control-label">Junkshop Name</label> -->
-                    <img id="valid_id" src="" alt="UPLOAD VALID ID" width="100%" height="auto">
+                    <img id="valid_id" src="" alt="image report" width="100%" height="auto">
                 </div>
             </div>
             <div class="modal-footer">
@@ -357,7 +357,7 @@
     var id, status;
     $('#kt_datatable').on('click','#view', function(){
         let row = $(this).closest("tr"),
-            file_path = $(row.find("td")[6]).text()
+            file_path = $(row.find("td")[7]).text()
 
             console.log(file_path)
             $("#valid_id").attr("src",file_path);

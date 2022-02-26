@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
         'login-mobile',
         'get-profile',
         'forgot-password',
+	'changepass',
         'location-schedule',
         'next-location',
         'get-region',

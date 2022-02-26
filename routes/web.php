@@ -32,6 +32,7 @@ Route::post('/login-mobile','MobileController@login_mobile')->name('login-mobile
 Route::post('/get-profile','MobileController@get_profile')->name('get-profile');
 Route::post('/getall','MobileController@get_all')->name('getall');
 Route::post('/forgot-password','MobileController@forgot_pass')->name('forgot_pass');
+Route::post('changepass','MobileController@changepass')->name('changepass');
 Route::post('/location-schedule','MobileController@get_location_schedule');
 Route::post('/next-location','MobileController@get_next_location');
 Route::get('/citizen-patrol/{pubkey}','MobileController@citizen_patrol');
